@@ -9,15 +9,23 @@
 <body>
     <div class="container">
         <h1>SNEAKR</h1>
-        <form>
-            <input type="email" placeholder="Email">
-            <input type="password" placeholder="Jelszó">
-            <input type="text" placeholder="Vezetéknév">
-            <input type="text" placeholder="Keresztnév">
-            <a href="index.html">
-            <button type="button">Regisztráció</button></a>
+        <form id="registration-form">
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Jelszó" required>
+            <input type="text" placeholder="Vezetéknév" required>
+            <input type="text" placeholder="Keresztnév" required>
+            <button type="submit">Regisztráció</button>
         </form>
         <p>Már regisztráltál korábban? <a href="login.html">Bejelentkezés</a></p>
     </div>
+
+    <script>
+        // Form küldés esemény kezelése
+        document.getElementById('registration-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Megakadályozza az alapértelmezett form küldést
+            alert('Sikeres regisztráció! Üdvözlünk a SneakR közösségben.');
+            window.location.href = 'login.html'; // Átirányítás a login oldalra
+        });
+    </script>
 </body>
 </html>
