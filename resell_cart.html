@@ -4,33 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kosár - Sneakr Resell</title>
-    <link rel="stylesheet" href="resell_cart.css">
+    <link rel="stylesheet" href="css/resell_cart.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
     <header>
         <nav class="navbar">
-            <!-- Logo -->
+            <!-- Flex container a logo és az ikonok számára -->
+            <div class="navbar-container">
+                <!-- Logo balra -->
+                <div class="logo">
+                    <img src="resources/resellicon.png" alt="Sneakr Resell">
+                </div>
+                <!-- Navbar ikonok jobbra -->
+                <div class="nav-icons">
+                    <i class="fas fa-user user-icon"></i>
+                    <i class="fas fa-bars hamburger-menu" onclick="toggleMenu()"></i>
+                </div>
+            </div>
+        </nav>
+    
+        <!-- Mobil menü -->
+        <ul id="mobile-menu" class="mobile-nav">
+            <li><a style="color: #fff;" href="#">Férfi</a></li>
+            <li><a style="color: #fff;" href="#">Női</a></li>
+            <li><a style="color: #fff;" href="#">Minőség</a></li>
+            <li><a style="color: #fff;" href="about.html">Info</a></li>
+        </ul>
+    </header>
+
+
+    <!-- <header>
+        <nav class="navbar">
+            
             <div class="logo">
                 <img src="resources/resellicon.png" alt="Sneakr Resell">
+                <div class="nav-icons">
+                    <i class="fas fa-bars hamburger-menu" onclick="toggleMenu()"></i>
+                    <i class="fas fa-user user-icon"></i>
+                </div>
             </div>
     
-            <!-- Navbar ikonok jobbra -->
+             
             <div class="nav-icons">
                 <i class="fas fa-bars hamburger-menu" onclick="toggleMenu()"></i>
                 <i class="fas fa-user user-icon"></i>
             </div>
         </nav>
     
-        <!-- Mobil menü -->
+        
         <ul id="mobile-menu" class="mobile-nav">
             <li><a href="#">Férfi</a></li>
             <li><a href="#">Női</a></li>
             <li><a href="#">Minőség</a></li>
             <li><a href="about.html">Info</a></li>
         </ul>
-    </header>
+    </header> -->
 
 <main>
     <h1>Kosarad</h1>

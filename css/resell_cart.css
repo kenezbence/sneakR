@@ -9,33 +9,63 @@ body {
 /* Header/navbar */
 header {
     background: #2A7B47;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between; /* Balra és jobbra helyezkedés */
-    align-items: center;
 }
 
-/* Logo */
+/* Navbar container flexbox-al */
+.navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Egyenletesen osztja el a logo-t és az ikonokat */
+}
+
+/* Logo igazítása */
 .logo img {
     height: 50px;
     width: 50px;
-    object-fit: cover;
     border-radius: 50%;
+    cursor: pointer;
 }
 
-/* Navbar ikonok jobbra */
+/* Ikonok igazítása jobbra */
 .nav-icons {
     display: flex;
     align-items: center;
     gap: 20px;
+    font-size: 24px;
 }
 
+/* Navbar styling */
+.navbar {
+    padding: 15px;
+    background-color: #2A7B47;
+    box-sizing: border-box;
+}
+
+
+/* Logo */
+/* .logo img {
+    height: 70px;
+    width: 70px;
+    /* object-fit: cover; */
+    /* border-radius: 50%;
+    cursor: pointer;
+    
+} */
+
+/* Navbar ikonok jobbra */
+/* .nav-icons {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 20px;
+} */
+
 /* Hamburger és User ikon mérete */
-.hamburger-menu,
+/* .hamburger-menu,
 .user-icon {
     font-size: 30px;
     cursor: pointer;
-}
+} */
 
 /* Hover effekt az ikonokra */
 .nav-icons i {
