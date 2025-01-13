@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 13, 2025 at 09:15 AM
+-- Generation Time: Jan 13, 2025 at 11:36 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.3.11
 
@@ -28,10 +28,15 @@ DELIMITER $$
 -- Procedures
 --
 DROP PROCEDURE IF EXISTS `getAllShoes`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllShoes` ()   SELECT nev AS `Cipők`, cipok.img AS Kép FROM cipok$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllShoes` ()   SELECT * FROM cipok$$
 
 DROP PROCEDURE IF EXISTS `getAllUsers`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllUsers` ()   SELECT * FROM userek$$
+
+DROP PROCEDURE IF EXISTS `getShoesByAir`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getShoesByAir` ()   SELECT cipok.nev AS Cipők, cipok.ar AS Ár, cipok.img AS Kép
+FROM cipok
+WHERE cipok.nev LIKE Concat('%','Air','%')$$
 
 DROP PROCEDURE IF EXISTS `getShoesDetails`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getShoesDetails` (IN `tipusIN` ENUM('férfi','női','uniszex'))   SELECT cipok.nev AS Cipők, markak.nev AS MárkaNevek, nemek.tipus AS Típusok, cipok.img AS Kép FROM `cipok` INNER JOIN `nemek` ON `cipok`.`nem_id` = `nemek`.`id` INNER JOIN `markak` ON `cipok`.`marka_id` = `markak`.`id` WHERE nemek.tipus = tipusIN$$
@@ -41,6 +46,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `getShoesNameBrand` ()   SELECT cipo
 
 DROP PROCEDURE IF EXISTS `getShoesNamePrice`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getShoesNamePrice` ()   SELECT `nev` AS Cipők, `ar` AS Ár, cipok.img AS Kép FROM `cipok`$$
+
+DROP PROCEDURE IF EXISTS `isUserExists`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `isUserExists` (IN `emailIN` VARCHAR(255), OUT `resultOUT` BOOLEAN)   SELECT EXISTS(
+        SELECT 1 FROM userek WHERE userek.email = emailIN
+    ) INTO resultOUT$$
 
 DROP PROCEDURE IF EXISTS `listNewShoes`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `listNewShoes` (IN `tipusIN` ENUM('férfi','női','uniszex'))   SELECT cipok.nev AS Cipők, markak.nev AS MárkaNevek, nemek.tipus AS Típusok, cipok.allapot AS Állapot, cipok.img AS Kép FROM `cipok` INNER JOIN `nemek` ON `cipok`.`nem_id` = `nemek`.`id` INNER JOIN `markak` ON `cipok`.`marka_id` = `markak`.`id` WHERE nemek.tipus = tipusIN AND cipok.allapot = "új"$$
@@ -419,7 +429,8 @@ INSERT INTO `userek` (`id`, `nev`, `email`, `jelszo`, `admin`) VALUES
 (3, 'Admin User', 'admin@example.com', 'adminpass', 'igen'),
 (4, 'Kiss Lajos', 'lajoskiss1@gmail.com', 'Alma123!', 'nem'),
 (5, 'Péter Aladár', 'petialadar@gmail.com', 'petike12345', 'nem'),
-(6, 'Nagy Zsombor', 'nagyzsombi@gmail.com', 'zsombika12345', 'nem');
+(6, 'Nagy Zsombor', 'nagyzsombi@gmail.com', 'zsombika12345', 'nem'),
+(61, 'Lajos Pal', 'lali@gmail.com', 'Jelszo123!', 'nem');
 
 --
 -- Indexes for dumped tables
@@ -625,7 +636,7 @@ ALTER TABLE `ujdonsagok`
 -- AUTO_INCREMENT for table `userek`
 --
 ALTER TABLE `userek`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- Constraints for dumped tables
