@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 02, 2024 at 12:47 AM
+-- Generation Time: Jan 13, 2025 at 09:15 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.3.11
 
@@ -29,6 +29,9 @@ DELIMITER $$
 --
 DROP PROCEDURE IF EXISTS `getAllShoes`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllShoes` ()   SELECT nev AS `Cipők`, cipok.img AS Kép FROM cipok$$
+
+DROP PROCEDURE IF EXISTS `getAllUsers`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllUsers` ()   SELECT * FROM userek$$
 
 DROP PROCEDURE IF EXISTS `getShoesDetails`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getShoesDetails` (IN `tipusIN` ENUM('férfi','női','uniszex'))   SELECT cipok.nev AS Cipők, markak.nev AS MárkaNevek, nemek.tipus AS Típusok, cipok.img AS Kép FROM `cipok` INNER JOIN `nemek` ON `cipok`.`nem_id` = `nemek`.`id` INNER JOIN `markak` ON `cipok`.`marka_id` = `markak`.`id` WHERE nemek.tipus = tipusIN$$
