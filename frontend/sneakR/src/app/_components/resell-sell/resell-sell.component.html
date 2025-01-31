@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell - Sneakr Resell</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<app-navbar></app-navbar>
+<body>
+    <main class="sell-section">
+        <h1>Termék eladása</h1>
+        <form class="sell-form" (ngSubmit)="onSubmit($event)">
+            <label for="upload-images">Adj hozzá legfeljebb 10 képet</label>
+            <input type="file" id="upload-images" multiple accept="image/*" (change)="onFileSelect($event)">
+            <textarea placeholder="Pl. pontos méret, csak néhányszor viselted" required></textarea>
+            <select required>
+                <option value="" disabled selected>Kategória</option>
+                <option value="cipok">Cipők</option>
+                <option value="kiegeszitok">Kiegészítők</option>
+            </select>
+            <input type="number" placeholder="Ár (Ft)" min="1" required>
+            <div class="form-buttons">
+                <button type="button" class="cancel-button" (click)="onCancel()">Mégse</button>
+                <button type="submit" class="submit-button">Feltöltés</button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

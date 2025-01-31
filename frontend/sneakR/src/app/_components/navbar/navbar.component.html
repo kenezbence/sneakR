@@ -1,0 +1,23 @@
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<header>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="assets/resellicon.png" alt="Resell Sneaker Logo" (click)="navigateToTarget3()" style="cursor: pointer;">
+        </div>
+        <div class="search-cart">
+            <input type="text" placeholder="Mit keresel?">
+            <i class="fas fa-search"></i>
+            <a [routerLink]="['/resell-user']"><i style="color: #fff;" class="fas fa-user user-icon"></i></a>
+            <a [routerLink]="['/resell-cart']"><i style="color: #fff;" class="fas fa-shopping-cart"></i></a>
+            <i class="fas fa-bars menu-toggle" (click)="toggleMenu()"></i>
+        </div>
+        <ul class="hamburger-menu" [class.active]="isMenuActive">
+            <li><a href="#">Férfi</a></li>
+            <li><a href="#">Női</a></li>
+            <li><a href="#">Minőség</a></li>
+            <li><a [routerLink]="['/about']">Info</a></li>
+        </ul>
+    </nav>
+</header>

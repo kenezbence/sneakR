@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bejelentkezés</title>
+</head>
+<body>
+    <div class="container">
+        <h1>SNEAKR</h1>
+        <form>
+            <div class="input-group">
+                <input type="email" placeholder="Email" id="email" required>
+                <small class="error">Kérlek, adj meg egy érvényes email címet!</small>
+            </div>
+            <div class="input-group">
+                <input type="password" placeholder="Jelszó" id="password" required>
+                <small class="error">Kérlek, add meg a jelszavad!</small>
+            </div>
+            <a [routerLink]="['/password']" class="help-link">Elfelejtetted a jelszavad?</a>
+            <button type="submit" [routerLink]="['/select']">Bejelentkezés</button>
+        </form>
+        <div class="register-section">
+            <p>Nincs még fiókod?</p>
+            <a class="register-button" [routerLink]="['/register']">Regisztráció</a>
+        </div>
+    </div>
+</body>
+</html>

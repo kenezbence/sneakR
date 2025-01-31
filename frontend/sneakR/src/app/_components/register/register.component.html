@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regisztráció</title>
+</head>
+<body>
+    <div class="container">
+        <h1>SNEAKR</h1>
+        <!-- Az (ngSubmit) esemény a formra van rakva -->
+        <form id="registration-form" (ngSubmit)="onSubmit($event)">
+            <div class="input-group">
+                <input type="email" id="email" placeholder="Email" required (input)="checkInputs()">
+                <small class="error">Érvényes email címet adj meg!</small>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Jelszó" required (input)="checkInputs()">
+                <small class="error">A jelszónak legalább 6 karakter hosszúnak kell lennie!</small>
+            </div>
+            <div class="input-group">
+                <input type="text" id="lastName" placeholder="Vezetéknév" required (input)="checkInputs()">
+                <small class="error">A vezetéknév megadása kötelező!</small>
+            </div>
+            <div class="input-group">
+                <input type="text" id="firstName" placeholder="Keresztnév" required (input)="checkInputs()">
+                <small class="error">A keresztnév megadása kötelező!</small>
+            </div>
+            <!-- A gombnak csak type="submit"-nak kell lennie -->
+            <button type="submit" id="submit-btn" [disabled]="!isFormValid">Regisztráció</button>
+        </form>
+        <p>Már regisztráltál korábban? <a [routerLink]="'/login'" class="register-button">Bejelentkezés</a></p>
+    </div>
+</body>
+</html>
