@@ -11,25 +11,35 @@
 <main>
     <h1>Kosarad</h1>
 
-    <div id="cart-items"></div>
+    <div class="cart-items">
+        <div *ngFor="let item of cart; let i = index" class="cart-item">
+            <button 
+                (click)="removeItem(i)"
+                class="remove-btn"
+                aria-label="Remove item"
+            ></button>
+            <img [src]="item.img" [alt]="item.name" class="product-img">
+            <span>{{ item.name }}</span>
+        </div>
+    </div>
 
-    <form id="checkoutForm" onsubmit="submitCheckout(event)">
+    <form (submit)="submitCheckout($event, name.value, email.value, address.value)">
         <label for="name">Név</label>
-        <input type="text" id="name" placeholder="Név" required>
+        <input #name type="text" id="name" placeholder="Név" required>
 
         <label for="email">Email</label>
-        <input type="email" id="email" placeholder="Email cím" required>
+        <input #email type="email" id="email" placeholder="Email cím" required>
 
         <label for="address">Szállítási cím</label>
-        <textarea id="address" placeholder="Szállítási cím" rows="3" required></textarea>
+        <textarea #address id="address" placeholder="Szállítási cím" rows="3" required></textarea>
 
         <label for="payment-method">Fizetési mód</label>
-        <select id="payment-method" onchange="showCardDetails()">
+        <select #paymentSelect id="payment-method" (change)="showCardDetails(paymentSelect.value)">
             <option value="készpénz">Készpénz</option>
             <option value="bankkártya">Bankkártya</option>
         </select>
 
-        <div id="card-details" class="hidden">
+        <div id="card-details" [class.hidden]="!showCard">
             <label for="card-number">Kártyaszám</label>
             <input type="text" id="card-number" placeholder="XXXX XXXX XXXX XXXX" maxlength="16">
 
@@ -45,9 +55,3 @@
 </main>
 </body>
 </html>
-
-
-
-
-<!-- https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/a73e4b7f-9c0a-47b2-a6ef-ceb4ca6b54c3/AIR+JORDAN+1+MID+%28GS%29.png -->
-<!-- https://www.buzzsneakers.hu/files/images/slike_proizvoda/media/ID4/ID4655/images/ID4655.jpg -->
