@@ -12,11 +12,9 @@ interface CartItem {
   selector: 'app-resell-cart',
   standalone: true,
   imports: [
-    NavbarComponent, 
-    RouterLink, 
-    RouterOutlet,
-    CommonModule 
-  ],
+    NavbarComponent,
+    CommonModule
+],
   templateUrl: './resell-cart.component.html',
   styleUrl: './resell-cart.component.css'
 })

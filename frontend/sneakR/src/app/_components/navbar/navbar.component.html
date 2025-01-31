@@ -24,11 +24,13 @@
                 <span *ngIf="cartCount > 0" class="icon-count">{{ cartCount }}</span>
             </a>
             
-            <button class="hamburger-menu" (click)="toggleMenu()">
+            <!-- Updated Hamburger Menu -->
+            <button class="icon-btn hamburger-btn" (click)="toggleMenu()">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
 
+        <!-- Mobile Menu -->
         <ul class="mobile-nav" [class.active]="isMenuActive">
             <li><a href="#" class="nav-link">Férfi</a></li>
             <li><a href="#" class="nav-link">Női</a></li>
