@@ -2,22 +2,38 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <header>
-    <nav class="navbar">
+    <nav class="navbar-container">
         <div class="logo">
-            <img src="assets/resellicon.png" alt="Resell Sneaker Logo" (click)="navigateToTarget3()" style="cursor: pointer;">
+            <img src="assets/resellicon.png" alt="Resell Sneaker Logo" 
+                 (click)="navigateToTarget3()" 
+                 class="logo-img">
         </div>
-        <div class="search-cart">
-            <input type="text" placeholder="Mit keresel?">
-            <i class="fas fa-search"></i>
-            <a [routerLink]="['/resell-user']"><i style="color: #fff;" class="fas fa-user user-icon"></i></a>
-            <a [routerLink]="['/resell-cart']"><i style="color: #fff;" class="fas fa-shopping-cart"></i></a>
-            <i class="fas fa-bars menu-toggle" (click)="toggleMenu()"></i>
+
+        <div class="nav-icons">
+            <div class="search-container">
+                <input type="text" placeholder="Mit keresel?" class="search-input">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            
+            <a [routerLink]="['/resell-user']" class="icon-btn">
+                <i class="fas fa-user"></i>
+            </a>
+            
+            <a [routerLink]="['/resell-cart']" class="icon-btn cart-btn">
+                <i class="fas fa-shopping-cart"></i>
+                <span *ngIf="cartCount > 0" class="icon-count">{{ cartCount }}</span>
+            </a>
+            
+            <button class="hamburger-menu" (click)="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
-        <ul class="hamburger-menu" [class.active]="isMenuActive">
-            <li><a href="#">Férfi</a></li>
-            <li><a href="#">Női</a></li>
-            <li><a href="#">Minőség</a></li>
-            <li><a [routerLink]="['/about']">Info</a></li>
+
+        <ul class="mobile-nav" [class.active]="isMenuActive">
+            <li><a href="#" class="nav-link">Férfi</a></li>
+            <li><a href="#" class="nav-link">Női</a></li>
+            <li><a href="#" class="nav-link">Minőség</a></li>
+            <li><a [routerLink]="['/about']" class="nav-link">Info</a></li>
         </ul>
     </nav>
 </header>
