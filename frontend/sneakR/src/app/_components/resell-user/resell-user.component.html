@@ -1,12 +1,12 @@
-
 <body>
     <!-- Navigációs sáv -->
     <nav class="navbar">
         <ul>
-            <li><a [routerLink]="['/resell-user']">Profil</a></li>
-            <li><a [routerLink]="[]" fragment="current-listings">Jelenlegi Hirdetések</a></li>
-            <li><a [routerLink]="[]" fragment="past-listings">Korábbi Hirdetések</a></li>
-            <li><a [routerLink]="[]" fragment="purchased-items">Vásárolt Termékek</a></li>
+            <li><a [routerLink]="['/resell']">←</a></li>
+            <li><a [routerLink]="['/resell-user']" class="active">Profil</a></li>
+            <li><a (click)="scroll(currentListings)">Jelenlegi Hirdetések</a></li>
+            <li><a (click)="scroll(pastListings)">Korábbi Hirdetések</a></li>
+            <li><a (click)="scroll(purchasedItems)">Vásárolt Termékek</a></li>
             <li><a [routerLink]="['/login']">Kijelentkezés</a></li>
         </ul>
     </nav>
@@ -14,70 +14,73 @@
     <!-- Felhasználói Profil -->
     <section id="profile" class="profile-section">
         <header>
-            <h1>Üdvözöllek, Kovács János!</h1>
+            <h1>Üdvözöllek, <span style="color: #2A7B47;">Kovács János</span>!</h1>
             <div class="profile-info">
-                <img src="https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Clip-Art-Transparent-File.png" alt="Profilkép" class="avatar">
-                <p>Email: janos.kovacs&#64;example.com</p>
-                <p>Aktív hirdetések: 2 | Eladott termékek: 3</p>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrAIH5ePjPpc06-hopmyUZNsVbBPvZA0XGmQ&s" alt="Profilkép" class="avatar">
+                <p>📧 janos.kovacs&#64;example.com</p>
+                <p>🌟 Aktív hirdetések: {{ activeListingsCount }} | 🛍️ Eladott termékek: 3</p>
             </div>
         </header>
     </section>
 
-    <section id="current-listings" class="listings-section">
+    <!-- Jelenlegi Hirdetések -->
+    <section #currentListings id="current-listings" class="listings-section">
         <h2>Jelenlegi Hirdetések</h2>
         <div class="card-grid">
             <div class="card">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsKFyVSngeeFLVpCk-R9HMrlLoB0vYdPTS2Q&s" alt="Nike Air Max 90">
+                <div class="card-img-container">
+                    <img src="https://static.nike.com/a/images/t_default/36979bbd-532a-4981-b091-7179d4240bdf/NIKE+AIR+MAX+90.png" alt="Nike Air Max 90">
+                </div>
                 <div class="card-content">
                     <h3>Nike Air Max 90</h3>
-                    <p>Ár: 30,000 Ft</p>
-                    <p>Állapot: Újszerű</p>
-                    <button (click)="deleteListing($event)">Törlés</button>
+                    <p>💰 Ár: 30,000 Ft</p>
+                    <p>🏷️ Állapot: Újszerű</p>
+                    <button (click)="deleteListing($event)">🗑️ Törlés</button>
                 </div>
             </div>
             <div class="card">
-                <img src="https://a.allegroimg.com/original/11245e/df0cfe584d3d95c42cecf23f79ff/Yeezy-350-V2-Zebra-44" alt="Adidas Yeezy Boost 350">
+                <div class="card-img-container">
+                    <img src="https://sneakcenter.com/cdn/shop/products/adidas-yeezy-boost-350-v2-beluga-reflective-sneakcenter-1-34784995803403.png?v=1701593838" alt="Adidas Yeezy">
+                </div>
                 <div class="card-content">
                     <h3>Adidas Yeezy Boost 350</h3>
-                    <p>Ár: 80,000 Ft</p>
-                    <p>Állapot: Kiváló</p>
-                    <button (click)="deleteListing($event)">Törlés</button>
+                    <p>💰 Ár: 80,000 Ft</p>
+                    <p>🏷️ Állapot: Kiváló</p>
+                    <button (click)="deleteListing($event)">🗑️ Törlés</button>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Korábbi Hirdetések -->
-    <section id="past-listings" class="listings-section">
+    <section #pastListings id="past-listings" class="listings-section">
         <h2>Korábbi Hirdetések</h2>
         <div class="card-grid">
             <div class="card">
-                <img src="https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/b1bcbca4-e853-4df7-b329-5be3c61ee057/NIKE+DUNK+LOW+RETRO.png" alt="Nike Dunk Low">
+                <div class="card-img-container">
+                    <img src="https://sneakcenter.com/cdn/shop/products/nike-dunk-low-lottery-grey-sneakcenter-1-34784944488715.png?v=1701593658" alt="Nike Dunk Low">
+                </div>
                 <div class="card-content">
                     <h3>Nike Dunk Low</h3>
-                    <p>Elkelt: 2024-11-15</p>
-                </div>
-            </div>
-            <div class="card">
-                <img src="https://static.ftshp.digital/img/p/1/2/1/5/7/6/3/1215763-full_product.jpg" alt="Puma RS-X">
-                <div class="card-content">
-                    <h3>Puma RS-X</h3>
-                    <p>Elkelt: 2024-10-10</p>
+                    <p>⏳ Elkelt: 2024-11-15</p>
+                    <p>💸 Végső ár: 25,000 Ft</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Vásárolt Termékek -->
-    <section id="purchased-items" class="listings-section">
+    <section #purchasedItems id="purchased-items" class="listings-section">
         <h2>Vásárolt Termékek</h2>
         <div class="card-grid">
             <div class="card">
-                <img src="https://www.vansshop.hu/media/catalog/product/cache/1/image/602f0fa2c1f0d1ba5e241f914e856ff9/v/d/vd3hy28_3.jpg" alt="Vans Old Skool">
+                <div class="card-img-container">
+                    <img src="https://www.buzzsneakers.hu/files/thumbs/files/images/slike_proizvoda/media/VN0/VN000CR5B9M/images/thumbs_800/VN000CR5B9M_800_800px.jpg" alt="Vans Old Skool">
+                </div>
                 <div class="card-content">
                     <h3>Vans Old Skool</h3>
-                    <p>Ár: 20,000 Ft</p>
-                    <p>Vásárlás dátuma: 2024-12-01</p>
+                    <p>📅 Vásárlás dátuma: 2024-12-01</p>
+                    <p>⭐ Értékelés: 5/5</p>
                 </div>
             </div>
         </div>

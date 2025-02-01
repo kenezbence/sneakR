@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
@@ -6,18 +6,29 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [RouterLink, RouterOutlet],
   templateUrl: './resell-user.component.html',
-  styleUrl: './resell-user.component.css'
+  styleUrls: ['./resell-user.component.css']
 })
 export class ResellUserComponent {
-  deleteListing(event: Event): void {
-    const button = event.target as HTMLButtonElement;
-    const card = button.closest('.card');
-    if (card) {
-      card.remove();
-      alert('A hirdetés törölve lett!');
+  @ViewChild('currentListings') currentListings!: ElementRef;
+  @ViewChild('pastListings') pastListings!: ElementRef;
+  @ViewChild('purchasedItems') purchasedItems!: ElementRef;
+
+    activeListingsCount: number = 2; // Számláló változó
+  
+    deleteListing(event: Event): void {
+      const button = event.target as HTMLElement;
+      const card = button.closest('.card');
+      if (card) {
+        card.classList.add('fade-out');
+        setTimeout(() => {
+          card.remove();
+          this.activeListingsCount--; // Számláló csökkentése
+        }, 300);
+      }
     }
+  
+
+  scroll(target: HTMLElement): void {
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
-  scroll(el: HTMLElement) {
-    el.scrollIntoView();
-}
 }
