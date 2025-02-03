@@ -235,3 +235,9 @@ footer {
 .logo-img:hover {
   transform: rotate(-15deg) scale(1.05);
 }
+
+.accent-link {
+  color: #2A7B47 !important;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
