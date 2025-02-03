@@ -1,98 +1,193 @@
-h2 {
-    text-align: center;
-    font-size: 1.8em;
-    margin: 20px 0;
-}
-
-/* Fejléc */
-.hero-section {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.hero-image img {
-    width: 100%;
-    height: auto;
-}
-
-.features {
-    display: flex;
-    justify-content: space-around;
-    padding: 20px;
-    background-color: #222;
-    color: white;
-    text-align: center;
-}
-
-.feature {
-    flex: 1;
-    padding: 10px;
-}
-
-.feature i {
-    display: block;
-    font-size: 2em;
-    margin-bottom: 10px;
-}
-
-/* Termékek */
-.products-section {
-    padding: 20px;
-}
-
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.product-card {
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 10px;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.product-card img {
-    width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-}
-
-/* Lábjegyzet */
-.footer {
-    background-color: #222;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-.footer-content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-.footer a {
-    color: white;
-    margin: 0 10px;
-    font-size: 1.5em;
-}
-
-.newsletter input {
-    padding: 10px;
-    margin-right: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-.newsletter button {
-    padding: 10px 20px;
-    background-color: #555;
-    color: white;
+/* Új stílusok */
+.hamburger-menu {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.7);
     border: none;
-    border-radius: 5px;
+    color: white;
+    font-size: 24px;
     cursor: pointer;
-}
+    z-index: 1000;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+  }
+  
+  .hamburger-menu:hover {
+    background: rgba(0, 0, 0, 0.9);
+  }
+  
+/* Oldalsó menü - Alapértelmezett állapotban teljesen elrejtve */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px; /* Teljesen kívülre helyezzük */
+    width: 300px;
+    height: 100%;
+    background-color: #222;
+    transition: all 0.3s ease;
+    z-index: 999;
+    padding: 20px;
+    opacity: 0; /* Áttetszőség hozzáadva az animációhoz */
+    visibility: hidden; /* Teljesen elrejtjük */
+  }
+  
+  /* Aktív állapot */
+  .sidebar.active {
+    right: 0;
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* Háttér effekt módosítása */
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .backdrop.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 60px;
+  }
+  
+  .sidebar li {
+    margin: 25px 0;
+  }
+  
+  .sidebar a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    transition: color 0.3s ease;
+  }
+  
+  .sidebar a:hover {
+    color: #007bff;
+  }
+  
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    display: none;
+  }
+  
+  .backdrop.active {
+    display: block;
+  }
+  
+  /* Meglévő stílusok */
+  h2 {
+      text-align: center;
+      font-size: 1.8em;
+      margin: 20px 0;
+  }
+  
+  .hero-section {
+      text-align: center;
+      margin-bottom: 20px;
+  }
+  
+  .hero-image img {
+      width: 100%;
+      height: auto;
+  }
+  
+  .features {
+      display: flex;
+      justify-content: space-around;
+      padding: 20px;
+      background-color: #222;
+      color: white;
+      text-align: center;
+  }
+  
+  .feature {
+      flex: 1;
+      padding: 10px;
+  }
+  
+  .feature i {
+      display: block;
+      font-size: 2em;
+      margin-bottom: 10px;
+  }
+  
+  .products-section {
+      padding: 20px;
+  }
+  
+  .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+  }
+  
+  .product-card {
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-card img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+  }
+  
+  .footer {
+      background-color: #222;
+      color: white;
+      padding: 20px;
+      text-align: center;
+  }
+  
+  .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+  }
+  
+  .footer a {
+      color: white;
+      margin: 0 10px;
+      font-size: 1.5em;
+  }
+  
+  .newsletter input {
+      padding: 10px;
+      margin-right: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+  }
+  
+  .newsletter button {
+      padding: 10px 20px;
+      background-color: #555;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+  }
