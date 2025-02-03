@@ -1,51 +1,80 @@
-<!DOCTYPE html>
-<html lang="hu">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kapcsolat - SneakR</title>
-</head>
-<body>
-  <header>
-    <nav>
-        <a [routerLink]="['/about']">Rólunk</a>
-        <a [routerLink]="['/GYIK']">GYIK</a>
-        <a [routerLink]="['/contact']" class="active">Kapcsolat</a>
-    </nav>
+<header>
+    <nav class="navbar-container">
+      <div class="logo">
+        <img src="assets/resellicon.png" alt="Resell Sneaker Logo" 
+             (click)="navigateToTarget3()" 
+             class="logo-img">
+      </div>
+      
+      <div class="nav-links">
+        <a [routerLink]="['/about']" 
+           class="nav-link" 
+           routerLinkActive="active" 
+           [routerLinkActiveOptions]="{ exact: true }">Rólunk</a>
+           
+        <a [routerLink]="['/GYIK']" 
+           class="nav-link" 
+           routerLinkActive="active">GYIK</a>
+           
+        <a [routerLink]="['/contact']" 
+           class="nav-link" 
+           routerLinkActive="active">Kapcsolat</a>
+    </div>
+    </nav>    
   </header>
 
-  <main class="content-section">
-    <h1>Kapcsolat</h1>
-    <p>Várjuk kérdéseidet, visszajelzésedet vagy egyedi kéréseidet. Az alábbi elérhetőségeinken, illetve az űrlap segítségével is kapcsolatba léphetsz velünk.</p>
+<main class="content-section">
+  <section class="hero-section">
+      <h1>Kapcsolat</h1>
+      <p class="tagline">Kérdéseid vannak vagy egyedi igényed? Írj nekünk vagy hívj minket!</p>
+  </section>
 
-    <div class="contact-container">
-      <div class="contact-info">
-        <h2>Elérhetőségeink</h2>
-        <p><strong>Email:</strong> <a href="mailto:info&#64;sneakR.hu">info&#64;sneakR.hu</a></p>
-        <p><strong>Telefon:</strong> +36 30 123 4567</p>
-        <p><strong>Cím:</strong> 1234 Budapest, Homok utca 12.</p>
+  <div class="contact-grid">
+      <div class="contact-card">
+          <div class="contact-info">
+              <h2><i class="fas fa-map-marker-alt"></i>Címünk</h2>
+              <p>1234 Budapest<br>Homok utca 12.</p>
+          </div>
+          
+          <div class="contact-info">
+              <h2><i class="fas fa-phone"></i>Telefon</h2>
+              <p>+36 30 123 4567</p>
+              <small>H-P: 8:00-18:00</small>
+          </div>
+          
+          <div class="contact-info">
+              <h2><i class="fas fa-envelope"></i>Email</h2>
+              <a href="mailto:info@sneakr.hu" class="accent-link">infosneakr.hu</a>
+          </div>
       </div>
 
-      <div class="contact-form-wrapper">
-        <h2>Küldj üzenetet!</h2>
-        <form action="#" method="post" class="contact-form" onsubmit="return handleSubmit(event);">
-          <label for="name">Név:</label>
-          <input type="text" id="name" name="name" required placeholder="Add meg a neved">
+      <div class="contact-card form-card">
+          <form class="contact-form">
+              <div class="input-group">
+                  <input type="text" id="name" required placeholder=" ">
+                  <label for="name">Teljes név</label>
+              </div>
+              
+              <div class="input-group">
+                  <input type="email" id="email" required placeholder=" ">
+                  <label for="email">Email cím</label>
+              </div>
+              
+              <div class="input-group">
+                  <textarea id="message" rows="5" required placeholder=" "></textarea>
+                  <label for="message">Üzeneted</label>
+              </div>
 
-          <label for="email">Email cím:</label>
-          <input type="email" id="email" name="email" required placeholder="Add meg az email címed">
-
-          <label for="message">Üzenet:</label>
-          <textarea id="message" name="message" rows="5" required placeholder="Írd meg az üzeneted"></textarea>
-
-          <button type="submit">Küldés</button>
-        </form>
+              <button type="submit" class="gradient-btn">
+                  Üzenet küldése
+                  <i class="fas fa-paper-plane"></i>
+              </button>
+          </form>
       </div>
-    </div>
-  </main>
+  </div>
+</main>
 
-  <footer>
-    <p>&copy; 2024 SneakR. Minden jog fenntartva.</p>
-  </footer>
-  </body>
-  </html>
+<footer>
+  <p>&copy; 2024 SneakR. Minden jog fenntartva.<br>
+  <small>A sneaker közösség otthona</small></p>
+</footer>
