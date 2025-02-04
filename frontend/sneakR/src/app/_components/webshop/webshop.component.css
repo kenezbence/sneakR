@@ -39,6 +39,30 @@
     opacity: 1;
     visibility: visible;
   }
+
+  .sidebar .submenu {
+    display: none;
+    padding-left: 20px;
+    background-color: #444;
+    list-style: none;
+  }
+  
+  .sidebar .submenu.active {
+    display: block;
+  }
+  
+  .sidebar .submenu li {
+    padding: 10px 0;
+  }
+  
+  .sidebar .submenu a {
+    font-size: 0.9em;
+    opacity: 0.9;
+  }
+  
+  .sidebar .submenu .submenu {
+    background-color: #555;
+  }
   
   /* Háttér effekt módosítása */
   .backdrop {

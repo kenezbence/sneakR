@@ -4,9 +4,72 @@
   
   <nav class="sidebar" [class.active]="isMenuOpen">
     <ul>
-      <li><a (click)="toggleMenu()" href="#new">Újdonságok</a></li>
-      <li><a (click)="toggleMenu()" href="#best">Best Sellerek</a></li>
-      <li><a (click)="toggleMenu()" href="#footer">Kapcsolat</a></li>
+      <!-- Márkák -->
+      <li>
+        <a (click)="toggleSubmenu('brands'); $event.preventDefault()" href="#">Márkák</a>
+        <ul class="submenu" [class.active]="menuState['brands']">
+          <li><a (click)="toggleMenu()" href="#">Jordan</a></li>
+          <li><a (click)="toggleMenu()" href="#">Nike</a></li>
+          <li><a (click)="toggleMenu()" href="#">Adidas</a></li>
+          <li><a (click)="toggleMenu()" href="#">Yeezy</a></li>
+          <li><a (click)="toggleMenu()" href="#">New Balance</a></li>
+          <li><a (click)="toggleMenu()" href="#">Alexander McQueen</a></li>
+          <li><a (click)="toggleMenu()" href="#">Travis Scott</a></li>
+          <li><a (click)="toggleMenu()" href="#">Reebok</a></li>
+          <li><a (click)="toggleMenu()" href="#">Converse</a></li>
+          <li><a (click)="toggleMenu()" href="#">Puma</a></li>
+        </ul>
+      </li>
+  
+      <!-- Sneaker -->
+      <li>
+        <a (click)="toggleSubmenu('sneaker'); $event.preventDefault()" href="#">Sneaker</a>
+        <ul class="submenu" [class.active]="menuState['sneaker']">
+          <!-- Felfedezés -->
+          <li>
+            <a (click)="toggleSubmenu('discover'); $event.preventDefault()" href="#">Felfedezés</a>
+            <ul class="submenu" [class.active]="menuState['discover']">
+              <li><a (click)="toggleMenu()" href="#best">Best Sellers</a></li>
+              <li><a (click)="toggleMenu()" href="#">50 000 Ft alatt</a></li>
+              <li><a (click)="toggleMenu()" href="#">100 000 Ft alatt</a></li>
+            </ul>
+          </li>
+          
+          <!-- Air Jordan -->
+          <li>
+            <a (click)="toggleSubmenu('air-jordan'); $event.preventDefault()" href="#">Air Jordan</a>
+            <ul class="submenu" [class.active]="menuState['air-jordan']">
+              <li><a (click)="toggleMenu()" href="#">Air Jordan 1</a></li>
+              <li><a (click)="toggleMenu()" href="#">Air Jordan 3</a></li>
+              <li><a (click)="toggleMenu()" href="#">Air Jordan 4</a></li>
+              <li><a (click)="toggleMenu()" href="#">Még több Air Jordan</a></li>
+            </ul>
+          </li>
+  
+          <!-- További almenük... -->
+        </ul>
+      </li>
+  
+      <!-- Kiegészítők -->
+      <li>
+        <a (click)="toggleSubmenu('accessories'); $event.preventDefault()" href="#">Kiegészítők</a>
+        <ul class="submenu" [class.active]="menuState['accessories']">
+          <li><a (click)="toggleMenu()" href="#">Sneaker Shield</a></li>
+          <li><a (click)="toggleMenu()" href="#">Fűzők</a></li>
+          <li><a (click)="toggleMenu()" href="#">Cipőápolás</a></li>
+          <li><a (click)="toggleMenu()" href="#">Ajándékutalvány</a></li>
+        </ul>
+      </li>
+  
+      <!-- Info -->
+      <li>
+        <a (click)="toggleSubmenu('info'); $event.preventDefault()" href="#">Info</a>
+        <ul class="submenu" [class.active]="menuState['info']">
+          <li><a (click)="toggleMenu()" [routerLink]="['/about']">Rólunk</a></li>
+          <li><a (click)="toggleMenu()" [routerLink]="['/GYIK']">GYIK</a></li>
+          <li><a (click)="toggleMenu()" [routerLink]="['/contact']">Kapcsolat</a></li>
+        </ul>
+      </li>
     </ul>
   </nav>
   
