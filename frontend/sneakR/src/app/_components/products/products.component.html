@@ -1,0 +1,69 @@
+<app-webshopnavbar></app-webshopnavbar>
+  
+  <section class="filters-container">
+    <h1 class="page-title">{{ getTitle() }}</h1>
+    <div class="filter-controls">
+      <!-- Méret: -->
+      <div class="select-wrapper">
+        <label for="sizeSelect" class="sr-only">Méret kiválasztása</label>
+        <select
+          id="sizeSelect"
+          [(ngModel)]="selectedSize"
+          (change)="applyFilters()"
+        >
+          <option value="">Méret</option>
+          <option
+            *ngFor="let size of [36, 37, 38, 39, 40, 41, 42, 43, 44, 45]"
+            [value]="size"
+          >
+            {{ size }}
+          </option>
+        </select>
+      </div>
+  
+      <!-- Két range input (ár) -->
+      <div class="range-filter">
+        <label for="minRange" class="range-label">Min Ár</label>
+        <input
+          type="range"
+          id="minRange"
+          [min]="0"
+          [max]="200000"
+          [step]="1000"
+          [(ngModel)]="minPrice"
+          (input)="applyFilters()"
+        />
+        <span>{{ minPrice | currency:'HUF':'symbol':'1.0-0' }}</span>
+      </div>
+  
+      <div class="range-filter">
+        <label for="maxRange" class="range-label">Max Ár</label>
+        <input
+          type="range"
+          id="maxRange"
+          [min]="0"
+          [max]="200000"
+          [step]="1000"
+          [(ngModel)]="maxPrice"
+          (input)="applyFilters()"
+        />
+        <span>{{ maxPrice | currency:'HUF':'symbol':'1.0-0' }}</span>
+      </div>
+    </div>
+  </section>
+  
+  <section class="product-grid">
+    <div class="product-card" *ngFor="let product of filteredProducts">
+      <div class="image-wrapper">
+        <img [src]="product.image" [alt]="product.name" />
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">{{ product.name }}</h3>
+        <p class="brand">{{ product.brand }}</p>
+        <p class="price">
+          {{ product.price | currency:'HUF':'symbol':'1.0-0' }}
+        </p>
+      </div>
+    </div>
+  </section>
+  

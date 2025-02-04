@@ -8,16 +8,16 @@
       <li>
         <a (click)="toggleSubmenu('brands'); $event.preventDefault()" href="#">Márkák</a>
         <ul class="submenu" [class.active]="menuState['brands']">
-          <li><a (click)="toggleMenu()" href="#">Jordan</a></li>
-          <li><a (click)="toggleMenu()" href="#">Nike</a></li>
-          <li><a (click)="toggleMenu()" href="#">Adidas</a></li>
-          <li><a (click)="toggleMenu()" href="#">Yeezy</a></li>
-          <li><a (click)="toggleMenu()" href="#">New Balance</a></li>
-          <li><a (click)="toggleMenu()" href="#">Alexander McQueen</a></li>
-          <li><a (click)="toggleMenu()" href="#">Travis Scott</a></li>
-          <li><a (click)="toggleMenu()" href="#">Reebok</a></li>
-          <li><a (click)="toggleMenu()" href="#">Converse</a></li>
-          <li><a (click)="toggleMenu()" href="#">Puma</a></li>
+          <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'Jordan'}">Jordan</a></li>
+          <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'Nike'}">Nike</a></li>
+          <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'Adidas'}">Adidas</a></li>
+          <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'Yeezy'}">Yeezy</a></li>
+          <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'New Balance'}">New Balance</a></li>
+          <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'Alexander McQueen'}">Alexander McQueen</a></li>
+          <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'Travis Scott'}">Travis Scott</a></li>
+          <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'Reebok'}">Reebok</a></li>
+          <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'Converse'}">Converse</a></li>
+          <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'Puma'}">Puma</a></li>
         </ul>
       </li>
   
@@ -29,9 +29,9 @@
           <li>
             <a (click)="toggleSubmenu('discover'); $event.preventDefault()" href="#">Felfedezés</a>
             <ul class="submenu" [class.active]="menuState['discover']">
-              <li><a (click)="toggleMenu()" href="#best">Best Sellers</a></li>
-              <li><a (click)="toggleMenu()" href="#">50 000 Ft alatt</a></li>
-              <li><a (click)="toggleMenu()" href="#">100 000 Ft alatt</a></li>
+              <li><a (click)="scrollToBest(); toggleMenu()">Best Sellers</a></li>
+              <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{ maxPrice: 50000 }">50 000 Ft alatt</a></li>
+              <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{ maxPrice: 100000 }">100 000 Ft alatt</a></li>
             </ul>
           </li>
           
@@ -39,14 +39,43 @@
           <li>
             <a (click)="toggleSubmenu('air-jordan'); $event.preventDefault()" href="#">Air Jordan</a>
             <ul class="submenu" [class.active]="menuState['air-jordan']">
-              <li><a (click)="toggleMenu()" href="#">Air Jordan 1</a></li>
-              <li><a (click)="toggleMenu()" href="#">Air Jordan 3</a></li>
-              <li><a (click)="toggleMenu()" href="#">Air Jordan 4</a></li>
-              <li><a (click)="toggleMenu()" href="#">Még több Air Jordan</a></li>
+              <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{model: 'Air Jordan 1'}">Air Jordan 1</a></li>
+              <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{model: 'Air Jordan 3'}">Air Jordan 3</a></li>
+              <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{model: 'Air Jordan 4'}">Air Jordan 4</a></li>
+              <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'Jordan'}">Még több Air Jordan</a></li>
             </ul>
           </li>
   
           <!-- További almenük... -->
+          <li>
+            <a (click)="toggleSubmenu('nike'); $event.preventDefault()" href="#">Nike</a>
+            <ul class="submenu" [class.active]="menuState['nike']">
+              <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{model: 'Air Force 1'}">Air Force 1</a></li>
+              <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{model: 'Dunk'}">Dunk</a></li>
+              <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{model: 'Air Max'}">Air Max</a></li>
+              <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'Nike'}">Még több Nike</a></li>
+            </ul>
+          </li>
+
+          <li>
+            <a (click)="toggleSubmenu('new-balance'); $event.preventDefault()" href="#">New Balance</a>
+            <ul class="submenu" [class.active]="menuState['new-balance']">
+              <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{model: 'New Balance 550'}">New Balance 550</a></li>
+              <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{model: 'New Balance 370'}">New Balance 370</a></li>
+              <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{model: 'New Balance 1906'}">New Balance 1906</a></li>
+              <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'New Balance'}">Még több New Balance</a></li>
+            </ul>
+          </li>
+
+          <li>
+            <a (click)="toggleSubmenu('yeezy'); $event.preventDefault()" href="#">Yeezy</a>
+            <ul class="submenu" [class.active]="menuState['yeezy']">
+              <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{model: 'Yeezy 350'}">Yeezy 350</a></li>
+              <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{model: 'Slide'}">Slide</a></li>
+              <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{model: 'Foam Runner'}">Foam Runner</a></li>
+              <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'Yeezy'}">Még több Yeezy</a></li>
+            </ul>
+          </li>
         </ul>
       </li>
   
@@ -54,10 +83,10 @@
       <li>
         <a (click)="toggleSubmenu('accessories'); $event.preventDefault()" href="#">Kiegészítők</a>
         <ul class="submenu" [class.active]="menuState['accessories']">
-          <li><a (click)="toggleMenu()" href="#">Sneaker Shield</a></li>
-          <li><a (click)="toggleMenu()" href="#">Fűzők</a></li>
-          <li><a (click)="toggleMenu()" href="#">Cipőápolás</a></li>
-          <li><a (click)="toggleMenu()" href="#">Ajándékutalvány</a></li>
+          <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{category: 'Shield'}">Sneaker Shield</a></li>
+          <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{category: 'Lace'}">Fűzők</a></li>
+          <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{category: 'Care'}">Cipőápolási termékek</a></li>
+          <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{category: 'Gift'}">Ajándékutalvány</a></li>
         </ul>
       </li>
   
@@ -112,8 +141,8 @@
       </div>
   </section>
   
-  <section class="products-section" id="best">
-      <h2>Best Sellerek</h2>
+  <section class="products-section" id="best" #best>
+    <h2>Best Sellerek</h2>
       <div class="product-grid">
           <div class="product-card">
               <img src="https://drake.vn/image/cache/catalog/Converse/GIA%CC%80Y%202/A05094C/A05094C-300x300.jpg" alt="Converse cipő">
