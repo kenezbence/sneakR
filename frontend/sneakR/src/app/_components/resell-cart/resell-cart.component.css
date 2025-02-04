@@ -4,6 +4,14 @@ body {
     color: #fff;
     margin: 0;
     padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+html {
+    background-color: #121212;
+    min-height: 100vh;
 }
 
 /* Header/navbar */
@@ -102,6 +110,9 @@ main {
     margin: 20px auto;
     border-radius: 15px;
     box-shadow: 0 0 15px #000;
+    flex-grow: 1;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* Form input styling */
