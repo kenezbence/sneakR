@@ -9,22 +9,59 @@
 <app-navbar></app-navbar>
 <body>
     <main class="sell-section">
-        <h1>Termék eladása</h1>
-        <form class="sell-form" (ngSubmit)="onSubmit($event)">
-            <label for="upload-images">Adj hozzá legfeljebb 10 képet</label>
-            <input type="file" id="upload-images" multiple accept="image/*" (change)="onFileSelect($event)">
-            <textarea placeholder="Pl. pontos méret, csak néhányszor viselted" required></textarea>
-            <select required>
-                <option value="" disabled selected>Kategória</option>
-                <option value="cipok">Cipők</option>
-                <option value="kiegeszitok">Kiegészítők</option>
-            </select>
-            <input type="number" placeholder="Ár (Ft)" min="1" required>
-            <div class="form-buttons">
-                <button type="button" class="cancel-button" (click)="onCancel()">Mégse</button>
-                <button type="submit" class="submit-button">Feltöltés</button>
-            </div>
-        </form>
+        <div class="sell-container">
+            <h1 class="gradient-title">Termék eladása</h1>
+            
+            <form class="sell-form" (ngSubmit)="onSubmit(sellForm)" #sellForm="ngForm">
+                <div class="upload-container">
+                    <input type="file" id="upload-images" multiple accept="image/*" (change)="onFileSelect($event)">
+                    <label for="upload-images" class="upload-label">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span>Húzd ide a képeket vagy kattints ide</span>
+                        <small>Maximum 10 kép (JPEG, PNG)</small>
+                    </label>
+                    <div class="preview-grid" id="preview-container"></div>
+                    <div *ngIf="imageError" class="error-message">Legalább egy képet fel kell tölteni!</div>
+                </div>
+            
+                <div class="input-group">
+                    <textarea name="description" placeholder=" " required ngModel></textarea>
+                    <label>Termékleírás</label>
+                </div>
+                <div class="input-group">
+                    <select name="category" required ngModel>
+                        <option value="" disabled selected>Válassz kategóriát...</option>
+                        <option value="cipok">Cipők</option>
+                        <option value="kiegeszitok">Kiegészítők</option>
+                    </select>
+                </div>
+            
+                <div class="input-group price-group">
+                    <input type="number" name="price" placeholder=" " min="1" required ngModel>
+                    <label>Ár (Ft)</label>
+                </div>
+                <div class="form-buttons">
+                    <button type="button" class="cancel-button" (click)="onCancel()">
+                        <i class="fas fa-times"></i>
+                        Mégse
+                    </button>
+                    <button type="submit" class="submit-button">
+                        <i class="fas fa-upload"></i>
+                        Feltöltés
+                    </button>
+                </div>
+            </form>
+        </div>
     </main>
+    <div class="success-modal" [class.active]="showSuccessModal">
+        <div class="modal-content">
+            <i class="fas fa-check-circle modal-icon"></i>
+            <h3 class="modal-title">Sikeres feltöltés!</h3>
+            <p class="modal-message">A termék sikeresen közzétéve.</p>
+            <button class="modal-close-button" (click)="onCloseSuccessModal()">
+                Vissza a főoldalra
+            </button>
+        </div>
+    </div>
 </body>
 </html>
