@@ -15,18 +15,22 @@ export class ResellSellComponent {
   constructor(private router: Router) {}
 
   showSuccessModal: boolean = false;
-  selectedFiles: File[] = [];
+  showLinkModal: boolean = false;
+  imageUrl: string = '';
   imageError: boolean = false;
-  showValidationError: boolean = false;
-  missingFields: string[] = [];
   
-  onFileSelect(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files?.length) {
-      this.selectedFiles = Array.from(input.files);
+  openLinkModal(): void {
+    this.showLinkModal = true;
+  }
+
+  closeLinkModal(): void {
+    this.showLinkModal = false;
+  }
+
+  confirmImage(): void {
+    if(this.imageUrl) {
       this.imageError = false;
-    } else {
-      this.selectedFiles = [];
+      this.closeLinkModal();
     }
   }
 
@@ -35,16 +39,14 @@ export class ResellSellComponent {
   }
 
   onSubmit(form: NgForm): void {
-    if (form.invalid || this.selectedFiles.length === 0) {
+    if (form.invalid || !this.imageUrl) {
       form.control.markAllAsTouched();
-      this.imageError = this.selectedFiles.length === 0;
+      this.imageError = !this.imageUrl;
       return;
     }
     
     this.showSuccessModal = true;
   }
-
-
 
   onCloseSuccessModal(): void {
     this.showSuccessModal = false;
