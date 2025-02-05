@@ -13,8 +13,8 @@
             <h1 class="gradient-title">Termék eladása</h1>
             
             <form class="sell-form" (ngSubmit)="onSubmit(sellForm)" #sellForm="ngForm">
-                <div class="upload-container" (click)="openLinkModal()">
-                    <label class="upload-label">
+                <div class="upload-container">
+                    <label class="upload-label" (click)="openLinkModal()"> <!-- Click handler áthelyezve -->
                         <i class="fas fa-link"></i>
                         <span>Kattints ide képlink hozzáadásához</span>
                         <small>Csak közvetlen képlinkek (URL)</small>
@@ -48,19 +48,46 @@
                     </div>
                 </div>
 
-                <!-- Egyéb form elemek változatlanok -->
                 <div class="input-group">
-                    <textarea name="description" placeholder=" " required ngModel></textarea>
-                    <label>Termékleírás</label>
+                    <select name="condition" required ngModel>
+                        <option value="" disabled selected></option>
+                        <option *ngFor="let condition of conditions" [value]="condition">{{condition}}</option>
+                    </select>
+                    <label>Állapot</label>
                 </div>
                 <div class="input-group">
                     <select name="category" required ngModel>
-                        <option value="" disabled selected>Válassz kategóriát...</option>
+                        <option value="" disabled selected></option>
                         <option value="cipok">Cipők</option>
                         <option value="kiegeszitok">Kiegészítők</option>
                     </select>
+                    <label>Kategória</label>
                 </div>
-            
+
+                <div class="input-group">
+                    <select name="brand" required ngModel>
+                        <option value="" disabled selected></option>
+                        <option *ngFor="let brand of brands" [value]="brand">{{brand}}</option>
+                    </select>
+                    <label>Márka</label>
+                </div>
+
+                <div class="input-group">
+                    <select name="gender" required ngModel>
+                        <option value="" disabled selected></option>
+                        <option *ngFor="let gender of genders" [value]="gender">{{gender}}</option>
+                    </select>
+                    <label>Nem</label>
+                </div>
+
+                <div class="input-group">
+                    <select name="size" required ngModel>
+                        <option value="" disabled selected></option>
+                        <option *ngFor="let size of sizes" [value]="size">{{size}}</option>
+                    </select>
+                    <label>Méret</label>
+                </div>
+
                 <div class="input-group price-group">
                     <input type="number" name="price" placeholder=" " min="1" required ngModel>
                     <label>Ár (Ft)</label>
@@ -79,6 +106,16 @@
         </div>
     </main>
 
-    <!-- Success modal változatlan -->
+    <div class="success-modal" id="success-modal" [class.active]="showSuccessModal">
+        <div class="modal-content">
+            <i class="fas fa-check-circle modal-icon"></i>
+            <h3 class="modal-title">Sikeres feltöltés!</h3>
+            <p class="modal-message">A termékedet sikeresen közzétettük.</p>
+            <button class="modal-close-button" (click)="onCloseSuccessModal()">
+                Vissza a főoldalra
+            </button>
+        </div>
+    </div>
+
 </body>
 </html>

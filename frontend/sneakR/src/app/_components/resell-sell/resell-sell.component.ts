@@ -14,6 +14,11 @@ import { CommonModule } from '@angular/common';
 export class ResellSellComponent {
   constructor(private router: Router) {}
 
+  sizes = Array.from({length: 10}, (_, i) => i + 36); // 36-45-ig generálja a méreteket
+  brands = ['Nike', 'Adidas', 'Puma', 'Reebook', 'Converse', 'Jordan', 'Yeezy', 'New Balance', 'Alexander McQueen', 'Travis Scott'];
+  conditions = ['Új', 'Használt'];
+  genders = ['Férfi', 'Női'];
+
   showSuccessModal: boolean = false;
   showLinkModal: boolean = false;
   imageUrl: string = '';
@@ -21,6 +26,7 @@ export class ResellSellComponent {
   
   openLinkModal(): void {
     this.showLinkModal = true;
+    
   }
 
   closeLinkModal(): void {
@@ -40,16 +46,19 @@ export class ResellSellComponent {
 
   onSubmit(form: NgForm): void {
     if (form.invalid || !this.imageUrl) {
-      form.control.markAllAsTouched();
-      this.imageError = !this.imageUrl;
-      return;
+        form.control.markAllAsTouched();
+        this.imageError = !this.imageUrl;
+        return;
     }
-    
     this.showSuccessModal = true;
+    
   }
+
+  
 
   onCloseSuccessModal(): void {
     this.showSuccessModal = false;
     this.router.navigate(['/resell']);
   }
 }
+
