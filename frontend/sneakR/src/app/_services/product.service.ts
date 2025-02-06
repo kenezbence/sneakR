@@ -23,7 +23,7 @@ export class ProductService {
         model: 'Dunk',
         price: 64990,
         sizes: [36, 37, 38, 39, 40, 41, 42, 43, 44],
-        image: 'https://example.com/nike-dunk.jpg'
+        image: 'https://www.buzzsneakers.hu/files/images/slike_proizvoda/media/HQ4/HQ4988-030/images/HQ4988-030.jpg'
     },
     {
         id: 2,
@@ -32,7 +32,7 @@ export class ProductService {
         model: 'Dunk',
         price: 47990,
         sizes: [36, 38, 40, 41, 42, 43],
-        image: 'https://example.com/nike-dunk.jpg'
+        image: 'https://www.buzzsneakers.hu/files/thumbs/files/images/slike_proizvoda/media/DD1/DD1391-103/images/thumbs_800/DD1391-103_800_800px.jpg'
     },
     {
         id: 3,
@@ -41,7 +41,7 @@ export class ProductService {
         model: 'Dunk',
         price: 69990,
         sizes: [40, 41, 42, 43, 44, 45],
-        image: 'https://example.com/nike-dunk-high.jpg'
+        image: 'https://www.buzzsneakers.hu/files/thumbs/files/images/slike_proizvoda/media/FV5/FV5960-100/images/thumbs_800/FV5960-100_800_800px.jpg'
     },
     {
         id: 4,
@@ -59,7 +59,7 @@ export class ProductService {
         model: 'Dunk',
         price: 67990,
         sizes: [39, 40, 41, 42, 43],
-        image: 'https://example.com/nike-dunk-high-retro.jpg'
+        image: 'https://www.buzzsneakers.hu/files/thumbs/files/images/slike_proizvoda/media/DD1/DD1399-105/images/thumbs_800/DD1399-105_800_800px.jpg'
     },
     {
         id: 6,
@@ -68,7 +68,7 @@ export class ProductService {
         model: 'Dunk',
         price: 62990,
         sizes: [36, 37, 38, 39, 40],
-        image: 'https://example.com/nike-dunk-low-next-nature.jpg'
+        image: 'https://www.buzzsneakers.hu/files/images/slike_proizvoda/media/HF5/HF5384-300/images/HF5384-300.jpg'
     },
     {
         id: 7,
@@ -77,7 +77,7 @@ export class ProductService {
         model: 'Dunk',
         price: 71990,
         sizes: [40, 41, 42, 43, 44],
-        image: 'https://example.com/nike-dunk-high-1985.jpg'
+        image: 'https://www.buzzsneakers.hu/files/thumbs/files/images/slike_proizvoda/media/DD1/DD1869-114/images/thumbs_800/DD1869-114_800_800px.jpg'
     },
     {
         id: 8,
@@ -86,7 +86,7 @@ export class ProductService {
         model: 'Dunk',
         price: 57990,
         sizes: [37, 38, 39, 40, 41],
-        image: 'https://example.com/nike-dunk-low-disrupt.jpg'
+        image: 'https://www.buzzsneakers.hu/files/images/slike_proizvoda/media/FN7/FN7167-400/images/FN7167-400.jpg'
     },
     {
         id: 9,
@@ -95,7 +95,7 @@ export class ProductService {
         model: 'Dunk',
         price: 68990,
         sizes: [39, 40, 41, 42],
-        image: 'https://example.com/nike-dunk-high-up.jpg'
+        image: 'https://www.buzzsneakers.hu/files/thumbs/files/images/slike_proizvoda/media/DB2/DB2179-118/images/thumbs_800/DB2179-118_800_800px.jpg'
     },
     {
         id: 10,
@@ -104,7 +104,7 @@ export class ProductService {
         model: 'Dunk',
         price: 64990,
         sizes: [36, 37, 38, 39],
-        image: 'https://example.com/nike-dunk-low-flyleather.jpg'
+        image: 'https://www.buzzsneakers.hu/files/thumbs/files/images/slike_proizvoda/media/DX5/DX5931-100/images/thumbs_800/DX5931-100_800_800px.jpg'
     },
     {
         id: 11,
@@ -113,7 +113,7 @@ export class ProductService {
         model: 'Dunk',
         price: 70990,
         sizes: [40, 41, 42, 43],
-        image: 'https://example.com/nike-dunk-high-rebel.jpg'
+        image: 'https://www.buzzsneakers.gr/files/images/slike_proizvoda/media/DH3/DH3718-100/images/DH3718-100.jpg'
     },
     {
         id: 12,
@@ -122,7 +122,7 @@ export class ProductService {
         model: 'Dunk',
         price: 59990,
         sizes: [38, 39, 40, 41, 42, 43],
-        image: 'https://example.com/nike-dunk-low-sp.jpg'
+        image: 'https://www.buzzsneakers.hu/files/thumbs/files/images/slike_proizvoda/media/DD1/DD1873-600/images/thumbs_800/DD1873-600_800_800px.jpg'
     },
     {
         id: 13,
@@ -131,7 +131,7 @@ export class ProductService {
         model: 'Dunk',
         price: 67990,
         sizes: [39, 40, 41, 42, 43, 44],
-        image: 'https://example.com/nike-dunk-high-varsity.jpg'
+        image: 'https://www.buzzsneakers.hu/files/images/slike_proizvoda/media/DD1/DD1869-202/images/DD1869-202.jpg'
     },
     {
         id: 14,
@@ -140,7 +140,7 @@ export class ProductService {
         model: 'Dunk',
         price: 62990,
         sizes: [36, 37, 38, 39, 40, 41],
-        image: 'https://example.com/nike-dunk-low-premium.jpg'
+        image: 'https://www.buzzsneakers.hu/files/images/slike_proizvoda/media/FB7/FB7910-500/images/FB7910-500.jpg'
     },
     {
         id: 15,
@@ -149,7 +149,7 @@ export class ProductService {
         model: 'Dunk',
         price: 69990,
         sizes: [40, 41, 42, 43, 44, 45],
-        image: 'https://example.com/nike-dunk-high-se.jpg'
+        image: 'https://www.buzzsneakers.hu/files/images/slike_proizvoda/media/FB8/FB8892-200/images/FB8892-200.jpg'
     },
     {
         id: 16,
@@ -158,7 +158,7 @@ export class ProductService {
         model: 'Dunk',
         price: 58990,
         sizes: [37, 38, 39, 40, 41, 42],
-        image: 'https://example.com/nike-dunk-low-essential.jpg'
+        image: 'https://www.buzzsneakers.hu/files/images/slike_proizvoda/media/FB9/FB9109-111/images/FB9109-111.jpg'
     },
     {
         id: 17,
@@ -167,7 +167,7 @@ export class ProductService {
         model: 'Dunk',
         price: 71990,
         sizes: [39, 40, 41, 42, 43],
-        image: 'https://example.com/nike-dunk-high-lx.jpg'
+        image: 'https://www.buzzsneakers.hu/files/images/slike_proizvoda/media/DD1/DD1869-113/images/DD1869-113.jpg'
     },
     {
       id: 1,
@@ -432,7 +432,7 @@ export class ProductService {
     model: 'Dunk',
     price: 119990,
     sizes: [38, 39, 40, 41, 42],
-    image: 'https://example.com/nike-sb-dunk-travis-scott.jpg'
+    image: 'https://balazskicks.com/cdn/shop/products/image_43a8c756-8bc2-4205-a8ee-012e60dbd9af.png?v=1702321194&width=2048'
 },
 {
     id: 15,

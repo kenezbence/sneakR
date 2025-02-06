@@ -5,6 +5,7 @@ import { ProductService } from '../../_services/product.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { WebshopnavbarComponent } from '../webshopnavbar/webshopnavbar.component';
+import { CartService } from '../../_services/cart.service';
 
 @Component({
   standalone: true,
@@ -23,7 +24,8 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private cartService: CartService
   ) {}
 
   ngOnInit() {
@@ -55,4 +57,8 @@ export class ProductsComponent implements OnInit {
       'Összes termék'
     );
   }
+  addToCart(product: Product) {
+    this.cartService.addToCart(product);
+  
+}
 }

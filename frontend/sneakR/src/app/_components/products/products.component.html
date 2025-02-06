@@ -63,6 +63,7 @@
         <p class="price">
           {{ product.price | currency:'HUF':'symbol':'1.0-0' }}
         </p>
+        <button class="add-to-cart" (click)="addToCart(product)">Kosárba</button>
       </div>
     </div>
   </section>
