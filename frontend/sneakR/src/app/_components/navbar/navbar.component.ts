@@ -14,6 +14,7 @@ export class NavbarComponent {
 
   constructor(private router: Router) {}
 
+  
   navigateToTarget3() {
     this.router.navigate(['/select']);
   }
