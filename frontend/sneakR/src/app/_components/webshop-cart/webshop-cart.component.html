@@ -1,50 +1,67 @@
 <!-- webshop-cart.component.html -->
 <section class="cart-container">
-    <h2>Kosár tartalma</h2>
-    
-    <div class="cart-items">
-      <div *ngFor="let item of cartService.getItems(); let i = index" class="cart-item">
-        <div class="item-image">
-          <img [src]="item.image" [alt]="item.name">
-        </div>
-        <div class="item-details">
-          <h3>{{ item.name }}</h3>
-          <p>{{ item.price | currency:'HUF':'symbol':'1.0-0' }}</p>
-        </div>
-        <button class="remove-btn" (click)="removeItem(i)">✕</button>
+  <h2>Kosár tartalma</h2>
+  
+  <div class="cart-items">
+    <div *ngFor="let item of cartService.getItems(); let i = index" class="cart-item">
+      <button class="remove-btn" (click)="removeItem(i)">×</button>
+      <div class="item-image">
+        <img [src]="item.image" [alt]="item.name">
+      </div>
+      <div class="item-details">
+        <h3>{{ item.name }}</h3>
+        <p>{{ item.price | currency:'HUF':'symbol':'1.0-0' }}</p>
       </div>
     </div>
-  
-    <div class="cart-summary">
-      <h3>Összesen: {{ cartService.getTotal() | currency:'HUF':'symbol':'1.0-0' }}</h3>
+  </div>
+
+  <div class="cart-summary">
+    <h3>Összesen: {{ cartService.getTotal() | currency:'HUF':'symbol':'1.0-0' }}</h3>
+  </div>
+
+  <form #checkoutForm="ngForm" (ngSubmit)="checkout()" class="checkout-form">
+    <div class="form-group">
+      <label for="name">Név:</label>
+      <input type="text" id="name" name="name" required ngModel>
     </div>
-  
-    <form #checkoutForm="ngForm" (ngSubmit)="checkout()" class="checkout-form">
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required ngModel>
+    </div>
+
+    <div class="form-group">
+      <label for="address">Szállítási cím:</label>
+      <textarea id="address" name="address" required ngModel></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Fizetési mód:</label>
+      <select #paymentSelect name="payment" required ngModel (change)="showCardDetails(paymentSelect.value)">
+        <option value="bankkártya">Bankkártya</option>
+        <option value="utánvét">Utánvét</option>
+      </select>
+    </div>
+
+    <div id="card-details" [class.hidden]="!showCard">
       <div class="form-group">
-        <label for="name">Név:</label>
-        <input type="text" id="name" name="name" required ngModel>
+        <label for="card-number">Kártyaszám:</label>
+        <input type="text" id="card-number" name="cardNumber" ngModel placeholder="XXXX XXXX XXXX XXXX" maxlength="16">
       </div>
-  
+
       <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required ngModel>
+        <label for="expiry-date">Lejárati dátum:</label>
+        <input type="month" id="expiry-date" name="expiryDate" ngModel>
       </div>
-  
+
       <div class="form-group">
-        <label for="address">Szállítási cím:</label>
-        <textarea id="address" name="address" required ngModel></textarea>
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" name="cvv" ngModel placeholder="CVV" maxlength="3">
       </div>
-  
-      <div class="form-group">
-        <label>Fizetési mód:</label>
-        <select name="payment" required ngModel>
-          <option value="bankkártya">Bankkártya</option>
-          <option value="utánvét">Utánvét</option>
-        </select>
-      </div>
-  
-      <button type="submit" [disabled]="!checkoutForm.valid" class="checkout-btn">
-        Tovább a fizetéshez
-      </button>
-    </form>
-  </section>
+    </div>
+
+    <button type="submit" [disabled]="!checkoutForm.valid" class="checkout-btn">
+      Tovább a fizetéshez
+    </button>
+  </form>
+</section>

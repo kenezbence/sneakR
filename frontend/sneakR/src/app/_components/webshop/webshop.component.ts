@@ -1,18 +1,48 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+// webshop.component.ts
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ShoeService } from '../../_services/shoe.service';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-webshop',
   standalone: true,
-  imports: [RouterLink],
+  imports: [CommonModule, HttpClientModule, RouterLink],
   templateUrl: './webshop.component.html',
-  styleUrl: './webshop.component.css'
+  styleUrls: ['./webshop.component.css']
 })
-export class WebshopComponent {
+export class WebshopComponent implements OnInit {
   isMenuOpen = false;
+  newShoes: any[] = [];
+  bestSellerShoes: any[] = [];
   menuState: { [key: string]: boolean } = {};
+  loading = true;
 
-  @ViewChild('best') bestSection!: ElementRef; // Best Sellerek szekció referencia
+  selectedProduct: any = null;
+  selectedSize: string | null = null;
+  sizes: string[] = ['36', '37', '38', '39', '40', '41', '42', '43', '44', '45'];
+
+  constructor(private shoeService: ShoeService) {}
+
+  @ViewChild('best') bestSection!: ElementRef;
+  ngOnInit() {
+    this.shoeService.getShoes().subscribe({
+      next: (response) => {
+        if (response.shoes) {
+          // Split shoes into new arrivals and best sellers
+          const half = Math.ceil(response.shoes.length / 2);
+          this.newShoes = response.shoes.slice(0, half);
+          this.bestSellerShoes = response.shoes.slice(half);
+        }
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Error loading shoes:', err);
+        this.loading = false;
+      }
+    });
+  }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
@@ -31,6 +61,34 @@ export class WebshopComponent {
   scrollToBest() {
     if (this.bestSection) {
       this.bestSection.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  openProductModal(product: any) {
+    this.selectedProduct = product;
+    this.selectedSize = null;
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeProductModal() {
+    this.selectedProduct = null;
+    document.body.style.overflow = 'auto';
+  }
+
+  selectSize(size: string) {
+    this.selectedSize = size;
+  }
+
+  addToCart() {
+    if (this.selectedProduct && this.selectedSize) {
+      // Add your cart logic here
+      console.log('Added to cart:', {
+        product: this.selectedProduct,
+        size: this.selectedSize
+      });
+      
+      // Close modal after adding to cart
+      this.closeProductModal();
     }
   }
 }
