@@ -47,7 +47,17 @@ public class ShoeService {
     return shoesList;
 }
     
-    
+    public ArrayList<Cipok> getAllShoesData() {
+    ArrayList<Cipok> shoesList = new ArrayList<>(); 
+    try {
+        shoesList = layer.getAllShoesData();     
+        
+    } catch (Exception e) {
+        System.err.println("Error fetching shoes: " + e.getMessage());
+    }
+
+    return shoesList;
+}
     
     public JSONObject uploadShoes(Cipok u) {
     JSONObject toReturn = new JSONObject();
