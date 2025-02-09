@@ -1,5 +1,5 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-resell-user',
@@ -8,10 +8,29 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   templateUrl: './resell-user.component.html',
   styleUrls: ['./resell-user.component.css']
 })
-export class ResellUserComponent {
+export class ResellUserComponent implements OnInit  {
+  
   @ViewChild('currentListings') currentListings!: ElementRef;
   @ViewChild('pastListings') pastListings!: ElementRef;
   @ViewChild('purchasedItems') purchasedItems!: ElementRef;
+
+  user: any = {
+    nev: 'Felhasználó',
+    email: '',
+    activeListingsCount: 2
+  };
+
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    const userData = localStorage.getItem('currentUser');
+    if (userData) {
+      this.user = JSON.parse(userData);
+      this.user.activeListingsCount = 2; 
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
 
     activeListingsCount: number = 2; // Számláló változó
   

@@ -14,11 +14,12 @@
     <!-- Felhasználói Profil -->
     <section id="profile" class="profile-section">
         <header>
-            <h1>Üdvözöllek, <span style="color: #2A7B47;">Kovács János</span>!</h1>
+            <h1>Üdvözöllek, <span style="color: #2A7B47;">{{ user.nev || 'Felhasználó' }}</span>!</h1>
             <div class="profile-info">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrAIH5ePjPpc06-hopmyUZNsVbBPvZA0XGmQ&s" alt="Profilkép" class="avatar">
-                <p>📧 janos.kovacs&#64;example.com</p>
-                <p>🌟 Aktív hirdetések: {{ activeListingsCount }} | 🛍️ Eladott termékek: 3</p>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrAIH5ePjPpc06-hopmyUZNsVbBPvZA0XGmQ&s"
+                    alt="Profilkép" class="avatar">
+                <p>📧 {{ user.email }}</p>
+                <p>🌟 Aktív hirdetések: {{ user.activeListingsCount }} | 🛍️ Eladott termékek: 3</p>
             </div>
         </header>
     </section>
