@@ -13,8 +13,8 @@
             <h1 class="gradient-title">Termék eladása</h1>
             
             <form class="sell-form" (ngSubmit)="onSubmit(sellForm)" #sellForm="ngForm">
-                <div class="upload-container">
-                    <label class="upload-label" (click)="openLinkModal()"> <!-- Click handler áthelyezve -->
+                <div class="upload-container" (click)="openLinkModal()">
+                    <label class="upload-label">
                         <i class="fas fa-link"></i>
                         <span>Kattints ide képlink hozzáadásához</span>
                         <small>Csak közvetlen képlinkek (URL)</small>
@@ -49,46 +49,52 @@
                 </div>
 
                 <div class="input-group">
-                    <select name="condition" required ngModel>
-                        <input type="text" name="nev" placeholder=" " required ngModel>
-                    </select>
+                    <input type="text" name="nev" placeholder=" " required ngModel>
                     <label>Termék neve</label>
                 </div>
+                
                 <div class="input-group">
-                    <select name="category" required ngModel>
+                    <select name="marka" required ngModel>
                         <option value="" disabled selected></option>
-                        <option value="cipok">Cipők</option>
-                        <option value="kiegeszitok">Kiegészítők</option>
-                    </select>
-                    <label>Kategória</label>
-                </div>
-
-                <div class="input-group">
-                    <select name="brand" required ngModel>
-                        <option value="" disabled selected></option>
-                        <option *ngFor="let brand of brands" [value]="brand">{{brand}}</option>
+                        <option value="Nike">Nike</option>
+                        <option value="Adidas">Adidas</option>
+                        <option value="Puma">Puma</option>
+                        <option value="Reebok">Reebok</option>
+                        <option value="Converse">Converse</option>
+                        <option value="Jordan">Jordan</option>
+                        <option value="Yeezy">Yeezy</option>
+                        <option value="New Balance">New Balance</option>
+                        <option value="Alexander McQueen">Alexander McQueen</option>
+                        <option value="Travis Scott">Travis Scott</option>
                     </select>
                     <label>Márka</label>
                 </div>
-
+                
                 <div class="input-group">
-                    <select name="gender" required ngModel>
+                    <select name="nem" required ngModel>
                         <option value="" disabled selected></option>
-                        <option *ngFor="let gender of genders" [value]="gender">{{gender}}</option>
+                        <option value="Férfi">Férfi</option>
+                        <option value="Női">Nő</option>
                     </select>
                     <label>Nem</label>
                 </div>
-
+                
                 <div class="input-group">
-                    <select name="size" required ngModel>
+                    <select name="allapot" required ngModel>
                         <option value="" disabled selected></option>
-                        <option *ngFor="let size of sizes" [value]="size">{{size}}</option>
+                        <option value="használt">Használt</option>
+                        <option value="új">Új</option>
                     </select>
+                    <label>Állapot</label>
+                </div>
+                
+                <div class="input-group">
+                    <input type="number" name="meret" placeholder=" " required ngModel>
                     <label>Méret</label>
                 </div>
-
+                
                 <div class="input-group price-group">
-                    <input type="number" name="price" placeholder=" " min="1" required ngModel>
+                    <input type="number" name="ar" placeholder=" " min="1" required ngModel>
                     <label>Ár (Ft)</label>
                 </div>
                 <div class="form-buttons">
@@ -105,16 +111,15 @@
         </div>
     </main>
 
-    <div class="success-modal" id="success-modal" [class.active]="showSuccessModal">
+    <!-- Success Modal -->
+    <div class="success-modal" [class.active]="showSuccessModal">
         <div class="modal-content">
             <i class="fas fa-check-circle modal-icon"></i>
             <h3 class="modal-title">Sikeres feltöltés!</h3>
-            <p class="modal-message">A termékedet sikeresen közzétettük.</p>
             <button class="modal-close-button" (click)="onCloseSuccessModal()">
                 Vissza a főoldalra
             </button>
         </div>
     </div>
-
 </body>
 </html>
