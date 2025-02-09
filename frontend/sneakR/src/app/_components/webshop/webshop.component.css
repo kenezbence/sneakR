@@ -1,4 +1,4 @@
-/* Új stílusok */
+/* Hamburger Menu Styles */
 .hamburger-menu {
     position: fixed;
     top: 20px;
@@ -12,60 +12,80 @@
     padding: 10px 15px;
     border-radius: 5px;
     transition: all 0.3s ease;
-  }
-  
-  .hamburger-menu:hover {
+}
+
+.hamburger-menu:hover {
     background: rgba(0, 0, 0, 0.9);
-  }
-  
-/* Oldalsó menü - Alapértelmezett állapotban teljesen elrejtve */
+}
+
+/* Sidebar Styles */
 .sidebar {
     position: fixed;
     top: 0;
-    right: -300px; /* Teljesen kívülre helyezzük */
+    right: -300px;
     width: 300px;
     height: 100%;
     background-color: #222;
     transition: all 0.3s ease;
     z-index: 999;
     padding: 20px;
-    opacity: 0; /* Áttetszőség hozzáadva az animációhoz */
-    visibility: hidden; /* Teljesen elrejtjük */
-  }
-  
-  /* Aktív állapot */
-  .sidebar.active {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.sidebar.active {
     right: 0;
     opacity: 1;
     visibility: visible;
-  }
+}
 
-  .sidebar .submenu {
+.sidebar .submenu {
     display: none;
     padding-left: 20px;
     background-color: #444;
     list-style: none;
-  }
-  
-  .sidebar .submenu.active {
+}
+
+.sidebar .submenu.active {
     display: block;
-  }
-  
-  .sidebar .submenu li {
+}
+
+.sidebar .submenu li {
     padding: 10px 0;
-  }
-  
-  .sidebar .submenu a {
+}
+
+.sidebar .submenu a {
     font-size: 0.9em;
     opacity: 0.9;
-  }
-  
-  .sidebar .submenu .submenu {
+}
+
+.sidebar .submenu .submenu {
     background-color: #555;
-  }
-  
-  /* Háttér effekt módosítása */
-  .backdrop {
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+.sidebar li {
+    margin: 25px 0;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    transition: color 0.3s ease;
+}
+
+.sidebar a:hover {
+    color: #007bff;
+}
+
+/* Backdrop Styles */
+.backdrop {
     position: fixed;
     top: 0;
     left: 0;
@@ -76,142 +96,294 @@
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
-  }
-  
-  .backdrop.active {
+}
+
+.backdrop.active {
     opacity: 1;
     visibility: visible;
-  }
-  
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin-top: 15px;
-  }
-  
-  .sidebar li {
-    margin: 25px 0;
-  }
-  
-  .sidebar a {
+}
+
+/* Main Content Styles */
+h2 {
+    text-align: center;
+    font-size: 1.8em;
+    margin: 20px 0;
+}
+
+.hero-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+}
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: #222;
     color: white;
-    text-decoration: none;
+    text-align: center;
+}
+
+.feature {
+    flex: 1;
+    padding: 10px;
+}
+
+.feature i {
+    display: block;
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+/* Product Grid Styles */
+.products-section {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+}
+
+.product-card {
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    background: none;
+}
+
+.size-info h4 {
+    margin-bottom: 5px;
+}
+
+.size-value {
     font-size: 1.2em;
-    transition: color 0.3s ease;
-  }
-  
-  .sidebar a:hover {
-    color: #007bff;
-  }
-  
-  .backdrop {
+    font-weight: bold;
+    color: #2A7B47;
+    padding: 8px 15px;
+    border: 2px solid #2A7B47;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 20px;
+}
+
+.text-container {
+    padding: 15px;
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-card p {
+    margin: 8px 0;
+    font-size: 1.1em;
+}
+
+.product-card p:last-child {
+    color: #2A7B47;
+    font-weight: 700;
+    font-size: 1.2em;
+    margin-top: auto;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #222;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.footer a {
+    color: white;
+    margin: 0 10px;
+    font-size: 1.5em;
+}
+
+.newsletter input {
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.newsletter button {
+    padding: 10px 20px;
+    background-color: #555;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 800px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+    }
+
+    .image-container {
+        padding-top: 80%;
+    }
+}
+
+/* Product Modal Styles */
+.product-modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 998;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1001;
     display: none;
-  }
-  
-  .backdrop.active {
+    overflow-y: auto;
+}
+
+.product-modal.active {
     display: block;
-  }
-  
-  /* Meglévő stílusok */
-  h2 {
-      text-align: center;
-      font-size: 1.8em;
-      margin: 20px 0;
-  }
-  
-  .hero-section {
-      text-align: center;
-      margin-bottom: 20px;
-  }
-  
-  .hero-image img {
-      width: 100%;
-      height: auto;
-  }
-  
-  .features {
-      display: flex;
-      justify-content: space-around;
-      padding: 20px;
-      background-color: #222;
-      color: white;
-      text-align: center;
-  }
-  
-  .feature {
-      flex: 1;
-      padding: 10px;
-  }
-  
-  .feature i {
-      display: block;
-      font-size: 2em;
-      margin-bottom: 10px;
-  }
-  
-  .products-section {
-      padding: 20px;
-  }
-  
-  .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-  }
-  
-  .product-card {
-      background-color: white;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 10px;
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .product-card img {
-      width: 100%;
-      height: auto;
-      margin-bottom: 10px;
-  }
-  
-  .footer {
-      background-color: #222;
-      color: white;
-      padding: 20px;
-      text-align: center;
-  }
-  
-  .footer-content {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-  }
-  
-  .footer a {
-      color: white;
-      margin: 0 10px;
-      font-size: 1.5em;
-  }
-  
-  .newsletter input {
-      padding: 10px;
-      margin-right: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-  }
-  
-  .newsletter button {
-      padding: 10px 20px;
-      background-color: #555;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-  }
+}
+
+.modal-content {
+    background: white;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    gap: 30px;
+    position: relative;
+}
+
+.modal-image {
+    flex: 1;
+}
+
+.modal-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.modal-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.size-selector h4 {
+    margin-bottom: 10px;
+}
+
+.size-options {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.size-options button {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.size-options button.selected {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.add-to-cart {
+    background: #2A7B47;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 20px;
+}
+
+.add-to-cart:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+
+.description {
+    color: #666;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        flex-direction: column;
+        margin: 20px;
+        padding: 20px;
+    }
+    
+    .modal-image {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+}
