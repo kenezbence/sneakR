@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { User } from '../../models/user.model';
 import { UserResponse } from '../../models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -15,11 +16,28 @@ import { UserResponse } from '../../models/user.model';
 })
 export class AdminComponent {
   users: User[] = [];
+  isAdmin: boolean = false;
+  currentUser: any;
   
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit() {
-    this.loadUsers();
+    const userData = localStorage.getItem('currentUser');
+    if (userData) {
+      this.currentUser = JSON.parse(userData);
+      this.isAdmin = this.currentUser.admin === 'igen';
+      
+      if (this.isAdmin) {
+        this.loadUsers();
+      }
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
+  
+
+  goBack() {
+    this.router.navigate(['/select']);
   }
 
   loadUsers() {

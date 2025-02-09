@@ -44,3 +44,39 @@
     padding: 2rem;
     color: #666;
   }
+
+    .error-container {
+      text-align: center;
+      padding: 4rem;
+      background: #f8d7da;
+      border-radius: 8px;
+      margin: 2rem auto;
+      max-width: 600px;
+    }
+  
+    .error-container h2 {
+      color: #721c24;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+  
+    .error-container p {
+      color: #721c24;
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+  
+    .back-button {
+      background: #2A7B47;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+  
+    .back-button:hover {
+      background: #1f5e36;
+    }

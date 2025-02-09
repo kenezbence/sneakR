@@ -1,10 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-resell-user',
   standalone: true,
-  imports: [RouterLink, RouterOutlet],
+  imports: [RouterLink, RouterOutlet, CommonModule],
   templateUrl: './resell-user.component.html',
   styleUrls: ['./resell-user.component.css']
 })

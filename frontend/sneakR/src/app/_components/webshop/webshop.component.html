@@ -115,60 +115,71 @@
       </div>
   </header>
 
+<!-- webshop.component.html -->
 <section class="products-section" id="new">
-    <h2>Újdonságok</h2>
-    <div class="product-grid">
-      <div class="product-card" *ngFor="let shoe of newShoes" (click)="openProductModal(shoe)">
-        <div class="image-container">
-            <img [src]="shoe.img" [alt]="shoe.nev">
-        </div>
-        <div class="text-container">
-            <p>{{ shoe.nev }}</p>
-            <p>{{ shoe.ar | number }} Ft</p>
-        </div>
+  <h2>Újdonságok</h2>
+  <div class="product-grid">
+    <div class="product-card" *ngFor="let shoe of newShoes" (click)="openProductModal(shoe)">
+      <div class="image-container">
+        <!-- Update img to image -->
+        <img [src]="shoe.image" [alt]="shoe.name">
+      </div>
+      <div class="text-container">
+        <!-- Update nev to name -->
+        <p>{{ shoe.name }}</p>
+        <p>{{ shoe.price | number }} Ft</p>
+      </div>
     </div>
-    </div>
+  </div>
 </section>
 
 <section class="products-section" id="best" #best>
-    <h2>Best Sellerek</h2>
-    <div class="product-grid">
-      <div class="product-card" *ngFor="let shoe of bestSellerShoes" (click)="openProductModal(shoe)">
-            <div class="image-container">
-                <img [src]="shoe.img" [alt]="shoe.nev">
-            </div>
-            <div class="text-container">
-                <p>{{ shoe.nev }}</p>
-                <p>{{ shoe.ar | number }} Ft</p>
-            </div>
-        </div>
+  <h2>Best Sellerek</h2>
+  <div class="product-grid">
+    <div class="product-card" *ngFor="let shoe of bestSellerShoes" (click)="openProductModal(shoe)">
+      <div class="image-container">
+        <!-- Update img to image -->
+        <img [src]="shoe.image" [alt]="shoe.name">
+      </div>
+      <div class="text-container">
+        <!-- Update nev to name -->
+        <p>{{ shoe.name }}</p>
+        <p>{{ shoe.price | number }} Ft</p>
+      </div>
     </div>
+  </div>
 </section>
 
 <div class="product-modal" [class.active]="selectedProduct">
-    <div class="modal-content" *ngIf="selectedProduct">
-        <span class="close" (click)="closeProductModal()">&times;</span>
-        <div class="modal-image">
-            <img [src]="selectedProduct.img" [alt]="selectedProduct.nev">
-        </div>
-        <div class="modal-details">
-            <h3>{{ selectedProduct.nev }}</h3>
-            <p class="price">{{ selectedProduct.ar | number }} Ft</p>
-            
-            <div class="size-info">
-                <h4>Elérhető méret:</h4>
-                <div class="size-value">
-                    {{ selectedProduct.meret }}
-                </div>
-            </div>
-
-            <button class="add-to-cart" (click)="addToCart()">
-                <i class="fas fa-cart-plus"></i> Kosárba
-            </button>
-            
-            <p class="description">{{ selectedProduct.leiras }}</p>
-        </div>
+  <div class="modal-content" *ngIf="selectedProduct">
+    <span class="close" (click)="closeProductModal()">&times;</span>
+    <div class="modal-image">
+      <!-- Update img to image -->
+      <img [src]="selectedProduct.image" [alt]="selectedProduct.name">
     </div>
+    <div class="modal-details">
+      <!-- Update nev to name -->
+      <h3>{{ selectedProduct.name }}</h3>
+      <p class="price">{{ selectedProduct.price | number }} Ft</p>
+
+      <div class="size-info">
+        <h4>Elérhető méret:</h4>
+        <div class="size-value">
+          <!-- Update meret to sizes -->
+          {{ selectedProduct.sizes.join(', ') }}
+        </div>
+      </div>
+
+      <button class="add-to-cart" (click)="addToCart()">
+        <i class="fas fa-cart-plus"></i> Kosárba
+      </button>
+
+      <!-- Add description if needed -->
+      <p class="description" *ngIf="selectedProduct.description">
+        {{ selectedProduct.description }}
+      </p>
+    </div>
+  </div>
 </div>
 
   

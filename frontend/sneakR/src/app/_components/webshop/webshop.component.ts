@@ -28,13 +28,10 @@ export class WebshopComponent implements OnInit {
   @ViewChild('best') bestSection!: ElementRef;
   ngOnInit() {
     this.shoeService.getShoes().subscribe({
-      next: (response) => {
-        if (response.shoes) {
-          // Split shoes into new arrivals and best sellers
-          const half = Math.ceil(response.shoes.length / 2);
-          this.newShoes = response.shoes.slice(0, half);
-          this.bestSellerShoes = response.shoes.slice(half);
-        }
+      next: (shoes) => {
+        const half = Math.ceil(shoes.length / 2);
+        this.newShoes = shoes.slice(0, half);
+        this.bestSellerShoes = shoes.slice(half);
         this.loading = false;
       },
       error: (err) => {

@@ -1,56 +1,41 @@
 <app-webshopnavbar></app-webshopnavbar>
   
-  <section class="filters-container">
-    <h1 class="page-title">{{ getTitle() }}</h1>
-    <div class="filter-controls">
-      <!-- Méret: -->
-      <div class="select-wrapper">
-        <label for="sizeSelect" class="sr-only">Méret kiválasztása</label>
-        <select
-          id="sizeSelect"
-          [(ngModel)]="selectedSize"
-          (change)="applyFilters()"
-        >
-          <option value="">Méret</option>
-          <option
-            *ngFor="let size of [36, 37, 38, 39, 40, 41, 42, 43, 44, 45]"
-            [value]="size"
-          >
-            {{ size }}
-          </option>
-        </select>
-      </div>
-  
-      <!-- Két range input (ár) -->
+  <!-- Update the size selector and price sliders section -->
+<section class="filters-container">
+  <h1 class="page-title">{{ getTitle() }}</h1>
+  <div class="filter-controls">
+    <!-- Size Selector -->
+    <div class="select-wrapper">
+      <label for="sizeSelect">Méret:</label>
+      <select id="sizeSelect" [(ngModel)]="selectedSize" (change)="applyFilters()">
+        <option value="">Összes méret</option>
+        <option *ngFor="let size of availableSizes" [value]="size">{{ size }}</option>
+      </select>
+    </div>
+
+    <!-- Price Sliders -->
+    <div class="price-range">
       <div class="range-filter">
-        <label for="minRange" class="range-label">Min Ár</label>
-        <input
-          type="range"
-          id="minRange"
-          [min]="0"
-          [max]="200000"
-          [step]="1000"
-          [(ngModel)]="minPrice"
-          (input)="applyFilters()"
-        />
-        <span>{{ minPrice | currency:'HUF':'symbol':'1.0-0' }}</span>
-      </div>
-  
-      <div class="range-filter">
-        <label for="maxRange" class="range-label">Max Ár</label>
-        <input
-          type="range"
-          id="maxRange"
-          [min]="0"
-          [max]="200000"
-          [step]="1000"
-          [(ngModel)]="maxPrice"
-          (input)="applyFilters()"
-        />
-        <span>{{ maxPrice | currency:'HUF':'symbol':'1.0-0' }}</span>
+        <label>Ár tartomány:</label>
+        <div class="slider-container">
+          <input type="range" 
+                 [min]="absoluteMinPrice" 
+                 [max]="absoluteMaxPrice"
+                 [(ngModel)]="minPrice" 
+                 (input)="applyFilters()">
+          <input type="range" 
+                 [min]="absoluteMinPrice" 
+                 [max]="absoluteMaxPrice"
+                 [(ngModel)]="maxPrice" 
+                 (input)="applyFilters()">
+        </div>
+        <div class="price-labels">
+          <span>{{ maxPrice | currency:'HUF':'symbol':'1.0-0' }}</span>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
   
   <section class="product-grid">
     <div class="product-card" *ngFor="let product of filteredProducts">
@@ -60,6 +45,15 @@
       <div class="product-info">
         <h3 class="product-name">{{ product.name }}</h3>
         <p class="brand">{{ product.brand }}</p>
+  
+        <!-- Size display -->
+        <div class="size-container" *ngIf="product.sizes.length > 0">
+          <span class="size-label">Méret:</span>
+          <div class="sizes">
+            <span class="size-pill" *ngFor="let size of product.sizes">{{ size }}</span>
+          </div>
+        </div>
+  
         <p class="price">
           {{ product.price | currency:'HUF':'symbol':'1.0-0' }}
         </p>

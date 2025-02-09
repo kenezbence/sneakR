@@ -7,6 +7,9 @@
             <li><a (click)="scroll(currentListings)">Jelenlegi Hirdetések</a></li>
             <li><a (click)="scroll(pastListings)">Korábbi Hirdetések</a></li>
             <li><a (click)="scroll(purchasedItems)">Vásárolt Termékek</a></li>
+            <li *ngIf="user.admin === 'igen'">
+                <a [routerLink]="['/admin']">Felhasználók kezelése</a>
+            </li>
             <li><a [routerLink]="['/login']">Kijelentkezés</a></li>
         </ul>
     </nav>
