@@ -154,3 +154,35 @@ button:hover {
 .register-button:hover {
     background: #3e8e41;
 }
+
+
+/* login.component.css */
+.error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.invalid {
+    border-color: #dc3545;
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.help-link {
+    display: block;
+    margin: 1rem 0;
+    color: #666;
+    text-decoration: none;
+}
+
+.help-link:hover {
+    text-decoration: underline;
+}

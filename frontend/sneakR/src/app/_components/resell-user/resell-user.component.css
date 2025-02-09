@@ -177,3 +177,12 @@ body {
     from { opacity: 1; transform: translateY(0); }
     to { opacity: 0; transform: translateY(-20px); }
 }
+
+.profile-info p {
+    margin: 0.5rem 0;
+}
+
+.profile-info span.warning {
+    color: #ff9800;
+    font-style: italic;
+}
