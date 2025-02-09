@@ -50,10 +50,9 @@
 
                 <div class="input-group">
                     <select name="condition" required ngModel>
-                        <option value="" disabled selected></option>
-                        <option *ngFor="let condition of conditions" [value]="condition">{{condition}}</option>
+                        <input type="text" name="nev" placeholder=" " required ngModel>
                     </select>
-                    <label>Állapot</label>
+                    <label>Termék neve</label>
                 </div>
                 <div class="input-group">
                     <select name="category" required ngModel>
