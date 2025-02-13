@@ -4,125 +4,121 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ResellCartService } from '../../_services/resell-cart.service';
+import { ResellProductService } from '../../_services/resell-product.service';
+import { UserService } from '../../_services/user.service';
 
 interface Product {
-    id: number;
-    name: string;
-    brand: string;
-    gender: string;
-    size: number;
-    price: number;
-    imgUrl: string;
-    seller: string;
-    sellerAvatar: string;
-    condition: string;
+  id: number;
+  nev: string;
+  marka: string;
+  nem: string;
+  allapot: string;
+  meret: number;
+  ar: number;
+  img: string;
+  user_id: number;
+  seller?: string;
 }
 
 @Component({
-    selector: 'app-resell-products',
-    standalone: true,
-    imports: [NavbarComponent, FormsModule, CommonModule],
-    templateUrl: './resell-products.component.html',
-    styleUrls: ['./resell-products.component.css']
+  selector: 'app-resell-products',
+  standalone: true,
+  imports: [NavbarComponent, FormsModule, CommonModule],
+  templateUrl: './resell-products.component.html',
+  styleUrls: ['./resell-products.component.css']
 })
 export class ResellProductsComponent implements OnInit {
-    constructor(private cartService: ResellCartService, private route: ActivatedRoute) {}
+  originalProducts: Product[] = [];
+  filteredProducts: Product[] = [];
+  users: any[] = [];
+  
+  // Filters
+  brands: string[] = [];
+  sizes: number[] = Array.from({length: 13}, (_, i) => 35 + i); // 35-47
+  selectedBrand: string = '';
+  selectedGender: string = '';
+  selectedCondition: string = '';
+  selectedSize: number | null = null;
+  maxPrice: number = 200000;
 
-    products: Product[] = [
-        { 
-            id: 1, 
-            name: 'Nike Air Max 90', 
-            brand: 'Nike', 
-            gender: 'Férfi', 
-            size: 42, 
-            price: 45000, 
-            imgUrl: 'https://static.nike.com/a/images/w_1280,q_auto,f_auto/oplmjxfkyp4stfe8rab8/nike-air-max-901-white-university-red-release-date.jpg', 
-            seller: 'Kovács Péter', 
-            sellerAvatar: 'https://upload.wikimedia.org/wikipedia/en/c/c7/Chill_guy_original_artwork.jpg', 
-            condition: 'Használt' 
-        },
-        { 
-            id: 2, 
-            name: 'Adidas Ultraboost', 
-            brand: 'Adidas', 
-            gender: 'Női', 
-            size: 39, 
-            price: 40000, 
-            imgUrl: 'https://static.ftshp.digital/img/p/1/0/0/0/3/5/4/1000354-full_product.jpg', 
-            seller: 'Nagy László', 
-            sellerAvatar: 'https://upload.wikimedia.org/wikipedia/en/c/c7/Chill_guy_original_artwork.jpg', 
-            condition: 'Újszerű' 
-        },
-        { 
-            id: 3, 
-            name: 'Puma RS-X', 
-            brand: 'Puma', 
-            gender: 'Férfi', 
-            size: 44, 
-            price: 38000, 
-            imgUrl: 'https://www.buzzsneakers.hu/files/thumbs/files/images/slike_proizvoda/media/395/395936-02/images/thumbs_800/395936-02_800_800px.jpg', 
-            seller: 'Szabó Anna', 
-            sellerAvatar: 'https://upload.wikimedia.org/wikipedia/en/c/c7/Chill_guy_original_artwork.jpg', 
-            condition: 'Új' 
-        },
-        { 
-            id: 4, 
-            name: 'Yeezy Boost 350', 
-            brand: 'Adidas', 
-            gender: 'Férfi', 
-            size: 43, 
-            price: 150000, 
-            imgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7Ge1HPavf_LACEuj5DKBFfrSQAPZP09-jzw&s', 
-            seller: 'Tóth Bence', 
-            sellerAvatar: 'https://upload.wikimedia.org/wikipedia/en/c/c7/Chill_guy_original_artwork.jpg', 
-            condition: 'Új' 
-        }
-    ];
+  constructor(
+    private cartService: ResellCartService,
+    private route: ActivatedRoute,
+    private resellService: ResellProductService,
+    private userService: UserService
+  ) {}
 
-    filteredProducts: Product[] = [];
-    brands: string[] = ['Nike', 'Adidas', 'Puma'];
-    sizes: number[] = [38, 39, 40, 41, 42, 43, 44, 45];
-    selectedBrand: string = '';
-    selectedGender: string = '';
-    selectedCondition: string = ''; 
-    selectedSize: number | null = null;
-    maxPrice: number = 200000; 
+  ngOnInit() {
+    this.loadData();
+    this.route.queryParams.subscribe(params => {
+      this.selectedBrand = params['brand'] || '';
+      this.selectedGender = params['gender'] || '';
+      this.selectedCondition = params['condition'] || '';
+      this.selectedSize = params['size'] ? Number(params['size']) : null;
+      this.maxPrice = params['maxPrice'] ? Number(params['maxPrice']) : 200000;
+      this.applyFilters();
+    });
+  }
 
-    ngOnInit() {
-        this.filteredProducts = [...this.products];
+  private loadData() {
+    this.resellService.getResellShoes().subscribe({
+      next: (response) => {
+        this.originalProducts = response.ResellShoes;
+        this.brands = [...new Set(this.originalProducts.map(p => p.marka))];
+        this.filteredProducts = [...this.originalProducts];
+        this.mapUserNames();
+      },
+      error: (err) => console.error('Error loading shoes:', err)
+    });
 
-        // Figyeljük az URL paramétereket, és alkalmazzuk a szűrést
-        this.route.queryParams.subscribe(params => {
-            this.selectedBrand = params['brand'] || '';
-            this.selectedGender = params['gender'] || '';
-            this.selectedCondition = params['condition'] || '';
-            this.selectedSize = params['size'] ? Number(params['size']) : null;
-            this.maxPrice = params['maxPrice'] ? Number(params['maxPrice']) : 200000;
-            this.applyFilters();
-        });
+    this.userService.getAllUsers().subscribe({
+      next: (response) => {
+        this.users = response.users;
+        this.mapUserNames();
+      },
+      error: (err) => console.error('Error loading users:', err)
+    });
+  }
+
+  private mapUserNames() {
+    if (this.users.length && this.originalProducts.length) {
+      const userMap = new Map(this.users.map(user => [user.id, user.nev]));
+      this.originalProducts.forEach(product => {
+        product.seller = userMap.get(product.user_id) || 'Ismeretlen eladó';
+      });
     }
+  }
 
-    applyFilters() {
-        this.filteredProducts = this.products.filter(product =>
-            (this.selectedBrand ? product.brand === this.selectedBrand : true) &&
-            (this.selectedGender ? product.gender === this.selectedGender : true) &&
-            (this.selectedCondition ? product.condition === this.selectedCondition : true) &&
-            (this.selectedSize ? product.size === Number(this.selectedSize) : true) &&
-            (product.price <= this.maxPrice) 
-        );
-    }
+  applyFilters() {
+    this.filteredProducts = this.originalProducts.filter(product =>
+      (this.selectedBrand ? product.marka === this.selectedBrand : true) &&
+      (this.selectedGender ? product.nem === this.selectedGender : true) &&
+      (this.selectedCondition ? product.allapot === this.selectedCondition : true) &&
+      (this.selectedSize ? product.meret === this.selectedSize : true) &&
+      (product.ar <= this.maxPrice)
+    );
+  }
 
-    resetFilters() {
-        this.selectedBrand = '';
-        this.selectedGender = '';
-        this.selectedCondition = '';
-        this.selectedSize = null;
-        this.maxPrice = 200000; 
-        this.filteredProducts = [...this.products];
-    }
+  resetFilters() {
+    this.selectedBrand = '';
+    this.selectedGender = '';
+    this.selectedCondition = '';
+    this.selectedSize = null;
+    this.maxPrice = 200000;
+    this.filteredProducts = [...this.originalProducts];
+  }
 
-    addToCart(product: any) {
-        this.cartService.addToCart(product);
-        console.log(`${product.name} hozzáadva a kosárhoz.`);
-    }
+  addToCart(product: Product) {
+    this.cartService.addToCart({
+      id: product.id,
+      name: product.nev,
+      price: product.ar,
+      imgUrl: product.img,
+      brand: product.marka,
+      seller: product.seller || '',
+      sellerAvatar: '', // Add avatar if available
+      condition: product.allapot,
+      size: product.meret
+    });
+  }
 }
