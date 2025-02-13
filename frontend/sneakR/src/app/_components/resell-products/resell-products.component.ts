@@ -40,6 +40,7 @@ export class ResellProductsComponent implements OnInit {
   selectedCondition: string = '';
   selectedSize: number | null = null;
   maxPrice: number = 200000;
+  originalMaxPrice: number = 200000;
 
   constructor(
     private cartService: ResellCartService,
@@ -65,6 +66,12 @@ export class ResellProductsComponent implements OnInit {
       next: (response) => {
         this.originalProducts = response.ResellShoes;
         this.brands = [...new Set(this.originalProducts.map(p => p.marka))];
+
+        if (this.originalProducts.length > 0) {
+        this.originalMaxPrice = Math.max(...this.originalProducts.map(p => p.ar));
+      }
+      this.maxPrice = this.originalMaxPrice;
+
         this.filteredProducts = [...this.originalProducts];
         this.mapUserNames();
       },
@@ -104,7 +111,7 @@ export class ResellProductsComponent implements OnInit {
     this.selectedGender = '';
     this.selectedCondition = '';
     this.selectedSize = null;
-    this.maxPrice = 200000;
+    this.maxPrice = this.originalMaxPrice;
     this.filteredProducts = [...this.originalProducts];
   }
 
