@@ -110,6 +110,7 @@ header {
     cursor: pointer;
 }
 
+/* --- HAMBURGER MENÜ STÍLUSOK --- */
 .mobile-nav {
     display: none;
     position: absolute;
@@ -119,7 +120,7 @@ header {
     backdrop-filter: blur(12px);
     border-radius: 12px;
     padding: 1rem;
-    min-width: 200px;
+    min-width: 220px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.3);
     border: 1px solid rgba(255, 255, 255, 0.1);
     z-index: 1000;
@@ -130,40 +131,73 @@ header {
     animation: slideDown 0.3s ease;
 }
 
+/* Menüelemek */
 .mobile-nav li {
-    padding: 0.8rem 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    list-style: none;
+    padding: 10px;
+    transition: background 0.3s ease;
 }
 
-.mobile-nav li:last-child {
-    border-bottom: none;
-}
-
-.mobile-nav li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-    display: block;
-    padding: 0.5rem;
+.mobile-nav button {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    text-align: left;
+    font-size: 1rem;
+    color: white;
+    padding: 12px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
     border-radius: 6px;
 }
 
-.mobile-nav li a:hover {
-    background: rgba(42, 123, 71, 0.2);
-    color: #2A7B47;
+.mobile-nav button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(5px);
 }
 
-.nav-link {
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s ease;
+/* --- SUBMENÜK --- */
+.submenu {
+    display: none;
+    padding-left: 20px;
+    max-height: 250px; /* Ne csússzon ki */
+    overflow-y: auto; /* Görgethető legyen */
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
+    margin-top: 5px;
 }
 
-.nav-link:hover {
-    color: #2A7B47;
+.submenu.active {
+    display: block;
 }
 
+/* Márkák menüje */
+.submenu button {
+    font-size: 0.9rem;
+    padding: 10px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    transition: background 0.3s;
+    color: white;
+    text-align: left;
+    border: none;
+}
+
+.submenu button:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Görgethető lista */
+.submenu::-webkit-scrollbar {
+    width: 6px;
+}
+
+.submenu::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+}
+
+/* ANIMÁCIÓ */
 @keyframes slideDown {
     from {
         opacity: 0;
@@ -175,18 +209,10 @@ header {
     }
 }
 
+/* --- RESPONSIVE FIXES --- */
 @media (max-width: 768px) {
-    .hamburger-btn {
-        display: none; /* Hidden on desktop by default */
-        margin-left: 1rem;
-    }
-    
     .mobile-nav {
         right: 1rem;
-    }
-    
-    .search-input {
-        width: 180px;
     }
 }
 
@@ -196,9 +222,4 @@ header {
         left: 0.5rem;
         width: calc(100% - 1rem);
     }
-    
-    .search-input {
-        display: none;
-    }
 }
-

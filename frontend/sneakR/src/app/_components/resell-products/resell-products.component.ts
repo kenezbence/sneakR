@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { ResellCartService } from '../../_services/resell-cart.service';
 
 interface Product {
@@ -20,12 +21,13 @@ interface Product {
 @Component({
     selector: 'app-resell-products',
     standalone: true,
-    imports: [NavbarComponent, FormsModule, CommonModule, ],
+    imports: [NavbarComponent, FormsModule, CommonModule],
     templateUrl: './resell-products.component.html',
     styleUrls: ['./resell-products.component.css']
 })
 export class ResellProductsComponent implements OnInit {
-  constructor(private cartService: ResellCartService) {}
+    constructor(private cartService: ResellCartService, private route: ActivatedRoute) {}
+
     products: Product[] = [
         { 
             id: 1, 
@@ -77,8 +79,6 @@ export class ResellProductsComponent implements OnInit {
         }
     ];
 
-
-    
     filteredProducts: Product[] = [];
     brands: string[] = ['Nike', 'Adidas', 'Puma'];
     sizes: number[] = [38, 39, 40, 41, 42, 43, 44, 45];
@@ -86,11 +86,20 @@ export class ResellProductsComponent implements OnInit {
     selectedGender: string = '';
     selectedCondition: string = ''; 
     selectedSize: number | null = null;
-    
-    maxPrice: number = 200000; // MAXIMUM ár alapértelmezetten 500 000 Ft
+    maxPrice: number = 200000; 
 
     ngOnInit() {
         this.filteredProducts = [...this.products];
+
+        // Figyeljük az URL paramétereket, és alkalmazzuk a szűrést
+        this.route.queryParams.subscribe(params => {
+            this.selectedBrand = params['brand'] || '';
+            this.selectedGender = params['gender'] || '';
+            this.selectedCondition = params['condition'] || '';
+            this.selectedSize = params['size'] ? Number(params['size']) : null;
+            this.maxPrice = params['maxPrice'] ? Number(params['maxPrice']) : 200000;
+            this.applyFilters();
+        });
     }
 
     applyFilters() {
@@ -99,7 +108,7 @@ export class ResellProductsComponent implements OnInit {
             (this.selectedGender ? product.gender === this.selectedGender : true) &&
             (this.selectedCondition ? product.condition === this.selectedCondition : true) &&
             (this.selectedSize ? product.size === Number(this.selectedSize) : true) &&
-            (product.price <= this.maxPrice) // Csak maximum ár szűrés
+            (product.price <= this.maxPrice) 
         );
     }
 
@@ -108,11 +117,11 @@ export class ResellProductsComponent implements OnInit {
         this.selectedGender = '';
         this.selectedCondition = '';
         this.selectedSize = null;
-        this.maxPrice = 200000; // Visszaállításnál a max ár alapértelmezett érték
+        this.maxPrice = 200000; 
         this.filteredProducts = [...this.products];
     }
 
-     addToCart(product: any) {
+    addToCart(product: any) {
         this.cartService.addToCart(product);
         console.log(`${product.name} hozzáadva a kosárhoz.`);
     }
