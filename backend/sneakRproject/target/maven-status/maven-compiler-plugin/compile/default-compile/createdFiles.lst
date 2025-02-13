@@ -1,4 +1,5 @@
 sneakr\sneakrproject\model\Userek.class
+sneakr\sneakrproject\controller\ResellShoeController.class
 sneakr\sneakrproject\model\Exkluzivok.class
 sneakr\sneakrproject\model\Rendelesek.class
 sneakr\sneakrproject\model\RendelesTetelek.class
@@ -9,7 +10,9 @@ sneakr\sneakrproject\model\Cipok.class
 sneakr\sneakrproject\model\Kuponkodok.class
 sneakr\sneakrproject\model\Kiegeszitok.class
 sneakr\sneakrproject\model\Ujdonsagok.class
+sneakr\sneakrproject\service\ResellShoeService.class
 sneakr\sneakrproject\model\Lakcimek.class
+sneakr\sneakrproject\model\ResellCipok.class
 sneakr\sneakrproject\model\Szallitasok.class
 filters\CORSFilter.class
 sneakr\sneakrproject\model\ShoppingSession.class

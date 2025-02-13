@@ -85,6 +85,18 @@ public class ResellCipok implements Serializable {
         this.id = id;
         this.img = img;
     }
+    
+    public ResellCipok(String nev, String marka,String nem, String allapot, Integer meret,Float ar, String img) {
+        this.id = id;
+        this.nev = nev;
+        this.marka = marka;
+        this.nem = nem;
+        this.allapot = allapot;
+        this.meret = meret;
+        this.ar = ar;
+        this.img = img;
+    }
+    
 
     public Integer getId() {
         return id;
