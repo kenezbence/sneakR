@@ -42,6 +42,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ResellCipok.findByAr", query = "SELECT r FROM ResellCipok r WHERE r.ar = :ar")})
 public class ResellCipok implements Serializable {
 
+    @Column(name = "user_id")
+    private Integer userId;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -86,7 +89,7 @@ public class ResellCipok implements Serializable {
         this.img = img;
     }
     
-    public ResellCipok(String nev, String marka,String nem, String allapot, Integer meret,Float ar, String img) {
+    public ResellCipok(String nev, String marka,String nem, String allapot, Integer meret,Float ar, String img, Integer user_id) {
         this.id = id;
         this.nev = nev;
         this.marka = marka;
@@ -95,8 +98,17 @@ public class ResellCipok implements Serializable {
         this.meret = meret;
         this.ar = ar;
         this.img = img;
+        this.userId = userId;
     }
     
+    
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public Integer getId() {
         return id;
@@ -205,5 +217,5 @@ public class ResellCipok implements Serializable {
 
     return ResellShoesList;
 }
-    
+
 }

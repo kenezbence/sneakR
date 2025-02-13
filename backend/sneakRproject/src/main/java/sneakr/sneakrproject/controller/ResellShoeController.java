@@ -56,7 +56,8 @@ public Response getAllResellShoesData() {
             resellShoeJson.put("allapot", u.getAllapot());
             resellShoeJson.put("meret", u.getMeret());
             resellShoeJson.put("ar", u.getAr());
-            resellShoeJson.put("img", u.getImg());
+            resellShoeJson.put("img", u.getImg());       
+            resellShoeJson.put("user_id", u.getUserId());
 
             // Add the user JSON object to the array
             ResellShoesArray.put(resellShoeJson);
