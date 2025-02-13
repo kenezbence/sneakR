@@ -408,3 +408,25 @@ select:focus {
     margin-top: 1.5rem;
 }
 
+.owner-group label.always-top {
+    transform: translateY(-2.9rem) translateX(-12.5px) scale(0.9) !important;
+    color: #2A7B47 !important;
+    z-index: 2;
+    background: rgba(40, 40, 40, 0.8);
+    padding: 0 5px;
+}
+
+/* Disabled state styling */
+.owner-select {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    cursor: not-allowed;
+}
+
+/* Remove hover effects for disabled field */
+.owner-select:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+

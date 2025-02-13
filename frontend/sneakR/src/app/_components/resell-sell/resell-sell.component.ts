@@ -12,11 +12,18 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './resell-sell.component.html',
   styleUrls: ['./resell-sell.component.css']
 })
+
 export class ResellSellComponent {
+  currentUser: any = {};
   constructor(
     private router: Router,
     private http: HttpClient
-  ) {}
+) {
+    const userData = localStorage.getItem('currentUser');
+    if (userData) {
+        this.currentUser = JSON.parse(userData);
+    }
+}
 
   showSuccessModal: boolean = false;
   showLinkModal: boolean = false;
@@ -49,18 +56,22 @@ export class ResellSellComponent {
         return;
     }
 
+    // Get current user from localStorage
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    
     const postData = {
         nev: form.value.nev,
         marka: form.value.marka,
         nem: form.value.nem,
         allapot: form.value.allapot,
-        meret: form.value.meret.toString(),
-        ar: form.value.ar.toString(),
-        img: this.imageUrl
+        meret: Number(form.value.meret), // Convert to number
+        ar: Number(form.value.ar),       // Convert to number
+        img: this.imageUrl,
+        userId: currentUser.id // Use current user's ID
     };
 
     this.http.post<any>(
-        'http://127.0.0.1:8080/sneakRproject-1.0-SNAPSHOT/webresources/cipok/uploadShoes',
+        'http://127.0.0.1:8080/sneakRproject-1.0-SNAPSHOT/webresources/resellCipok/uploadResellShoes',
         postData
     ).subscribe({
         next: (response) => {
