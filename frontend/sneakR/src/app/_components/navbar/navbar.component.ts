@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ResellCartService } from '../../_services/resell-cart.service'; // Új import
+import { ResellCartService, CartProduct } from '../../_services/resell-cart.service'; // Új import
 import { Subscription } from 'rxjs'; // Új import
 
 @Component({
@@ -18,17 +18,29 @@ export class NavbarComponent implements OnInit, OnDestroy {
   brandMenuActive = false;
   brands = ['Jordan', 'Nike', 'Adidas', 'Yeezy', 'New Balance', 'Alexander McQueen', 'Travis Scott', 'Reebok', 'Converse', 'Puma'];
   private cartSubscription!: Subscription; // Új változó
+  showCartMenu = false;
+  cartItems: CartProduct[] = [];
 
   constructor(
     private router: Router,
-    private cartService: ResellCartService // Service injektálás
+    public cartService: ResellCartService, // Service injektálás
+    private renderer: Renderer2
   ) {}
 
   ngOnInit() {
-    // Feliratkozás a kosár változásokra
-    this.cartSubscription = this.cartService.getCart().subscribe(cart => {
+    this.cartService.getCart().subscribe(cart => {
+      this.cartItems = [...cart];  // Frissítjük a tényleges terméklistát
       this.cartCount = cart.length;
     });
+  }
+
+  toggleCartMenu() {
+    this.showCartMenu = !this.showCartMenu;
+  }
+
+  navigateToCart() {
+    this.showCartMenu = false;
+    this.router.navigate(['/resell-cart']);
   }
 
   ngOnDestroy() {
@@ -76,4 +88,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private closeMenu() {
     this.isMenuActive = false;
   }
+
+  // A komponens osztályba illeszd ezt a metódust
+removeItem(productId: number): void {
+  this.cartService.removeFromCart(productId);
+}
 }

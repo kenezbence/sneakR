@@ -36,4 +36,5 @@ export class ResellCartComponent implements OnInit {
     alert(`Kosarad elküldve!\nNév: ${name}\nEmail: ${email}\nCím: ${address}`);
     this.cartService.clearCart();
   }
+
 }

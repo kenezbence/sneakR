@@ -3,7 +3,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { ResellCartService } from '../../_services/resell-cart.service';
+import { ResellCartService, CartProduct } from '../../_services/resell-cart.service';
 import { ResellProductService } from '../../_services/resell-product.service';
 import { UserService } from '../../_services/user.service';
 
@@ -92,16 +92,17 @@ export class ResellProductsComponent implements OnInit {
   }
 
   addToCart(product: Product) {
-    this.cartService.addToCart({
+    const cartProduct: CartProduct = {
       id: product.id,
       name: product.nev,
       brand: product.marka,
       price: product.ar,
-      imgUrl: product.img,
+      imgUrl: product.img, // FONTOS: 'img' -> 'imgUrl' leképezés
       seller: product.seller || '',
       condition: product.allapot,
       size: product.meret
-    });
+    };
+    this.cartService.addToCart(cartProduct);
   }
 
   // ... (applyFilters és resetFilters változatlan)
