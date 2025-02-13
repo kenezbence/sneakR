@@ -22,7 +22,7 @@
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrAIH5ePjPpc06-hopmyUZNsVbBPvZA0XGmQ&s"
                     alt="Profilkép" class="avatar">
                 <p>📧 {{ user.email }}</p>
-                <p>🌟 Aktív hirdetések: {{ user.activeListingsCount }} | 🛍️ Eladott termékek: 3</p>
+                <p>🌟 Aktív hirdetések: {{ userShoes.length }} | 🛍️ Eladott termékek: 3</p>
             </div>
         </header>
     </section>
@@ -30,29 +30,35 @@
     <!-- Jelenlegi Hirdetések -->
     <section #currentListings id="current-listings" class="listings-section">
         <h2>Jelenlegi Hirdetések</h2>
-        <div class="card-grid">
-            <div class="card">
-                <div class="card-img-container">
-                    <img src="https://static.nike.com/a/images/t_default/36979bbd-532a-4981-b091-7179d4240bdf/NIKE+AIR+MAX+90.png" alt="Nike Air Max 90">
-                </div>
-                <div class="card-content">
-                    <h3>Nike Air Max 90</h3>
-                    <p>💰 Ár: 30,000 Ft</p>
-                    <p>🏷️ Állapot: Újszerű</p>
-                    <button (click)="deleteListing($event)">🗑️ Törlés</button>
+        <div class="slider-container">
+            <button class="slider-arrow prev" (click)="prevSlide()" [disabled]="currentSlide === 0">
+                &lt;
+            </button>
+    
+            <div class="slider-wrapper">
+                <div class="slider-track" [style.transform]="'translateX(-' + (currentSlide * 100) + '%)'">
+                    <div *ngFor="let slide of slides" class="slide">
+                        <div *ngFor="let shoe of slide" class="card">
+                            <div class="card-img-container">
+                                <img [src]="shoe.img" [alt]="shoe.nev">
+                            </div>
+                            <div class="card-content">
+                                <h3>{{ shoe.nev }}</h3>
+                                <p>💰 Ár: {{ shoe.ar | currency:'HUF':'symbol':'1.0-0' }}</p>
+                                <p>🏷️ Állapot: {{ shoe.allapot }}</p>
+                                <p>👟 Méret: {{ shoe.meret }}</p>
+                                <button (click)="deleteListing(shoe.id, $event)" class="delete-btn">
+                                    🗑️ Törlés
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-img-container">
-                    <img src="https://sneakcenter.com/cdn/shop/products/adidas-yeezy-boost-350-v2-beluga-reflective-sneakcenter-1-34784995803403.png?v=1701593838" alt="Adidas Yeezy">
-                </div>
-                <div class="card-content">
-                    <h3>Adidas Yeezy Boost 350</h3>
-                    <p>💰 Ár: 80,000 Ft</p>
-                    <p>🏷️ Állapot: Kiváló</p>
-                    <button (click)="deleteListing($event)">🗑️ Törlés</button>
-                </div>
-            </div>
+    
+            <button class="slider-arrow next" (click)="nextSlide()" [disabled]="currentSlide === maxSlides">
+                &gt;
+            </button>
         </div>
     </section>
 

@@ -15,3 +15,4 @@ export interface User {
   admin: string;
   createdAt?: Date;
 }
+

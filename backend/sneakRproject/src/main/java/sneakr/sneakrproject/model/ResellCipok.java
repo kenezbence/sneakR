@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.ParameterMode;
 import javax.persistence.Persistence;
 import javax.persistence.StoredProcedureQuery;
 import javax.persistence.Table;
@@ -41,6 +42,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ResellCipok.findByMeret", query = "SELECT r FROM ResellCipok r WHERE r.meret = :meret"),
     @NamedQuery(name = "ResellCipok.findByAr", query = "SELECT r FROM ResellCipok r WHERE r.ar = :ar")})
 public class ResellCipok implements Serializable {
+
+    @Column(name = "user_id")
+    private Integer userId;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -86,8 +90,19 @@ public class ResellCipok implements Serializable {
         this.img = img;
     }
     
-    public ResellCipok(String nev, String marka,String nem, String allapot, Integer meret,Float ar, String img) {
-        this.id = id;
+//    public ResellCipok(String nev, String marka,String nem, String allapot, Integer meret,Float ar, String img, Integer user_id) {
+//        this.id = id;
+//        this.nev = nev;
+//        this.marka = marka;
+//        this.nem = nem;
+//        this.allapot = allapot;
+//        this.meret = meret;
+//        this.ar = ar;
+//        this.img = img;
+//        this.userId = userId;
+//    }
+    public ResellCipok(String nev, String marka,String nem, String allapot, Integer meret,Float ar, String img, Integer userId) {
+        EntityManager em = emf.createEntityManager();
         this.nev = nev;
         this.marka = marka;
         this.nem = nem;
@@ -95,8 +110,17 @@ public class ResellCipok implements Serializable {
         this.meret = meret;
         this.ar = ar;
         this.img = img;
+        this.userId = userId;
     }
     
+    
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public Integer getId() {
         return id;
@@ -205,5 +229,40 @@ public class ResellCipok implements Serializable {
 
     return ResellShoesList;
 }
+
+     public Boolean uploadResellShoes(ResellCipok u) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("uploadResellShoes");
+            
+            spq.registerStoredProcedureParameter("nevIN", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("markaIN", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("nemIN", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("allapotIN", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("meretIN", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("arIN", Float.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("imgIN", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("user_IdIN", String.class, ParameterMode.IN);
+            
+            spq.setParameter("nevIN", u.getNev());
+            spq.setParameter("markaIN", u.getMarka());
+            spq.setParameter("nemIN", u.getNem());
+            spq.setParameter("allapotIN", u.getAllapot());
+            spq.setParameter("meretIN", u.getMeret());
+            spq.setParameter("arIN", u.getAr());
+            spq.setParameter("imgIN", u.getImg());
+            spq.setParameter("user_IdIN", u.getUserId());
+          
+            spq.execute();
+            
+            return true;
+        } catch (Exception e) {
+            System.err.println("Hiba: " + e.getLocalizedMessage());
+            return false;
+        } finally{
+            em.clear();
+            em.close();
+        }
+    }
     
 }

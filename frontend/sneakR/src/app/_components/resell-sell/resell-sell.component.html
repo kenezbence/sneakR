@@ -82,8 +82,8 @@
                 <div class="input-group">
                     <select name="allapot" required ngModel>
                         <option value="" disabled selected></option>
-                        <option value="használt">Használt</option>
-                        <option value="új">Új</option>
+                        <option value="Használt">Használt</option>
+                        <option value="Új">Új</option>
                     </select>
                     <label>Állapot</label>
                 </div>
@@ -96,6 +96,12 @@
                 <div class="input-group price-group">
                     <input type="number" name="ar" placeholder=" " min="1" required ngModel>
                     <label>Ár (Ft)</label>
+                </div>
+                <div class="input-group owner-group">
+                    <select name="tulajdonos" disabled class="owner-select">
+                        <option>{{ currentUser.nev }}</option>
+                    </select>
+                    <label class="always-top">Tulajdonos</label>
                 </div>
                 <div class="form-buttons">
                     <button type="button" class="cancel-button" (click)="onCancel()">
