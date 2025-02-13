@@ -24,18 +24,32 @@
                 <span *ngIf="cartCount > 0" class="icon-count">{{ cartCount }}</span>
             </a>
             
-            <!-- Updated Hamburger Menu -->
             <button class="icon-btn hamburger-btn" (click)="toggleMenu()">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
 
-        <!-- Mobile Menu -->
         <ul class="mobile-nav" [class.active]="isMenuActive">
-            <li><a href="#" class="nav-link">Férfi</a></li>
-            <li><a href="#" class="nav-link">Női</a></li>
-            <li><a href="#" class="nav-link">Minőség</a></li>
-            <li><a [routerLink]="['/about']" class="nav-link">Info</a></li>
+            <li><button (click)="filterByCategory('Férfi')">Férfi</button></li>
+            <li><button (click)="filterByCategory('Női')">Női</button></li>
+            
+            <li>
+                <button (click)="toggleQualityMenu()">Minőség</button>
+                <ul class="submenu" [class.active]="qualityMenuActive">
+                    <li><button (click)="filterByQuality('Új')">Új</button></li>
+                    <li><button (click)="filterByQuality('Újszerű')">Újszerű</button></li>
+                    <li><button (click)="filterByQuality('Használt')">Használt</button></li>
+                </ul>
+            </li>
+            
+            <li>
+                <button (click)="toggleBrandMenu()">Márkák</button>
+                <ul class="submenu" [class.active]="brandMenuActive">
+                    <li *ngFor="let brand of brands">
+                        <button (click)="filterByBrand(brand)">{{ brand }}</button>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </nav>
 </header>
