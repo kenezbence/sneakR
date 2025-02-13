@@ -78,7 +78,7 @@ public class ResellShoeService {
             spq.registerStoredProcedureParameter("resell_meretIN", Integer.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("resell_arIN", Float.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("resell_imgIN", String.class, ParameterMode.IN);
-            spq.registerStoredProcedureParameter("resell_userIdIN", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("resell_userIdIN", Integer.class, ParameterMode.IN);
             
             
             // Set parameters
