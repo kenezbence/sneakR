@@ -206,3 +206,28 @@ form select {
     line-height: 1;
     margin-top: -1px;
 }
+
+.cart-items {
+    margin-bottom: 2rem;
+}
+
+.item-details {
+    flex-grow: 1;
+}
+
+.item-details h3 {
+    margin: 0 0 0.5rem 0;
+    color: #2A7B47;
+}
+
+.item-details p {
+    margin: 0.2rem 0;
+    font-size: 0.9rem;
+}
+
+.product-img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+}

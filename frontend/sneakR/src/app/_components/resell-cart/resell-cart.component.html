@@ -1,26 +1,24 @@
-<!DOCTYPE html>
-<html lang="hu">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kosár - Sneakr Resell</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
 <app-navbar></app-navbar>
 <main>
     <br> 
     <h1>Kosarad</h1>
 
     <div class="cart-items">
-        <div *ngFor="let item of cart; let i = index" class="cart-item">
+        <div *ngFor="let item of cart" class="cart-item">
             <button 
-                (click)="removeItem(i)"
+                (click)="removeItem(item.id)"
                 class="remove-btn"
                 aria-label="Remove item"
             ></button>
-            <img [src]="item.img" [alt]="item.name" class="product-img">
-            <span>{{ item.name }}</span>
+            <img [src]="item.imgUrl" [alt]="item.name" class="product-img">
+            <div class="item-details">
+                <h3>{{ item.name }}</h3>
+                <p><strong>Márka:</strong> {{ item.brand }}</p>
+                <p><strong>Méret:</strong> {{ item.size }}</p>
+                <p><strong>Állapot:</strong> {{ item.condition }}</p>
+                <p><strong>Ár:</strong> {{ item.price | currency:'HUF':'symbol':'1.0-0' }}</p>
+                <p><strong>Eladó:</strong> {{ item.seller }}</p>
+            </div>
         </div>
     </div>
 
@@ -54,9 +52,7 @@
         <button type="submit" class="btn">Fizetés</button>
     </form>
 </main>
-<br>
-</body>
-</html>
+
 
 
 

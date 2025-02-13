@@ -135,10 +135,11 @@ app-navbar {
 /* Képek a kártyákon */
 .product-card img {
     width: 100%;
-    height: auto;
+    height: 250px; /* Fix magasság minden képnek */
     border-radius: 8px;
     margin-bottom: 10px;
-    object-fit: cover;
+    object-fit: cover; /* Képek arányos levágása */
+    object-position: center; /* Képek középre igazítása */
 }
 
 /* Terméknév */

@@ -32,9 +32,8 @@ export class ResellProductsComponent implements OnInit {
   filteredProducts: Product[] = [];
   users: any[] = [];
   
-  // Filters
   brands: string[] = [];
-  sizes: number[] = Array.from({length: 13}, (_, i) => 35 + i); // 35-47
+  sizes: number[] = Array.from({length: 13}, (_, i) => 35 + i);
   selectedBrand: string = '';
   selectedGender: string = '';
   selectedCondition: string = '';
@@ -66,12 +65,8 @@ export class ResellProductsComponent implements OnInit {
       next: (response) => {
         this.originalProducts = response.ResellShoes;
         this.brands = [...new Set(this.originalProducts.map(p => p.marka))];
-
-        if (this.originalProducts.length > 0) {
         this.originalMaxPrice = Math.max(...this.originalProducts.map(p => p.ar));
-      }
-      this.maxPrice = this.originalMaxPrice;
-
+        this.maxPrice = this.originalMaxPrice;
         this.filteredProducts = [...this.originalProducts];
         this.mapUserNames();
       },
@@ -96,6 +91,22 @@ export class ResellProductsComponent implements OnInit {
     }
   }
 
+  addToCart(product: Product) {
+    this.cartService.addToCart({
+      id: product.id,
+      name: product.nev,
+      brand: product.marka,
+      price: product.ar,
+      imgUrl: product.img,
+      seller: product.seller || '',
+      condition: product.allapot,
+      size: product.meret
+    });
+  }
+
+  // ... (applyFilters és resetFilters változatlan)
+
+
   applyFilters() {
     this.filteredProducts = this.originalProducts.filter(product =>
       (this.selectedBrand ? product.marka === this.selectedBrand : true) &&
@@ -115,17 +126,5 @@ export class ResellProductsComponent implements OnInit {
     this.filteredProducts = [...this.originalProducts];
   }
 
-  addToCart(product: Product) {
-    this.cartService.addToCart({
-      id: product.id,
-      name: product.nev,
-      price: product.ar,
-      imgUrl: product.img,
-      brand: product.marka,
-      seller: product.seller || '',
-      sellerAvatar: '', // Add avatar if available
-      condition: product.allapot,
-      size: product.meret
-    });
-  }
+  
 }
