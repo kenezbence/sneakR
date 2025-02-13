@@ -3,7 +3,6 @@
   <persistence-unit name="sneakr_sneakRproject_war_1.0-SNAPSHOTPU" transaction-type="JTA">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <jta-data-source>MySqlDS</jta-data-source>
-    
     <class>sneakr.sneakrproject.model.Nemek</class>
     <class>sneakr.sneakrproject.model.Cipok</class>
     <class>sneakr.sneakrproject.model.Kuponkodok</class>
@@ -19,20 +18,17 @@
     <class>sneakr.sneakrproject.model.Meretek</class>
     <class>sneakr.sneakrproject.model.Userek</class>
     <class>sneakr.sneakrproject.model.ShoppingSession</class>
+    <class>sneakr.sneakrproject.model.ResellCipok</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sneakr?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="root"/>
-
-      
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
-      
       <property name="hibernate.hbm2ddl.auto" value="none"/>
       <property name="hibernate.show_sql" value="true"/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle12cDialect"/>
-     
     </properties>
   </persistence-unit>
 </persistence>
