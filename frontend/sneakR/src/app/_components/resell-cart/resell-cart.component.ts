@@ -31,10 +31,15 @@ export class ResellCartComponent implements OnInit {
     this.showCard = paymentMethod === 'bankkártya';
   }
 
-  submitCheckout(event: Event, name: string, email: string, address: string): void {
+  submitCheckout(event: Event, name: string, email: string, city: string, zip: string, street: string, number: string): void {
     event.preventDefault();
+    const address = `${street} ${number}, ${city} ${zip}`;
     alert(`Kosarad elküldve!\nNév: ${name}\nEmail: ${email}\nCím: ${address}`);
     this.cartService.clearCart();
-  }
+}
+
+  getTotal(): number {
+    return this.cart.reduce((acc, item) => acc + item.price, 0);
+}
 
 }

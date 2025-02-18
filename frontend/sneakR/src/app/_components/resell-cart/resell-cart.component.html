@@ -1,60 +1,103 @@
 <app-navbar></app-navbar>
-<main>
-    <br> 
-    <h1>Kosarad</h1>
-
-    <div class="cart-items">
-        <div *ngFor="let item of cart" class="cart-item">
-            <button 
-                (click)="removeItem(item.id)"
-                class="remove-btn"
-                aria-label="Remove item"
-            ></button>
-            <img [src]="item.imgUrl" [alt]="item.name" class="product-img">
-            <div class="item-details">
-                <h3>{{ item.name }}</h3>
-                <p><strong>Márka:</strong> {{ item.brand }}</p>
-                <p><strong>Méret:</strong> {{ item.size }}</p>
-                <p><strong>Állapot:</strong> {{ item.condition }}</p>
-                <p><strong>Ár:</strong> {{ item.price | currency:'HUF':'symbol':'1.0-0' }}</p>
-                <p><strong>Eladó:</strong> {{ item.seller }}</p>
-            </div>
+<br><br><br>
+<body>
+    
+    <main>
+        <div class="cart-container">
+            <section class="cart-section">
+                <h1 class="page-title">🛒 Kosarad</h1>
+                
+                <div class="cart-items">
+                    <div *ngFor="let item of cart" class="cart-item">
+                        <img [src]="item.imgUrl" [alt]="item.name" class="product-img">
+                        <div class="item-details">
+                            <h3>{{ item.name }}</h3>
+                            <div class="item-meta">
+                                <span class="brand">{{ item.brand }}</span>
+                                <span class="size">{{ item.size }}</span>
+                                <span class="condition">{{ item.condition }}</span>
+                            </div>
+                            <div class="item-footer">
+                                <span class="price">{{ item.price | currency:'HUF':'symbol':'1.0-0' }}</span>
+                                <button 
+                                    (click)="removeItem(item.id)"
+                                    class="remove-btn"
+                                    aria-label="Tétel eltávolítása"
+                                ></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cart-summary">
+                    <h3 class="overall-price">Összesen:</h3>
+                    <p class="total-price">{{ getTotal() | currency:'HUF':'symbol':'1.0-0' }}</p>
+                </div>
+            </section>
+    
+            <section class="checkout-section">
+                <h2>📦 Szállítási adatok</h2>
+                <form (submit)="submitCheckout($event, name.value, email.value, city.value, zip.value, street.value, number.value)">
+                    <div class="form-group">
+                        <label for="name">Teljes név</label>
+                        <input #name type="text" id="name" class="modern-input" placeholder="Kovács János" required>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="email">Email cím</label>
+                        <input #email type="email" id="email" class="modern-input" placeholder="pelda@email.hu" required>
+                    </div>
+    
+                    <div class="address-grid">
+                        <div class="form-group">
+                            <label for="city">Város</label>
+                            <input #city type="text" id="city" class="modern-input" placeholder="Budapest" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="zip">Irányítószám</label>
+                            <input #zip type="text" id="zip" class="modern-input" placeholder="1011" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="street">Utca</label>
+                            <input #street type="text" id="street" class="modern-input" placeholder="Homok utca" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="number">Házszám</label>
+                            <input #number type="text" id="number" class="modern-input" placeholder="12/A" required>
+                        </div>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="payment-method">Fizetési mód</label>
+                        <select #paymentSelect id="payment-method" class="modern-select" (change)="showCardDetails(paymentSelect.value)" required>
+                            <option value="készpénz">Készpénz</option>
+                            <option value="bankkártya">Bankkártya</option>
+                        </select>
+                    </div>
+    
+                    <div id="card-details" [class.hidden]="!showCard" class="card-details">
+                        <div class="form-group">
+                            <label for="card-number">Kártyaszám</label>
+                            <input type="text" id="card-number" class="modern-input" placeholder="0000 0000 0000 0000" required>
+                        </div>
+    
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="expiry-date">Lejárat</label>
+                                <input type="month" id="expiry-date" class="modern-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" class="modern-input" placeholder="123" required>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <button type="submit" class="checkout-btn">Biztonságos fizetés →</button>
+                </form>
+            </section>
         </div>
-    </div>
-
-    <form (submit)="submitCheckout($event, name.value, email.value, address.value)">
-        <label for="name">Név</label>
-        <input #name type="text" id="name" placeholder="Név" required>
-
-        <label for="email">Email</label>
-        <input #email type="email" id="email" placeholder="Email cím" required>
-
-        <label for="address">Szállítási cím</label>
-        <textarea #address id="address" placeholder="Szállítási cím" rows="3" required></textarea>
-
-        <label for="payment-method">Fizetési mód</label>
-        <select #paymentSelect id="payment-method" (change)="showCardDetails(paymentSelect.value)">
-            <option value="készpénz">Készpénz</option>
-            <option value="bankkártya">Bankkártya</option>
-        </select>
-
-        <div id="card-details" [class.hidden]="!showCard">
-            <label for="card-number">Kártyaszám</label>
-            <input type="text" id="card-number" placeholder="XXXX XXXX XXXX XXXX" maxlength="16">
-
-            <label for="expiry-date">Lejárati dátum</label>
-            <input type="month" id="expiry-date">
-
-            <label for="cvv">CVV</label>
-            <input type="text" id="cvv" placeholder="CVV" maxlength="3">
-        </div>
-
-        <button type="submit" class="btn">Fizetés</button>
-    </form>
-</main>
-
-
-
-
+    </main>
+</body>
 <!-- https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/a73e4b7f-9c0a-47b2-a6ef-ceb4ca6b54c3/AIR+JORDAN+1+MID+%28GS%29.png -->
 <!-- https://www.buzzsneakers.hu/files/images/slike_proizvoda/media/ID4/ID4655/images/ID4655.jpg -->

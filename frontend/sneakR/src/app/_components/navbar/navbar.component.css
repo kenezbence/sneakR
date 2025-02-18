@@ -278,6 +278,7 @@ header {
 
 .item-info {
     flex-grow: 1;
+    color: #2A7B47;
 }
 
 .item-info p {
