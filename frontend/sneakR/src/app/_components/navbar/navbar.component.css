@@ -294,6 +294,7 @@ header {
 .empty-cart {
     text-align: center;
     padding: 20px;
+    color: #2A7B47;
 }
 
 .empty-cart i {

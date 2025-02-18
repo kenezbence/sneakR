@@ -6,6 +6,12 @@ body {
     padding: 0;
 }
 
+:host {
+    display: block;
+    min-height: 100vh;
+    background: linear-gradient(45deg, #1A3D2B 0%, #0A0A0A 100%);
+}
+
 /* Header/navbar */
 header {
     background: #2A7B47;
@@ -41,31 +47,6 @@ header {
     box-sizing: border-box;
 }
 
-
-/* Logo */
-/* .logo img {
-    height: 70px;
-    width: 70px;
-    /* object-fit: cover; */
-    /* border-radius: 50%;
-    cursor: pointer;
-    
-} */
-
-/* Navbar ikonok jobbra */
-/* .nav-icons {
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    gap: 20px;
-} */
-
-/* Hamburger és User ikon mérete */
-/* .hamburger-menu,
-.user-icon {
-    font-size: 30px;
-    cursor: pointer;
-} */
 
 /* Hover effekt az ikonokra */
 .nav-icons i {
@@ -325,10 +306,10 @@ form select {
     border-color: #3dd683 !important;
     box-shadow: 0 0 0 3px rgba(61, 214, 131, 0.2) !important;
 }
-/* .modern-select {
+.modern-select {
     appearance: none;
     background: #252525 url("data:image/svg+xml;utf8,<svg fill='%232A7B47' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>") no-repeat right 12px center;
-} */
+}
 
 .form-group {
     margin-bottom: 1.5rem;
@@ -403,4 +384,106 @@ label{
     .page-title {
         font-size: 2rem;
     }
+}
+
+
+/* MODAL */
+
+
+.success-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    
+}
+
+.success-modal.active {
+    display: flex;
+    
+}
+
+.modal-content {
+    background: rgba(40, 40, 40, 0.95);
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+}
+
+.modal-icon {
+    font-size: 3rem;
+    color: #2A7B47;
+    margin-bottom: 1rem;
+}
+
+.modal-title {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.modal-message {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+}
+
+.modal-close-button {
+    background: linear-gradient(135deg, #2A7B47, #3BAE6D);
+    color: #fff;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.modal-close-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(42, 123, 71, 0.4);
+}
+
+.validation-modal {
+    display: none;
+    
+  }
+  
+  .validation-modal.active {
+    display: flex !important;
+    animation: modalFadeIn 0.3s ease;
+    
+  }
+
+.validation-modal .modal-icon.error {
+    color: #ff4444;
+}
+
+.validation-modal .modal-close-button.error {
+    background: linear-gradient(135deg, #ff4444, #cc0000);
+}
+
+.modal-content input[type="url"] {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 9px;
+    color: white;
+    margin: 1rem 0;
+}
+
+.modal-close-button {
+    margin-top: 1.5rem;
 }

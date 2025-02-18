@@ -1,7 +1,5 @@
 <app-navbar></app-navbar>
 <br><br><br>
-<body>
-    
     <main>
         <div class="cart-container">
             <section class="cart-section">
@@ -97,7 +95,16 @@
                 </form>
             </section>
         </div>
+
+        <div class="success-modal" [class.active]="showSuccessModal">
+            <div class="modal-content">
+                <i class="fas fa-check-circle modal-icon"></i>
+                <h3 class="modal-title">Sikeres megrendelés!</h3>
+                <button class="modal-close-button" (click)="onCloseSuccessModal()">
+                    Vissza a főoldalra
+                </button>
+            </div>
+        </div>
     </main>
-</body>
 <!-- https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/a73e4b7f-9c0a-47b2-a6ef-ceb4ca6b54c3/AIR+JORDAN+1+MID+%28GS%29.png -->
 <!-- https://www.buzzsneakers.hu/files/images/slike_proizvoda/media/ID4/ID4655/images/ID4655.jpg -->
