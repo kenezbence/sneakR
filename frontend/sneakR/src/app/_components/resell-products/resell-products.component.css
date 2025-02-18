@@ -8,6 +8,7 @@ app-navbar {
     z-index: 1000;
 }
 
+
 /* Az egész oldal elrendezése */
 .resell-products {
     display: flex;
