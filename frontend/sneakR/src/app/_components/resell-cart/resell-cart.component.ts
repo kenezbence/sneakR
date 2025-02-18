@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { ResellCartService, CartProduct } from '../../_services/resell-cart.service';
-
-
 import { Router } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -18,11 +16,11 @@ import { HttpClient } from '@angular/common/http';
 export class ResellCartComponent implements OnInit {
   cart: CartProduct[] = [];
   showCard = false;
-  isMenuActive = false;
   showSuccessModal = false;
 
 
-  constructor(private cartService: ResellCartService,
+  constructor(
+    private cartService: ResellCartService,
     private router: Router,
     private http: HttpClient
   ) {}
@@ -45,15 +43,16 @@ export class ResellCartComponent implements OnInit {
     return this.cart.reduce((acc, item) => acc + item.price, 0);
 }
 
-  submitCheckout(event: Event, name: string, email: string, city: string, zip: string, street: string, number: string): void {
-    event.preventDefault();
-    const address = `${street} ${number}, ${city} ${zip}`;
+submitCheckout(form: NgForm, event: Event): void {
+  event.preventDefault();
+  if (form.valid && this.cart.length > 0) {
     this.cartService.clearCart();
     this.showSuccessModal = true;
   }
+}
 
-  onCloseSuccessModal(): void {
-    this.showSuccessModal = false;
-    this.router.navigate(['/resell']); // Or your resell route
+onCloseSuccessModal(): void {
+  this.showSuccessModal = false;
+  this.router.navigate(['/resell']);
 }
 }

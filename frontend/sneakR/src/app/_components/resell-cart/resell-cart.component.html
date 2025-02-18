@@ -1,5 +1,7 @@
 <app-navbar></app-navbar>
 <br><br><br>
+<app-navbar></app-navbar>
+<br><br><br>
     <main>
         <div class="cart-container">
             <section class="cart-section">
@@ -35,39 +37,39 @@
     
             <section class="checkout-section">
                 <h2>📦 Szállítási adatok</h2>
-                <form (submit)="submitCheckout($event, name.value, email.value, city.value, zip.value, street.value, number.value)">
+                <form #checkoutForm="ngForm" (submit)="submitCheckout(checkoutForm, $event)" novalidate>
                     <div class="form-group">
                         <label for="name">Teljes név</label>
-                        <input #name type="text" id="name" class="modern-input" placeholder="Kovács János" required>
+                        <input type="text" id="name" name="name" class="modern-input" placeholder="Kovács János" required ngModel>
                     </div>
     
                     <div class="form-group">
                         <label for="email">Email cím</label>
-                        <input #email type="email" id="email" class="modern-input" placeholder="pelda@email.hu" required>
+                        <input type="email" id="email" name="email" class="modern-input" placeholder="pelda@email.hu" required ngModel>
                     </div>
     
                     <div class="address-grid">
                         <div class="form-group">
                             <label for="city">Város</label>
-                            <input #city type="text" id="city" class="modern-input" placeholder="Budapest" required>
+                            <input type="text" id="city" name="city" class="modern-input" placeholder="Budapest" required ngModel>
                         </div>
                         <div class="form-group">
                             <label for="zip">Irányítószám</label>
-                            <input #zip type="text" id="zip" class="modern-input" placeholder="1011" required>
+                            <input type="text" id="zip" name="zip" class="modern-input" placeholder="1011" required ngModel>
                         </div>
                         <div class="form-group">
                             <label for="street">Utca</label>
-                            <input #street type="text" id="street" class="modern-input" placeholder="Homok utca" required>
+                            <input type="text" id="street" name="street" class="modern-input" placeholder="Homok utca" required ngModel>
                         </div>
                         <div class="form-group">
                             <label for="number">Házszám</label>
-                            <input #number type="text" id="number" class="modern-input" placeholder="12/A" required>
+                            <input type="text" id="number" name="number" class="modern-input" placeholder="12/A" required ngModel>
                         </div>
                     </div>
     
                     <div class="form-group">
                         <label for="payment-method">Fizetési mód</label>
-                        <select #paymentSelect id="payment-method" class="modern-select" (change)="showCardDetails(paymentSelect.value)" required>
+                        <select id="payment-method" name="paymentMethod" class="modern-select" (change)="showCardDetails(paymentSelect.value)" required ngModel #paymentSelect>
                             <option value="készpénz">Készpénz</option>
                             <option value="bankkártya">Bankkártya</option>
                         </select>
@@ -76,17 +78,17 @@
                     <div id="card-details" [class.hidden]="!showCard" class="card-details">
                         <div class="form-group">
                             <label for="card-number">Kártyaszám</label>
-                            <input type="text" id="card-number" class="modern-input" placeholder="0000 0000 0000 0000" required>
+                            <input type="text" id="card-number" name="cardNumber" class="modern-input" placeholder="0000 0000 0000 0000" [required]="showCard" ngModel>
                         </div>
     
                         <div class="form-grid">
                             <div class="form-group">
                                 <label for="expiry-date">Lejárat</label>
-                                <input type="month" id="expiry-date" class="modern-input" required>
+                                <input type="month" id="expiry-date" name="expiryDate" class="modern-input" [required]="showCard" ngModel>
                             </div>
                             <div class="form-group">
                                 <label for="cvv">CVV</label>
-                                <input type="text" id="cvv" class="modern-input" placeholder="123" required>
+                                <input type="text" id="cvv" name="cvv" class="modern-input" placeholder="123" [required]="showCard" ngModel>
                             </div>
                         </div>
                     </div>
