@@ -3,8 +3,8 @@
   <h2>Kosár tartalma</h2>
   
   <div class="cart-items">
-    <div *ngFor="let item of cartService.getItems(); let i = index" class="cart-item">
-      <button class="remove-btn" (click)="removeItem(i)">×</button>
+    <div *ngFor="let item of cartItems" class="cart-item">
+      <button class="remove-btn" (click)="removeItem(item.id)">×</button>
       <div class="item-image">
         <img [src]="item.image" [alt]="item.name">
       </div>

@@ -210,3 +210,131 @@ header {
         display: none;
     }
 }
+
+
+/* Kosár menü stílusok */
+.cart-wrapper {
+    position: relative;
+}
+
+.cart-menu {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    width: 350px;
+    background: #1a1a1a;
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    z-index: 1001;
+    margin-top: 10px;
+}
+
+.cart-menu.active {
+    max-height: 70vh;
+    padding: 15px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.cart-menu-header h4 {
+    margin: 0 0 15px 0;
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.cart-items-list {
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.cart-menu-item {
+    display: flex;
+    gap: 15px;
+    padding: 10px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.05);
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.cart-menu-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.item-info {
+    flex-grow: 1;
+    color: #fff;
+}
+
+.item-info p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.item-info small {
+    color: #2A7B47;
+    font-weight: bold;
+}
+
+.item-remove-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: #ff4444;
+    border: none;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+.item-remove-btn:hover {
+    background: #cc0000;
+}
+
+.view-cart-btn {
+    width: 100%;
+    background: #2A7B47;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.view-cart-btn:hover {
+    background: #1F5C37;
+}
+
+.empty-cart {
+    text-align: center;
+    padding: 20px;
+    color: #fff;
+}
+
+.empty-cart i {
+    font-size: 2rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .cart-menu {
+        width: 300px;
+        right: -20px;
+    }
+}

@@ -1,9 +1,7 @@
-// webshop-cart.component.ts
 import { Component } from '@angular/core';
-import { CartService } from '../../_services/cart.service';
+import { CartService, CartProduct } from '../../_services/cart.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-webshop-cart',
@@ -14,11 +12,16 @@ import { RouterLink } from '@angular/router';
 })
 export class WebshopCartComponent {
   showCard = false;
+  cartItems: CartProduct[] = [];
 
-  constructor(public cartService: CartService) {}
+  constructor(public cartService: CartService) {
+    this.cartService.getCart().subscribe(items => {
+      this.cartItems = items;
+    });
+  }
 
-  removeItem(index: number) {
-    this.cartService.removeFromCart(index);
+  removeItem(productId: number) {
+    this.cartService.removeFromCart(productId);
   }
 
   showCardDetails(paymentMethod: string) {
@@ -26,7 +29,6 @@ export class WebshopCartComponent {
   }
 
   checkout() {
-    // Implement backend integration here
     alert('Köszönjük a vásárlást! A rendelését feldolgozzuk.');
     this.cartService.clearCart();
   }
