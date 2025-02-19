@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: localhost:3306
--- Létrehozás ideje: 2025. Feb 18. 16:53
+-- Létrehozás ideje: 2025. Feb 19. 22:11
 -- Kiszolgáló verziója: 5.7.24
 -- PHP verzió: 8.3.1
 
@@ -20,62 +20,98 @@ SET time_zone = "+00:00";
 --
 -- Adatbázis: `sneakr`
 --
+CREATE DATABASE IF NOT EXISTS `sneakr` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `sneakr`;
 
 DELIMITER $$
 --
 -- Eljárások
 --
+DROP PROCEDURE IF EXISTS `deleteShoes`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteShoes` (IN `idIN` INT(11))   DELETE FROM cipok WHERE cipok.id = idIN$$
+
+DROP PROCEDURE IF EXISTS `deleteUser`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteUser` (IN `userId` INT)   BEGIN
     DELETE FROM userek WHERE id = userId;
     SELECT 'Felhasználó sikeresen törölve.' AS message;
 END$$
 
+DROP PROCEDURE IF EXISTS `getAllResellShoesData`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllResellShoesData` ()   SELECT * FROM resell_cipok$$
 
+DROP PROCEDURE IF EXISTS `getAllShoes`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllShoes` ()   SELECT * FROM cipok$$
 
+DROP PROCEDURE IF EXISTS `getAllShoesData`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllShoesData` ()   SELECT * FROM cipok$$
 
+DROP PROCEDURE IF EXISTS `getAllUsers`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllUsers` ()   SELECT * FROM userek$$
 
+DROP PROCEDURE IF EXISTS `getShoesByAir`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getShoesByAir` ()   SELECT cipok.nev AS Cipők, cipok.ar AS Ár, cipok.img AS Kép
 FROM cipok
 WHERE cipok.nev LIKE Concat('%','Air','%')$$
 
+DROP PROCEDURE IF EXISTS `getShoesDetails`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getShoesDetails` (IN `tipusIN` ENUM('férfi','női','uniszex'))   SELECT cipok.nev AS Cipők, markak.nev AS MárkaNevek, nemek.tipus AS Típusok, cipok.img AS Kép FROM `cipok` INNER JOIN `nemek` ON `cipok`.`nem_id` = `nemek`.`id` INNER JOIN `markak` ON `cipok`.`marka_id` = `markak`.`id` WHERE nemek.tipus = tipusIN$$
 
+DROP PROCEDURE IF EXISTS `getShoesNamePrice`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getShoesNamePrice` ()   SELECT `nev` AS Cipők, `ar` AS Ár, cipok.img AS Kép FROM `cipok`$$
 
+DROP PROCEDURE IF EXISTS `getUserById`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getUserById` (IN `userId` INT)   BEGIN
     SELECT * FROM userek WHERE id = userId;
 END$$
 
+DROP PROCEDURE IF EXISTS `isUserExists`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `isUserExists` (IN `emailIN` VARCHAR(255), OUT `resultOUT` BOOLEAN)   SELECT EXISTS(
         SELECT 1 FROM userek WHERE userek.email = emailIN
     ) INTO resultOUT$$
 
+DROP PROCEDURE IF EXISTS `listNewShoes`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `listNewShoes` (IN `tipusIN` ENUM('férfi','női','uniszex'))   SELECT cipok.nev AS Cipők, markak.nev AS MárkaNevek, nemek.tipus AS Típusok, cipok.allapot AS Állapot, cipok.img AS Kép FROM `cipok` INNER JOIN `nemek` ON `cipok`.`nem_id` = `nemek`.`id` INNER JOIN `markak` ON `cipok`.`marka_id` = `markak`.`id` WHERE nemek.tipus = tipusIN AND cipok.allapot = "új"$$
 
+DROP PROCEDURE IF EXISTS `listShoesPriceASC`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `listShoesPriceASC` ()   SELECT `nev` AS Cipők, `ar` AS Ár, cipok.img AS Kép FROM `cipok` ORDER BY Ár ASC$$
 
+DROP PROCEDURE IF EXISTS `listShoesPriceDESC`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `listShoesPriceDESC` ()   SELECT `nev` AS Cipők, `ar` AS Ár, cipok.img AS Kép FROM `cipok` ORDER BY Ár DESC$$
 
+DROP PROCEDURE IF EXISTS `listUsedShoes`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `listUsedShoes` (IN `tipusIN` ENUM('férfi','női','uniszex'))   SELECT cipok.nev AS Cipők, markak.nev AS MárkaNevek, nemek.tipus AS Típusok, cipok.allapot AS Állapot, cipok.img AS Kép FROM `cipok` INNER JOIN `nemek` ON `cipok`.`nem_id` = `nemek`.`id` INNER JOIN `markak` ON `cipok`.`marka_id` = `markak`.`id` WHERE nemek.tipus = tipusIN AND cipok.allapot = "használt"$$
 
+DROP PROCEDURE IF EXISTS `login`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `login` (IN `emailIN` VARCHAR(255), IN `passwordIN` VARCHAR(255))   SELECT * FROM userek WHERE userek.email = emailIN AND userek.jelszo = passwordIN$$
 
+DROP PROCEDURE IF EXISTS `registerUser`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `registerUser` (IN `nevIN` VARCHAR(255), IN `emailIN` VARCHAR(255), IN `jelszoIN` VARCHAR(255))   INSERT INTO `userek` (`id`, `nev`, `email`, `jelszo`, `admin`) VALUES (NULL, nevIN, emailIN, jelszoIN, "nem")$$
 
+DROP PROCEDURE IF EXISTS `searchShoeByBrand`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `searchShoeByBrand` (IN `markaIN` VARCHAR(255))   SELECT cipok.nev AS Cipők, markak.nev AS Márka, cipok.ar AS Ár, cipok.img AS Kép
 FROM cipok INNER JOIN markak ON cipok.marka_id = markak.id
 WHERE markak.nev LIKE Concat('%',markaIN,'%')$$
 
+DROP PROCEDURE IF EXISTS `searchShoeByName`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `searchShoeByName` (IN `cipoIN` VARCHAR(255))   SELECT cipok.nev AS Cipők, markak.nev AS Márka, cipok.ar AS Ár, cipok.img AS Kép
 FROM cipok INNER JOIN markak ON cipok.marka_id = markak.id
 WHERE cipok.nev LIKE Concat('%',cipoIN,'%')$$
 
+DROP PROCEDURE IF EXISTS `updateShoe`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateShoe` (IN `idIN` INT(11), IN `nevIN` VARCHAR(255), IN `markaIN` VARCHAR(100), IN `nemIN` VARCHAR(100), IN `allapotIN` VARCHAR(100), IN `meretIN` INT(2), IN `arIN` FLOAT, IN `imgIN` TEXT)   UPDATE cipok
+SET cipok.nev = nevIN, 
+cipok.marka = markaIN,
+cipok.nem = nemIN,
+cipok.allapot = allapotIN,
+cipok.meret = meretIN,
+cipok.ar = arIN,
+cipok.img = imgIN
+WHERE cipok.id = idIN$$
+
+DROP PROCEDURE IF EXISTS `uploadResellShoes`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `uploadResellShoes` (IN `resell_nevIN` VARCHAR(255), IN `resell_markaIN` VARCHAR(100), IN `resell_nemIN` VARCHAR(100), IN `resell_allapotIN` VARCHAR(100), IN `resell_meretIN` INT(2), IN `resell_arIN` FLOAT, IN `resell_imgIN` TEXT, IN `resell_userIdIN` INT(11))   INSERT INTO `resell_cipok` (`id`, `nev`, `marka`, `nem`, `allapot`, `meret`,`ar`,`img`,`user_id`) VALUES (NULL, resell_nevIN, resell_markaIN,            resell_nemIN,resell_allapotIN, resell_meretIN, resell_arIN,resell_imgIN, resell_userIdIN)$$
 
+DROP PROCEDURE IF EXISTS `uploadShoes`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `uploadShoes` (IN `nevIN` VARCHAR(255), IN `markaIN` VARCHAR(100), IN `nemIN` VARCHAR(100), IN `allapotIN` VARCHAR(100), IN `meretIN` INT(2), IN `arIN` FLOAT, IN `imgIN` TEXT)   INSERT INTO `cipok` (`id`, `nev`, `marka`, `nem`, `allapot`, `meret`,`ar`,`akcio_id`,`exkluziv_id`,`ujdonsag_id`,`img`) VALUES (NULL, nevIN, markaIN,nemIN, allapotIN, meretIN, arIN, NULL, NULL, NULL, imgIN)$$
 
 DELIMITER ;
@@ -86,6 +122,7 @@ DELIMITER ;
 -- Tábla szerkezet ehhez a táblához `akciok`
 --
 
+DROP TABLE IF EXISTS `akciok`;
 CREATE TABLE `akciok` (
   `id` int(11) NOT NULL,
   `tipus` varchar(255) DEFAULT NULL
@@ -106,6 +143,7 @@ INSERT INTO `akciok` (`id`, `tipus`) VALUES
 -- Tábla szerkezet ehhez a táblához `cipok`
 --
 
+DROP TABLE IF EXISTS `cipok`;
 CREATE TABLE `cipok` (
   `id` int(11) NOT NULL,
   `nev` varchar(255) DEFAULT NULL,
@@ -158,7 +196,7 @@ INSERT INTO `cipok` (`id`, `nev`, `marka`, `nem`, `allapot`, `meret`, `ar`, `akc
 (31, 'Air Jordan 1 Low Travis Scott Reverse Mocha', 'Travis Scott', 'Férfi', 'használt', 45, 754990, NULL, NULL, NULL, 'https://www.truetosole.hu/cdn/shop/products/TruetoSole-AirJordan1LowTravisScottReverseMocha-DM7866-162-01_1000x600.png?v=1658766234'),
 (32, 'Air Jordan 1 Retro High Dark Mocha', 'Travis Jordan', 'Férfi', 'használt', 42, 329000, NULL, NULL, NULL, 'https://www.truetosole.hu/cdn/shop/products/555088-105_1_2000x1200.png?v=1606247460'),
 (33, 'Air Jordan 6 Retro Travis Scott British Khaki', 'Travis Scott', 'Férfi', 'új', 45, 249000, NULL, NULL, NULL, 'https://www.truetosole.hu/cdn/shop/products/True-to-Sole-Air-Jordan-6-Retro-Travis-Scott-British-Khaki-DH0690-200-01_1000x600.png?v=1622051132'),
-(34, 'Nike Dunk Low SP Kentucky', 'Nike', 'Férfi', 'használt', 47, 50499, NULL, NULL, NULL, 'https://www.truetosole.hu/cdn/shop/products/True-to-Sole-NikeDunkLowSPKentucky_CU1726-100_-01_1000x600.png?v=1667928660');
+(40, 'Nike Dunk Low SP Kentucky', 'Nike', 'Férfi', 'Új', 47, 67990, NULL, NULL, NULL, 'https://www.truetosole.hu/cdn/shop/products/True-to-Sole-NikeDunkLowSPKentucky_CU1726-100_-01_1000x600.png?v=1667928660');
 
 -- --------------------------------------------------------
 
@@ -166,6 +204,7 @@ INSERT INTO `cipok` (`id`, `nev`, `marka`, `nem`, `allapot`, `meret`, `ar`, `akc
 -- Tábla szerkezet ehhez a táblához `exkluzivok`
 --
 
+DROP TABLE IF EXISTS `exkluzivok`;
 CREATE TABLE `exkluzivok` (
   `id` int(11) NOT NULL,
   `tipus` varchar(255) DEFAULT NULL
@@ -186,6 +225,7 @@ INSERT INTO `exkluzivok` (`id`, `tipus`) VALUES
 -- Tábla szerkezet ehhez a táblához `kiegeszitok`
 --
 
+DROP TABLE IF EXISTS `kiegeszitok`;
 CREATE TABLE `kiegeszitok` (
   `id` int(11) NOT NULL,
   `nev` varchar(255) DEFAULT NULL
@@ -207,6 +247,7 @@ INSERT INTO `kiegeszitok` (`id`, `nev`) VALUES
 -- Tábla szerkezet ehhez a táblához `kuponkodok`
 --
 
+DROP TABLE IF EXISTS `kuponkodok`;
 CREATE TABLE `kuponkodok` (
   `id` int(11) NOT NULL,
   `kod` varchar(255) DEFAULT NULL,
@@ -228,6 +269,7 @@ INSERT INTO `kuponkodok` (`id`, `kod`, `kedvezmeny_szazalek`, `ervenyes_tol`, `e
 -- Tábla szerkezet ehhez a táblához `lakcimek`
 --
 
+DROP TABLE IF EXISTS `lakcimek`;
 CREATE TABLE `lakcimek` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
@@ -253,6 +295,7 @@ INSERT INTO `lakcimek` (`id`, `user_id`, `orszag`, `varos`, `iranyitoszam`, `utc
 -- Tábla szerkezet ehhez a táblához `rendelesek`
 --
 
+DROP TABLE IF EXISTS `rendelesek`;
 CREATE TABLE `rendelesek` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
@@ -269,6 +312,7 @@ CREATE TABLE `rendelesek` (
 -- Tábla szerkezet ehhez a táblához `rendeles_tetelek`
 --
 
+DROP TABLE IF EXISTS `rendeles_tetelek`;
 CREATE TABLE `rendeles_tetelek` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
@@ -284,6 +328,7 @@ CREATE TABLE `rendeles_tetelek` (
 -- Tábla szerkezet ehhez a táblához `resell_cipok`
 --
 
+DROP TABLE IF EXISTS `resell_cipok`;
 CREATE TABLE `resell_cipok` (
   `id` int(11) NOT NULL,
   `nev` varchar(255) DEFAULT NULL,
@@ -324,6 +369,7 @@ INSERT INTO `resell_cipok` (`id`, `nev`, `marka`, `nem`, `allapot`, `meret`, `ar
 -- Tábla szerkezet ehhez a táblához `shopping_session`
 --
 
+DROP TABLE IF EXISTS `shopping_session`;
 CREATE TABLE `shopping_session` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
@@ -340,6 +386,7 @@ CREATE TABLE `shopping_session` (
 -- Tábla szerkezet ehhez a táblához `szallitasok`
 --
 
+DROP TABLE IF EXISTS `szallitasok`;
 CREATE TABLE `szallitasok` (
   `id` int(11) NOT NULL,
   `tipus` varchar(255) DEFAULT NULL,
@@ -352,6 +399,7 @@ CREATE TABLE `szallitasok` (
 -- Tábla szerkezet ehhez a táblához `ujdonsagok`
 --
 
+DROP TABLE IF EXISTS `ujdonsagok`;
 CREATE TABLE `ujdonsagok` (
   `id` int(11) NOT NULL,
   `tipus` varchar(255) DEFAULT NULL
@@ -371,6 +419,7 @@ INSERT INTO `ujdonsagok` (`id`, `tipus`) VALUES
 -- Tábla szerkezet ehhez a táblához `userek`
 --
 
+DROP TABLE IF EXISTS `userek`;
 CREATE TABLE `userek` (
   `id` int(11) NOT NULL,
   `nev` varchar(255) DEFAULT NULL,
@@ -509,7 +558,7 @@ ALTER TABLE `akciok`
 -- AUTO_INCREMENT a táblához `cipok`
 --
 ALTER TABLE `cipok`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT a táblához `exkluzivok`
