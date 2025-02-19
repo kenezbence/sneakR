@@ -30,19 +30,12 @@
         <input type="range" 
                [min]="absoluteMinPrice"
                [max]="absoluteMaxPrice"
-               [(ngModel)]="minPrice"
-               (input)="applyFilters()"
-               class="range-input">
-        <input type="range" 
-               [min]="absoluteMinPrice"
-               [max]="absoluteMaxPrice"
                [(ngModel)]="maxPrice"
                (input)="applyFilters()"
                class="range-input">
       </div>
       <br>
       <div class="price-values">
-        <span>{{ minPrice | currency:'HUF':'symbol':'1.0-0' }}</span>
         <span class="maxPrice">{{ maxPrice | currency:'HUF':'symbol':'1.0-0' }}</span>
       </div>
     </div>
