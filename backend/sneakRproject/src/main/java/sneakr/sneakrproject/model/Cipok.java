@@ -343,6 +343,22 @@ public class Cipok implements Serializable {
         }
     }
 
+    public static boolean deleteShoes(Integer idIN) {
+    EntityManager em = emf.createEntityManager();
+    try {
+        StoredProcedureQuery spq = em.createStoredProcedureQuery("deleteShoes");
+        spq.registerStoredProcedureParameter("idIN", Integer.class, ParameterMode.IN);
+        spq.setParameter("idIN", idIN);
+        spq.execute();
+        return true;
+    } catch (Exception e) {
+        System.err.println("Hiba a cipő törlésekor: " + e.getMessage());
+        return false;
+    } finally {
+        em.clear();
+        em.close();
+    }
+}
 
  
 
