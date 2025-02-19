@@ -61,36 +61,36 @@ export class ShoeControllerComponent {
     this.showUploadModal = false;
   }
   onUploadSubmit(form: NgForm) {
-    if (form.invalid) {
-      form.control.markAllAsTouched();
-      return;
-    }
-
-    const postData = {
-      nev: form.value.nev,
-      marka: form.value.marka,
-      nem: form.value.nem,
-      allapot: form.value.allapot,
-      meret: Number(form.value.meret),
-      ar: Number(form.value.ar),
-      img: form.value.img
-    };
-
-    this.shoeService.uploadShoe(postData).subscribe({
-      next: (response) => {
-        if (response.status === 'success') {
-          this.showUploadModal = false;
-          this.showUploadSuccessModal = true;
-          this.loadShoes();
-          form.resetForm();
-        }
-      },
-      error: (err) => {
-        console.error('Hiba a feltöltés során:', err);
-        alert('Hiba történt a feltöltés során!');
-      }
-    });
+  if (form.invalid) {
+    form.control.markAllAsTouched();
+    return;
   }
+
+  const postData = {
+    nev: form.value.nev,
+    marka: form.value.marka,
+    nem: form.value.nem,
+    allapot: form.value.allapot,
+    meret: Number(form.value.meret),
+    ar: Number(form.value.ar),
+    img: form.value.img
+  };
+
+  this.shoeService.uploadShoe(postData).subscribe({
+    next: (response: any) => { // Add type annotation
+      if (response.status === 'success') {
+        this.showUploadModal = false;
+        this.showUploadSuccessModal = true; // Ensure this is set
+        this.loadShoes();
+        form.resetForm();
+      }
+    },
+    error: (err) => {
+      console.error('Hiba a feltöltés során:', err);
+      alert('Hiba történt a feltöltés során!');
+    }
+  });
+}
   deleteShoe(shoe: any) {
     this.selectedShoeId = shoe.id;
     this.selectedShoeName = shoe.nev;
