@@ -16,6 +16,7 @@ import { ProductsComponent } from './_components/products/products.component';
 import { WebshopCartComponent } from './_components/webshop-cart/webshop-cart.component';
 import { AdminComponent } from './_components/admin/admin.component';
 import { ResellProductsComponent } from './_components/resell-products/resell-products.component';
+import { ShoeControllerComponent } from './_components/shoe-controller/shoe-controller.component';
 
 export const routes: Routes = [
     {path:'', redirectTo:'/login', pathMatch:'full'},
@@ -35,6 +36,7 @@ export const routes: Routes = [
     {path: 'products', component:ProductsComponent},
     {path: 'webshop-cart', component:WebshopCartComponent},
     {path: 'admin', component:AdminComponent},
-    {path: 'resell-products', component:ResellProductsComponent}
+    {path: 'resell-products', component:ResellProductsComponent},
+    {path: 'shoe-controller', component:ShoeControllerComponent}
 
 ];

@@ -10,6 +10,9 @@
             <li *ngIf="user.admin === 'igen'">
                 <a [routerLink]="['/admin']">Felhasználók kezelése</a>
             </li>
+            <li *ngIf="user.admin === 'igen'">
+                <a [routerLink]="['/shoe-controller']">Cipők kezelése</a>
+            </li>
             <li><a [routerLink]="['/login']">Kijelentkezés</a></li>
         </ul>
     </nav>

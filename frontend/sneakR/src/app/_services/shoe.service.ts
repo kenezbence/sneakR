@@ -23,6 +23,19 @@ export class ShoeService {
 
   constructor(private http: HttpClient) { }
 
+  getAllShoesData(): Observable<any> {
+  return this.http.get(this.apiUrl);
+}
+uploadShoe(shoeData: any): Observable<any> {
+  const uploadUrl = 'http://127.0.0.1:8080/sneakRproject-1.0-SNAPSHOT/webresources/cipok/uploadShoes';
+  return this.http.post(uploadUrl, shoeData);
+}
+
+deleteShoe(id: number): Observable<any> {
+  const deleteUrl = `http://127.0.0.1:8080/sneakRproject-1.0-SNAPSHOT/webresources/cipok/deleteShoes/${id}`;
+  return this.http.delete(deleteUrl);
+}
+
   getShoes() {
     return this.http.get<{ shoes: any[] }>(this.apiUrl).pipe(
       map(response => response.shoes.map(shoe => ({
