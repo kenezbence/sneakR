@@ -152,5 +152,71 @@ public class ShoeService {
     return toReturn;
 }
      
-    
+    public JSONObject updateShoe(Cipok u, Integer id) {
+    JSONObject toReturn = new JSONObject();
+    String status = "success";
+    int statusCode = 200;
+    EntityManager em = emf.createEntityManager();
+
+    try {
+        // Validations
+        if (id == null || id <= 0) {
+            status = "InvalidID";
+            statusCode = 400;
+        } else if (u.getNev() == null || u.getNev().trim().isEmpty()) {
+            status = "InvalidName";
+            statusCode = 400;
+        } else if (u.getMarka() == null || u.getMarka().trim().isEmpty()) {
+            status = "InvalidBrand";
+            statusCode = 400;
+        } else if (u.getNem() == null) {
+            status = "InvalidGender";
+            statusCode = 400;
+        } else if (u.getAllapot() == null) {
+            status = "InvalidCondition";
+            statusCode = 400;
+        } else if (u.getMeret() <= 0) {
+            status = "InvalidSize";
+            statusCode = 400;
+        } else if (u.getAr() <= 0) {
+            status = "InvalidPrice";
+            statusCode = 400;
+        } else {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("updateShoe");
+            
+            spq.registerStoredProcedureParameter("idIN", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("nevIN", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("markaIN", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("nemIN", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("allapotIN", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("meretIN", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("arIN", Float.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("imgIN", String.class, ParameterMode.IN);
+
+            spq.setParameter("idIN", id);
+            spq.setParameter("nevIN", u.getNev());
+            spq.setParameter("markaIN", u.getMarka());
+            spq.setParameter("nemIN", u.getNem());
+            spq.setParameter("allapotIN", u.getAllapot());
+            spq.setParameter("meretIN", u.getMeret());
+            spq.setParameter("arIN", u.getAr());
+            spq.setParameter("imgIN", u.getImg());
+
+            spq.execute();
+        }
+    } catch (Exception e) {
+        status = "ServerError";
+        statusCode = 500;
+        System.err.println("Error during shoe update: " + e.getMessage());
+    } finally {
+        if (em != null) {
+            em.clear();
+            em.close();
+        }
+    }
+
+    toReturn.put("status", status);
+    toReturn.put("statusCode", statusCode);
+    return toReturn;
+}
 }

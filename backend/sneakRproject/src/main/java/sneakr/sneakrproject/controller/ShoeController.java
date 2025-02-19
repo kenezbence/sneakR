@@ -202,5 +202,35 @@ public Response uploadShoes(String bodyString) {
         JSONObject obj = layer.deleteShoes(idIN);
         return Response.status(obj.getInt("statusCode")).entity(obj.toString()).type(MediaType.APPLICATION_JSON).build();
     }
+    
+    @PUT
+@Path("updateShoe/{id}")
+@Consumes(MediaType.APPLICATION_JSON)
+public Response updateShoe(@PathParam("id") Integer id, String bodyString) {
+    try {
+        JSONObject body = new JSONObject(bodyString);
+        
+        Cipok u = new Cipok(
+            body.getString("nev"),
+            body.getString("marka"),
+            body.getString("nem"),
+            body.getString("allapot"),
+            body.getInt("meret"),
+            (float) body.getDouble("ar"),
+            body.optString("img", "")
+        );
+
+        JSONObject obj = layer.updateShoe(u, id);
+        return Response.status(obj.getInt("statusCode"))
+                       .entity(obj.toString())
+                       .build();
+    } catch (JSONException e) {
+        JSONObject error = new JSONObject();
+        error.put("status", "InvalidRequest");
+        error.put("statusCode", 400);
+        error.put("message", "Malformed JSON input");
+        return Response.status(400).entity(error.toString()).build();
+    }
+}
 
 }

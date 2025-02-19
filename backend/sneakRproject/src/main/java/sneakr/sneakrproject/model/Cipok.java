@@ -360,6 +360,39 @@ public class Cipok implements Serializable {
     }
 }
 
+    public static boolean updateShoe(Cipok u, Integer id) {
+    EntityManager em = emf.createEntityManager();
+    try {
+        StoredProcedureQuery spq = em.createStoredProcedureQuery("updateShoe");
+        
+        spq.registerStoredProcedureParameter("idIN", Integer.class, ParameterMode.IN);
+        spq.registerStoredProcedureParameter("nevIN", String.class, ParameterMode.IN);
+        spq.registerStoredProcedureParameter("markaIN", String.class, ParameterMode.IN);
+        spq.registerStoredProcedureParameter("nemIN", String.class, ParameterMode.IN);
+        spq.registerStoredProcedureParameter("allapotIN", String.class, ParameterMode.IN);
+        spq.registerStoredProcedureParameter("meretIN", Integer.class, ParameterMode.IN);
+        spq.registerStoredProcedureParameter("arIN", Float.class, ParameterMode.IN);
+        spq.registerStoredProcedureParameter("imgIN", String.class, ParameterMode.IN);
+
+        spq.setParameter("idIN", id);
+        spq.setParameter("nevIN", u.getNev());
+        spq.setParameter("markaIN", u.getMarka());
+        spq.setParameter("nemIN", u.getNem());
+        spq.setParameter("allapotIN", u.getAllapot());
+        spq.setParameter("meretIN", u.getMeret());
+        spq.setParameter("arIN", u.getAr());
+        spq.setParameter("imgIN", u.getImg());
+
+        spq.execute();
+        return true;
+    } catch (Exception e) {
+        System.err.println("Update error: " + e.getMessage());
+        return false;
+    } finally {
+        em.clear();
+        em.close();
+    }
+}
  
 
 
