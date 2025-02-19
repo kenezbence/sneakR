@@ -1,63 +1,147 @@
-/* ========= Frissített Design (Navbarhoz Igazítva) ========= */
+:root {
+    --primary: hsl(215, 85%, 55%);
+    --primary-dark: hsl(215, 85%, 45%);
+    --background: hsl(210, 20%, 98%);
+    --surface: white;
+    --text: hsl(220, 30%, 20%);
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
 
-/* Reset és alapbeállítások */
-* {
+
+  * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    z-index: 1;
-}
+    font-family: 'Inter', system-ui, sans-serif;
+    
+  }
 
 body {
-    background-color: #f4f4f4;
-    color: #333;
-    padding-top: 90px; /* A navbar fix pozíciója miatt */
+  background: var(--background);
+  padding-top: 90px;
+  
 }
 
 /* Szűrők Stílusai */
 .filters-container {
-    background-color: #fff;
-    padding: 2rem;
+    max-width: 1400px;
     margin: 2rem auto;
-    max-width: 1200px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    color: #222;
-    text-align: center;
+    padding: 2rem;
+    background: var(--surface);
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
+  }
+  
+.maxPrice{
+    float: right;
 }
 
-.page-title {
-    text-align: center;
-    font-size: 2.2rem;
-    font-weight: bold;
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: #222;
-}
 
-.filter-controls {
+  .page-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 2rem;
+    text-align: center;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+  
+  .filter-controls {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .filter-group {
+    padding: 1.5rem;
+    border-radius: 1rem;
+    background: hsl(220, 40%, 98%);
+  }
+  
+  .filter-label {
+    font-size: 1.1rem;
+    color: var(--text);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  
+  /* Size Selector */
+  .size-buttons {
     display: flex;
-    justify-content: center;
+    gap: 0.75rem;
     flex-wrap: wrap;
-    gap: 1.5rem;
-}
+  }
+  
+  .size-button {
+    padding: 0.75rem 1.25rem;
+    border: 2px solid hsl(220, 30%, 90%);
+    border-radius: 0.75rem;
+    background: white;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .size-button:hover {
+    transform: translateY(-2px);
+    border-color: #2A7B47;
+  }
+  
+  .size-button.active {
+    background: var(--primary);
+    color: #2A7B47;
+    border-color: var(--primary);
+  }
+  
 
-.select-wrapper select,
-.range-filter input {
-    padding: 12px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    font-size: 1rem;
-    background: #f8f9fa;
-    color: #333;
-    transition: 0.3s;
-}
+  .dual-range {
+    position: relative;
+    margin: 0.5rem 0; 
+  }
+  
+  .slider-track {
+    position: absolute;
+    height: 4px;
+    background: hsl(220, 30%, 90%);
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 2px;
+  }
+  
+  .range-input {
+    position: absolute;
+    width: 100%;
+    height: 0;
+    pointer-events: none;
+  }
+  
+  .range-input::-webkit-slider-thumb {
+    width: 24px;
+    height: 24px;
+    background: var(--primary);
+    border: 4px solid white;
+    border-radius: 50%;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    pointer-events: auto;
+    transition: transform 0.2s ease;
+  }
+  
+  .range-input::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+  }
+  
+  .price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    color: #ff4500;
+  }
 
-.select-wrapper select:hover,
-.range-filter input:hover {
-    border-color: #ff4500;
-}
 
 .range-label {
     font-weight: bold;
@@ -67,40 +151,38 @@ body {
 /* Termékek Stílusa */
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 2rem auto;
-    padding: 0 1rem;
-}
+    padding: 0 2rem;
+  }
 
-.product-card {
-    background-color: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
+
+
+.card-inner {
     position: relative;
-    padding-bottom: 15px;
-    color: #333;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-}
-
-.image-wrapper {
-    width: 100%;
-    height: 250px;
+    background: var(--surface);
+    border-radius: 1.5rem;
     overflow: hidden;
-    background: #f4f4f4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: var(--shadow);
+  }
+
+
+
+
+  .product-card:hover .card-inner {
+    transform: translateY(-10px) rotateX(5deg) rotateY(-5deg);
+  }
+
+  .image-wrapper {
+    position: relative;
+    height: 300px;
+    overflow: visible; 
+    z-index: 1;
+  }
 
 .image-wrapper img {
     width: 100%;
@@ -109,33 +191,94 @@ body {
     transition: transform 0.3s;
 }
 
-.product-card:hover img {
-    transform: scale(1.1);
-}
+
+
+  .product-card:hover .product-image {
+    transform: scale(1.05);
+  }
+
 
 .product-info {
     padding: 1.2rem;
     text-align: center;
 }
 
-.product-name {
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #222;
-    margin-bottom: 0.5rem;
-}
 
-.brand {
-    color: #666;
+.add-to-cart {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    background: #2A7B47;
+    color: white;
+    border: none;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transform: translateY(10px);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: var(--shadow);
+  }
+
+  .product-card:hover .add-to-cart {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+
+  .cart-icon {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    flex-shrink: 0;
+  }
+
+
+  .product-details {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 300px); /* Account for image height */
+    min-height: 160px; /* Minimum height for details section */
+  }
+
+
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto; /* Pushes to bottom */
+    padding-top: 1rem;
+    border-top: 1px solid hsl(220, 30%, 90%);
+  }
+  
+
+  .product-name {
+    font-size: 1.25rem;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 3em; 
+  }
+
+  .brand-badge {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    background: var(--primary);
+    color: white;
+    padding: 0.35rem 1rem;
+    border-radius: 0.5rem;
     font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-}
+    font-weight: 600;
+  }
 
-.price {
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: #ff4500;
-}
+
+
+  
 
 /* Reszponzív Stílusok */
 @media (max-width: 768px) {
@@ -226,16 +369,10 @@ input[type="range"]::-moz-range-thumb {
 
 .size-container {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    gap: 0.5rem;
+    flex-wrap: wrap;
     margin: 1rem 0;
-    padding: 8px 12px;
-    background: #f8f8f8;
-    border-radius: 8px;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-}
+  }
 
 .size-label {
     font-size: 0.9rem;
@@ -252,17 +389,23 @@ input[type="range"]::-moz-range-thumb {
     padding: 2px 0;
 }
 
+.price-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid hsl(220, 30%, 90%);
+  }
+
 .size-pill {
-    background-color: white;
-    padding: 5px 12px;
-    border-radius: 15px;
-    font-size: 0.85rem;
-    color: #2A7B47;
-    border: 1px solid #2A7B47;
+    padding: 0.35rem 0.75rem;
+    background: hsl(220, 30%, 95%);
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
     font-weight: 500;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    flex-shrink: 0;
-}
+    color: #2A7B47;
+  }
 
 .sizes::-webkit-scrollbar {
     height: 4px;
