@@ -26,6 +26,13 @@ export class ShoeControllerComponent {
   showUploadSuccessModal: boolean = false;
   showUploadErrorModal: boolean = false;
   uploadImageUrl = '';
+  showEditModal = false;
+  showEditSuccessModal = false;
+  editingShoe: any = null;
+  brands = [
+  'Nike', 'Adidas', 'Puma', 'Reebok', 'Converse', 
+  'Jordan', 'Yeezy', 'New Balance', 'Alexander McQueen', 'Travis Scott'
+];
 
   constructor(private shoeService: ShoeService, private router: Router) {}
 
@@ -137,6 +144,38 @@ export class ShoeControllerComponent {
     this.router.navigate(['/select']);
   }
 
+  openEditModal(shoe: any) {
+        this.editingShoe = { ...shoe }; // Clone the shoe object
+        this.showEditModal = true;
+    }
 
-  
+closeEditModal() {
+        this.showEditModal = false;
+        this.editingShoe = null;
+    }
+
+onEditSubmit(form: NgForm) {
+        if (form.invalid) {
+            form.control.markAllAsTouched();
+            return;
+        }
+        
+        // Convert állapot to lowercase
+        this.editingShoe.allapot = this.editingShoe.allapot.toLowerCase();
+        
+        this.shoeService.updateShoe(this.editingShoe.id, this.editingShoe).subscribe({
+            next: (response: any) => {
+                if (response.status === 'success') {
+                    this.showEditModal = false;
+                    this.showEditSuccessModal = true;
+                    this.loadShoes();
+                }
+            },
+            error: (err) => console.error('Update error:', err)
+        });
+    }
+    
+    onCloseEditSuccessModal() {
+        this.showEditSuccessModal = false;
+    }
 }

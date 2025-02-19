@@ -31,6 +31,11 @@ uploadShoe(shoeData: any): Observable<any> {
   return this.http.post(uploadUrl, shoeData);
 }
 
+updateShoe(id: number, shoeData: any): Observable<any> {
+  const updateUrl = `http://127.0.0.1:8080/sneakRproject-1.0-SNAPSHOT/webresources/cipok/updateShoe/${id}`;
+  return this.http.put(updateUrl, shoeData);
+}
+
 deleteShoe(id: number): Observable<any> {
   const deleteUrl = `http://127.0.0.1:8080/sneakRproject-1.0-SNAPSHOT/webresources/cipok/deleteShoes/${id}`;
   return this.http.delete(deleteUrl);

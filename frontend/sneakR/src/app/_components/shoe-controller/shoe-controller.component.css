@@ -404,3 +404,59 @@ h1 {
 input:invalid:not(:placeholder-shown)+label+.upload-error {
     display: block;
 }
+
+.edit-btn {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-left: 8px;
+}
+
+.edit-btn:hover {
+    background: #0056b3;
+}
+
+.modal-confirm-button.edit {
+    background: #007bff;
+}
+
+.modal-confirm-button.edit:hover {
+    background: #0056b3;
+}
+
+/* Adjust table cell padding */
+.shoes-table td {
+    padding: 8px;
+}
+
+.custom-modal .modal-content {
+    background: white !important;
+    padding: 2rem !important;
+}
+
+.custom-modal .input-group select {
+    background-color: white !important;
+    color: #333 !important;
+}
+
+.custom-modal .input-group label {
+    background: white !important;
+}
+
+/* Ensure modal visibility */
+.custom-modal.active,
+.success-modal.active {
+    display: flex !important;
+    z-index: 2000;
+}
+
+/* Fix option styling */
+.custom-modal select option {
+    background: white !important;
+    color: #333 !important;
+}
+
