@@ -1,7 +1,7 @@
 :host {
   display: block;
   min-height: 100vh;
-  background-image: radial-gradient(circle, #2a7b47, #00705d, #00636a, #00546a, #21455e, #21455e, #21455e, #21455e, #00546a, #00636a, #00705d, #2a7b47);  
+  background-image: linear-gradient(to left bottom, #2a7b47, #4c551f, #473318, #2c1a16, #000000);
   padding: 2rem;
 }
 
@@ -109,7 +109,7 @@
 }
 
 .checkout-btn:disabled {
-  background: #334;
+  background: #2A7B47;
   cursor: not-allowed;
 }
 
