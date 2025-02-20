@@ -1,3 +1,12 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background-image: radial-gradient(circle, #2a7b47, #2a9682, #57aeb4, #93c3d7, #cadaec, #cadaec, #cadaec, #cadaec, #93c3d7, #57aeb4, #2a9682, #2a7b47);
+  padding: 2rem;
+}
+
+
+
 /* webshop-cart.component.css */
 .cart-container {
   max-width: 900px;

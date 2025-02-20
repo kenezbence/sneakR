@@ -31,9 +31,27 @@
     </div>
 
     <div class="form-group">
-      <label for="address">Szállítási cím:</label>
-      <textarea id="address" name="address" required ngModel></textarea>
+      <label for="phone">Telefonszám:</label>
+      <input type="tel" id="phone" name="phone" required ngModel 
+             pattern="(\+36|06)[0-9]{8,9}" placeholder="0612345678">
     </div>
+
+    <div class="form-group">
+      <label for="postalCode">Irányítószám:</label>
+      <input type="text" id="postalCode" name="postalCode" required ngModel 
+             maxlength="4" pattern="[0-9]{4}" placeholder="1234">
+    </div>
+    
+    <div class="form-group">
+      <label for="city">Város:</label>
+      <input type="text" id="city" name="city" required ngModel>
+    </div>
+    
+    <div class="form-group">
+      <label for="street">Utca, házszám:</label>
+      <input type="text" id="street" name="street" required ngModel>
+    </div>
+    
 
     <div class="form-group">
       <label>Fizetési mód:</label>
