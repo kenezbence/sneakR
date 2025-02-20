@@ -1,3 +1,38 @@
+<div class="cart-wrapper">
+  <div class="icon-btn cart-btn" (click)="toggleCartMenu()">
+    <i class="fas fa-shopping-cart"></i>
+    <span *ngIf="cartCount > 0" class="icon-count">{{ cartCount }}</span>
+  </div>
+
+  <div class="cart-menu" [class.active]="showCartMenu">
+    <div class="cart-menu-header">
+      <h4>Kosár tartalma</h4>
+    </div>
+
+    <div class="cart-items-list" *ngIf="cartItems.length > 0; else emptyCart">
+      <div *ngFor="let item of cartItems" class="cart-menu-item">
+        <button class="item-remove-btn" (click)="removeItem(item.id)">×</button>
+        <img [src]="item.image" [alt]="item.name">
+        <div class="item-info">
+          <p>{{ item.name }}</p>
+          <small>{{ item.price | currency:'HUF' }}</small>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #emptyCart>
+      <div class="empty-cart">
+        <i class="fas fa-shopping-basket"></i>
+        <p>A kosár üres</p>
+      </div>
+    </ng-template>
+
+    <div class="cart-menu-footer">
+      <button class="view-cart-btn" [routerLink]="['/webshop-cart']">Kosár megtekintése</button>
+    </div>
+  </div>
+</div>
+
 <button class="hamburger-menu" (click)="toggleMenu()">
     <i [class]="isMenuOpen ? 'fas fa-times' : 'fas fa-bars'"></i>
   </button>
@@ -154,33 +189,40 @@
   <div class="modal-content" *ngIf="selectedProduct">
     <span class="close" (click)="closeProductModal()">&times;</span>
     <div class="modal-image">
-      <!-- Update img to image -->
       <img [src]="selectedProduct.image" [alt]="selectedProduct.name">
     </div>
     <div class="modal-details">
-      <!-- Update nev to name -->
       <h3>{{ selectedProduct.name }}</h3>
       <p class="price">{{ selectedProduct.price | number }} Ft</p>
 
-      <div class="size-info">
-        <h4>Elérhető méret:</h4>
-        <div class="size-value">
-          <!-- Update meret to sizes -->
-          {{ selectedProduct.sizes.join(', ') }}
+      <div class="size-selector">
+        <h4>Válassz méretet:</h4>
+        <div class="size-options">
+          <button 
+            *ngFor="let size of selectedProduct.sizes" 
+            [class.selected]="selectedSize === size"
+            (click)="selectSize(size)"
+          >
+            {{ size }}
+          </button>
         </div>
       </div>
 
-      <button class="add-to-cart" (click)="addToCart()">
+      <button 
+        class="add-to-cart" 
+        (click)="addToCart()" 
+        [disabled]="!selectedSize"
+      >
         <i class="fas fa-cart-plus"></i> Kosárba
       </button>
 
-      <!-- Add description if needed -->
       <p class="description" *ngIf="selectedProduct.description">
         {{ selectedProduct.description }}
       </p>
     </div>
   </div>
 </div>
+
 
   
   <footer class="footer" id="footer">

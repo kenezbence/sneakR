@@ -4,6 +4,7 @@ import { ShoeService } from '../../_services/shoe.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
+import { CartService, CartProduct } from '../../_services/cart.service';
 
 @Component({
   selector: 'app-webshop',
@@ -18,12 +19,18 @@ export class WebshopComponent implements OnInit {
   bestSellerShoes: any[] = [];
   menuState: { [key: string]: boolean } = {};
   loading = true;
+  cartCount = 0;
+  cartItems: CartProduct[] = [];
+  showCartMenu = false;
 
   selectedProduct: any = null;
   selectedSize: string | null = null;
   sizes: string[] = ['36', '37', '38', '39', '40', '41', '42', '43', '44', '45'];
 
-  constructor(private shoeService: ShoeService) {}
+  constructor(
+    private shoeService: ShoeService,
+    private cartService: CartService // Service injektálás
+  ) {}
 
   @ViewChild('best') bestSection!: ElementRef;
   ngOnInit() {
@@ -39,7 +46,22 @@ export class WebshopComponent implements OnInit {
         this.loading = false;
       }
     });
+    this.cartService.getCart().subscribe(cart => {
+      this.cartItems = cart;
+      this.cartCount = cart.length;
+    });
   }
+
+  toggleCartMenu() {
+    this.showCartMenu = !this.showCartMenu;
+  }
+
+  removeItem(productId: number) {
+    this.cartService.removeFromCart(productId);
+  }
+
+
+
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
@@ -78,13 +100,15 @@ export class WebshopComponent implements OnInit {
 
   addToCart() {
     if (this.selectedProduct && this.selectedSize) {
-      // Add your cart logic here
-      console.log('Added to cart:', {
-        product: this.selectedProduct,
-        size: this.selectedSize
-      });
-      
-      // Close modal after adding to cart
+      const cartProduct: CartProduct = {
+        id: this.selectedProduct.id,
+        name: this.selectedProduct.name,
+        brand: this.selectedProduct.brand,
+        price: this.selectedProduct.price,
+        image: this.selectedProduct.image,
+        sizes: [Number(this.selectedSize)]
+      };
+      this.cartService.addToCart(cartProduct);
       this.closeProductModal();
     }
   }
