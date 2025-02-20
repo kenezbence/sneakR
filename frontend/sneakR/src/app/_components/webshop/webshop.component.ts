@@ -3,13 +3,13 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ShoeService } from '../../_services/shoe.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CartService, CartProduct } from '../../_services/cart.service';
 
 @Component({
   selector: 'app-webshop',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, RouterLink],
+  imports: [CommonModule, HttpClientModule, RouterLink,],
   templateUrl: './webshop.component.html',
   styleUrls: ['./webshop.component.css']
 })
@@ -29,7 +29,8 @@ export class WebshopComponent implements OnInit {
 
   constructor(
     private shoeService: ShoeService,
-    private cartService: CartService // Service injektálás
+    private cartService: CartService,
+    private router: Router // Service injektálás
   ) {}
 
   @ViewChild('best') bestSection!: ElementRef;
@@ -111,5 +112,8 @@ export class WebshopComponent implements OnInit {
       this.cartService.addToCart(cartProduct);
       this.closeProductModal();
     }
+  }
+  navigateToTarget3() {
+    this.router.navigate(['/select']);
   }
 }

@@ -460,3 +460,198 @@ input:invalid:not(:placeholder-shown)+label+.upload-error {
     color: #333 !important;
 }
 
+/* shoe-controller.component.css */
+.shoe-controller-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #2A7B47;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.shoes-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.shoes-table th,
+.shoes-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.shoes-table th {
+    background-color: #3d7852;
+    color: white;
+}
+
+.shoe-image {
+    width: 80px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.delete-btn, .edit-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-left: 8px;
+}
+
+.delete-btn:hover {
+    background: #bb2d3b;
+}
+
+.edit-btn {
+    background: #007bff;
+}
+
+.edit-btn:hover {
+    background: #0056b3;
+}
+
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+}
+
+.error-container {
+    text-align: center;
+    padding: 4rem;
+    background: #f8d7da;
+    border-radius: 8px;
+    margin: 2rem auto;
+    max-width: 600px;
+}
+
+.error-container h2 {
+    color: #721c24;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.error-container p {
+    color: #721c24;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.back-button {
+    background: #2A7B47;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.back-button:hover {
+    background: #1f5e36;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .shoe-controller-container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .shoes-table th,
+    .shoes-table td {
+        padding: 8px;
+    }
+
+    .shoe-image {
+        width: 60px;
+        height: 40px;
+    }
+
+    .delete-btn, .edit-btn {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+
+    .back-button {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+
+    .error-container {
+        padding: 2rem;
+    }
+
+    .error-container h2 {
+        font-size: 2rem;
+    }
+
+    .error-container p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .shoe-controller-container {
+        padding: 5px;
+    }
+
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    .shoes-table th,
+    .shoes-table td {
+        padding: 6px;
+        font-size: 0.9rem;
+    }
+
+    .shoe-image {
+        width: 50px;
+        height: 30px;
+    }
+
+    .delete-btn, .edit-btn {
+        padding: 4px 8px;
+        font-size: 0.8rem;
+    }
+
+    .back-button {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+
+    .error-container {
+        padding: 1rem;
+    }
+
+    .error-container h2 {
+        font-size: 1.5rem;
+    }
+
+    .error-container p {
+        font-size: 0.9rem;
+    }
+}
