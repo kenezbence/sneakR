@@ -1,7 +1,7 @@
 :host {
   display: block;
   min-height: 100vh;
-  background-image: radial-gradient(circle, #2a7b47, #2a9682, #57aeb4, #93c3d7, #cadaec, #cadaec, #cadaec, #cadaec, #93c3d7, #57aeb4, #2a9682, #2a7b47);
+  background-image: radial-gradient(circle, #2a7b47, #00705d, #00636a, #00546a, #21455e, #21455e, #21455e, #21455e, #00546a, #00636a, #00705d, #2a7b47);  
   padding: 2rem;
 }
 
