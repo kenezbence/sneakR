@@ -25,6 +25,8 @@ export class ResellUserComponent implements OnInit  {
 
   userShoes: any[] = [];
 
+  menuOpen: boolean = false;
+
   itemsPerView = 2; // Show 2 items at a time
 currentSlide = 0;
 
@@ -46,6 +48,10 @@ prevSlide() {
 
 nextSlide() {
   this.currentSlide = Math.min(this.maxSlides, this.currentSlide + 1);
+}
+
+toggleMenu() {
+  this.menuOpen = !this.menuOpen;
 }
 
   constructor(
@@ -75,6 +81,8 @@ nextSlide() {
       error: (err) => console.error('Error loading user shoes:', err)
     });
   }
+
+  
     
   
     deleteListing(shoeId: number, event: Event): void {
@@ -93,4 +101,6 @@ nextSlide() {
   scroll(target: HTMLElement): void {
     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+
+  
 }

@@ -9,6 +9,7 @@ body {
 }
 
 /* Navigációs sáv */
+/* NAVBAR */
 .navbar {
     background-color: #000000;
     padding: 1.2rem 2rem;
@@ -17,36 +18,40 @@ body {
     z-index: 1000;
     border-bottom: 2px solid #2A7B47;
     backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
 }
 
+.navbar-container {
+    width: 100%;
+    max-width: 1400px; /* Nem nyúlik túl szélesre */
+    display: flex;
+    justify-content: center;
+}
+
+/* NAVBAR UL (Menü) */
 .navbar ul {
     display: flex;
-    justify-content: center; /* Módosítva: flex-start → center */
-    gap: 2.5rem;
-    margin: 0;
-    padding: 0;
+    justify-content: center;
+    align-items: center;
     list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap;
+    
 }
 
-.navbar li {
-    transition: transform 0.2s;
-}
-
-.navbar li:hover {
-    transform: translateY(-3px);
-}
-
-.navbar a {
+/* NAVBAR LINKEK (Betűméret visszaállítása) */
+.navbar ul li a {
     color: #E0FFEE;
     text-decoration: none;
-    font-size: 1.1em;
+    font-size: 1.3em; /* Nagyobb betűméret */
     padding: 0.8rem 1.2rem;
     border-radius: 6px;
     transition: all 0.3s;
-    font-weight: 500;
 }
 
-.navbar a:hover {
+.navbar ul li a:hover {
     background-color: #2A7B47;
     box-shadow: 0 4px 12px rgba(42, 123, 71, 0.3);
 }
@@ -54,6 +59,52 @@ body {
 .navbar a.active {
     background-color: #1E5A36;
 }
+
+/* HAMBURGER MENÜ (Alapból rejtett) */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem; /* Nagyobb hamburger ikon */
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 1rem; /* Bal oldalra igazítva */
+    transform: translateY(-50%);
+}
+
+/* MOBILNÉZET - Hamburger menü és navigáció */
+@media (max-width: 768px) {
+    .navbar-container {
+        justify-content: flex-start; /* Balra igazítja a menüt */
+    }
+
+    .menu-toggle {
+        display: block; /* Megjeleníti a hamburger menüt */
+    }
+
+    .navbar ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+    }
+
+    .navbar ul.open {
+        display: flex;
+    }
+
+    .navbar ul li {
+        text-align: center;
+        padding: 1rem 0;
+    }
+}
+    
+
 
 /* Profil szekció */
 .profile-section {
