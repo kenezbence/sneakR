@@ -119,35 +119,37 @@
             Betöltött cipők: {{ shoes.length }}
         </div>
 
-        <table class="shoes-table" *ngIf="shoes.length > 0">
-            <thead>
-                <tr>
-                    <th>Kép</th>
-                    <th>Név</th>
-                    <th>Márka</th>
-                    <th>Ár</th>
-                    <th>Állapot</th>
-                    <th>Méret</th>
-                    <th>Nem</th>
-                    <th>Funkció</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let shoe of shoes">
-                    <td><img [src]="shoe.img" class="shoe-image" alt="Shoe image"></td>
-                    <td>{{ shoe.nev }}</td>
-                    <td>{{ shoe.marka }}</td>
-                    <td>{{ shoe.ar | currency:'HUF':'symbol':'1.0-0' }}</td>
-                    <td>{{ shoe.allapot }}</td>
-                    <td>{{ shoe.meret }}</td>
-                    <td>{{ shoe.nem }}</td>
-                    <td>
-                        <button class="delete-btn" (click)="deleteShoe(shoe)">Törlés</button>
-                        <button class="edit-btn" (click)="openEditModal(shoe)">Módosítás</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="shoes-table" *ngIf="shoes.length > 0">
+                <thead>
+                    <tr>
+                        <th>Kép</th>
+                        <th>Név</th>
+                        <th>Márka</th>
+                        <th>Ár</th>
+                        <th>Állapot</th>
+                        <th>Méret</th>
+                        <th>Nem</th>
+                        <th>Funkció</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let shoe of shoes">
+                        <td><img [src]="shoe.img" class="shoe-image" alt="Shoe image"></td>
+                        <td>{{ shoe.nev }}</td>
+                        <td>{{ shoe.marka }}</td>
+                        <td>{{ shoe.ar | currency:'HUF':'symbol':'1.0-0' }}</td>
+                        <td>{{ shoe.allapot }}</td>
+                        <td>{{ shoe.meret }}</td>
+                        <td>{{ shoe.nem }}</td>
+                        <td>
+                            <button class="delete-btn" (click)="deleteShoe(shoe)">Törlés</button>
+                            <button class="edit-btn" (click)="openEditModal(shoe)">Módosítás</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <br>
 
         <button class="back-button" (click)="goBackToProfile()">Vissza a profilra</button>

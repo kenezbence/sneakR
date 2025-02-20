@@ -9,7 +9,7 @@ body {
 :host {
     display: block;
     min-height: 100vh;
-    background: linear-gradient(45deg, #1A3D2B 0%, #0A0A0A 100%);
+    background-image: radial-gradient(circle, #2a7b47, #495f26, #4d4319, #422c18, #2c1a16, #2c1a16, #2c1a16, #2c1a16, #422c18, #4d4319, #495f26, #2a7b47);
 }
 
 /* Header/navbar */
