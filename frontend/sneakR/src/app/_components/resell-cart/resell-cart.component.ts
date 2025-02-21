@@ -16,7 +16,7 @@ import { HttpClient } from '@angular/common/http';
 export class ResellCartComponent implements OnInit {
   cart: CartProduct[] = [];
   showCard = false;
-  showSuccessModal = true;
+  showSuccessModal = false;
 
 
   constructor(

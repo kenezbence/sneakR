@@ -124,7 +124,7 @@ h2 {
     display: flex;
     justify-content: space-around;
     padding: 20px;
-    background-color: #222;
+    background-color: rgba(30, 30, 30, 0.95);
     color: white;
     text-align: center;
 }
@@ -221,7 +221,7 @@ h2 {
 
 /* Footer Styles */
 .footer {
-    background-color: #222;
+    background-color: rgba(30, 30, 30, 0.95);
     color: white;
     padding: 20px;
     text-align: center;

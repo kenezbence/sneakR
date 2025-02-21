@@ -166,14 +166,24 @@
             Vissza
           </button>
           <button 
-            class="primary-button" 
-            type="button"
-            [disabled]="!canProceed()"
-            (click)="nextStep()">
-            {{ currentStep === 3 ? 'Fizetés' : 'Tovább' }}
-          </button>
+          class="primary-button" 
+          type="button"
+          [disabled]="!canProceed()"
+          (click)="currentStep === 3 ? checkout() : nextStep()">
+          {{ currentStep === 3 ? 'Fizetés' : 'Tovább' }}
+      </button>
         </div>
       </div>
     </div>
   </section>
+
+  <div class="success-modal" [class.active]="showSuccessModal">
+    <div class="modal-content">
+        <div class="confirmation-icon">✓</div>
+        <p class="confirmation-text">Köszönjük a vásárlást! A rendelését feldolgozzuk.</p>
+        <div class="modal-footer">
+            <button class="primary-button" (click)="onCloseSuccessModal()">Vissza a főoldalra</button>
+        </div>
+    </div>
+</div>
 </div>

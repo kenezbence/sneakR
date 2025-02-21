@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-webshop-cart',
@@ -31,9 +32,9 @@ export class WebshopCartComponent {
   showCard = false;
   cartItems: CartProduct[] = [];
   selectedPayment: 'card' | 'cash' | null = null;
-  shippingCost = 1500; // Fixed shipping cost in HUF
-  showSuccessModal = true;
-  constructor(public cartService: CartService) {
+  shippingCost = 1890; 
+  showSuccessModal = false;
+  constructor(public cartService: CartService, private router: Router) {
     this.cartService.getCart().subscribe(items => {
       this.cartItems = items;
     });
@@ -67,7 +68,7 @@ export class WebshopCartComponent {
       case 1:
         return this.cartItems.length > 0;
       case 2:
-        return true; // Add form validation check here
+        return true;
       case 3:
         return !!this.selectedPayment;
       default:
@@ -76,10 +77,13 @@ export class WebshopCartComponent {
   }
 
   checkout() {
-    alert('Köszönjük a vásárlást! A rendelését feldolgozzuk.');
+    this.showSuccessModal = true;
     this.cartService.clearCart();
   }
-
+  onCloseSuccessModal() {
+    this.showSuccessModal = false;
+    this.router.navigate(['webshop']);
+}
 
   
 }
