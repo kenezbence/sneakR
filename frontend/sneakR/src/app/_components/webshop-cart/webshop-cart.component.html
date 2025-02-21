@@ -1,85 +1,179 @@
-<!-- webshop-cart.component.html -->
-<section class="cart-container">
-  <h2>Kosár tartalma</h2>
-  
-  <div class="cart-items">
-    <div *ngFor="let item of cartItems" class="cart-item">
-      <button class="remove-btn" (click)="removeItem(item.id)">×</button>
-      <div class="item-image">
-        <img [src]="item.image" [alt]="item.name">
+<div class="page-container">
+  <section class="cart-container" [class.empty]="cartItems.length === 0">
+    <!-- Progress Stepper -->
+    <div class="stepper" *ngIf="cartItems.length > 0">
+      <div class="step" [class.active]="currentStep >= 1">
+        <div class="step-number">1</div>
+        <span>Kosár</span>
       </div>
-      <div class="item-details">
-        <h3>{{ item.name }}</h3>
-        <p>{{ item.price | currency:'HUF':'symbol':'1.0-0' }}</p>
+      <div class="step-line"></div>
+      <div class="step" [class.active]="currentStep >= 2">
+        <div class="step-number">2</div>
+        <span>Szállítás</span>
       </div>
-    </div>
-  </div>
-
-  <div class="cart-summary">
-    <h3>Összesen: {{ cartService.getTotal() | currency:'HUF':'symbol':'1.0-0' }}</h3>
-  </div>
-
-  <form #checkoutForm="ngForm" (ngSubmit)="checkout()" class="checkout-form">
-    <div class="form-group">
-      <label for="name">Név:</label>
-      <input type="text" id="name" name="name" required ngModel placeholder="Nagy János">
-    </div>
-
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required ngModel placeholder="teszt@gmail.com">
-    </div>
-
-    <div class="form-group">
-      <label for="phone">Telefonszám:</label>
-      <input type="tel" id="phone" name="phone" required ngModel 
-             pattern="(\+36|06)[0-9]{8,9}" placeholder="0612345678">
-    </div>
-
-    <div class="form-group">
-      <label for="postalCode">Irányítószám:</label>
-      <input type="text" id="postalCode" name="postalCode" required ngModel 
-             maxlength="4" pattern="[0-9]{4}" placeholder="1234">
-    </div>
-    
-    <div class="form-group">
-      <label for="city">Város:</label>
-      <input type="text" id="city" name="city" required ngModel placeholder="Budapest">
-    </div>
-    
-    <div class="form-group">
-      <label for="street">Utca, házszám:</label>
-      <input type="text" id="street" name="street" required ngModel placeholder="Homok utca">
-    </div>
-    
-
-    <div class="form-group">
-      <label>Fizetési mód:</label>
-      <select #paymentSelect name="payment" required ngModel (change)="showCardDetails(paymentSelect.value)">
-        <option value="bankkártya">Bankkártya</option>
-        <option value="utánvét">Utánvét</option>
-      </select>
-    </div>
-
-    <div id="card-details" [class.hidden]="!showCard">
-      <div class="form-group">
-        <label for="card-number">Kártyaszám:</label>
-        <input type="text" id="card-number" name="cardNumber" ngModel placeholder="XXXX XXXX XXXX XXXX" maxlength="16">
-      </div>
-
-      <div class="form-group">
-        <label for="expiry-date">Lejárati dátum:</label>
-        <input type="month" id="expiry-date" name="expiryDate" ngModel>
-      </div>
-
-      <div class="form-group">
-        <label for="cvv">CVV:</label>
-        <input type="text" id="cvv" name="cvv" ngModel placeholder="CVV" maxlength="3">
+      <div class="step-line"></div>
+      <div class="step" [class.active]="currentStep >= 3">
+        <div class="step-number">3</div>
+        <span>Fizetés</span>
       </div>
     </div>
 
-    <button type="submit" [disabled]="!checkoutForm.valid" class="checkout-btn">
-      Tovább a fizetéshez
-    </button>
-  </form>
-</section>
+    <!-- Empty Cart State -->
+    <div class="empty-cart" *ngIf="cartItems.length === 0">
+      <div class="empty-cart-icon">🛒</div>
+      <h2>A kosár üres</h2>
+      <p>Fedezze fel termékeinket és adja hozzá őket a kosárhoz!</p>
+      <button class="primary-button" routerLink="/products">
+        Vásárlás folytatása
+      </button>
+    </div>
+
+    <!-- Cart Items -->
+    <div class="cart-content" *ngIf="cartItems.length > 0">
+      <div class="cart-items-container" [class.hidden]="currentStep !== 1">
+        <h2 class="section-title">Kosár tartalma</h2>
+        <div class="cart-items">
+          <div *ngFor="let item of cartItems" class="cart-item" [@slideIn]>
+            <div class="item-image">
+              <img [src]="item.image" [alt]="item.name">
+            </div>
+            <div class="item-content">
+              <div class="item-details">
+                <h3>{{ item.name }}</h3>
+                <p class="item-brand">{{ item.brand }}</p>
+                <p class="item-price">{{ item.price | currency:'HUF':'symbol':'1.0-0' }}</p>
+                <div class="item-sizes">
+                  <span class="size-label">Méretek:</span>
+                  <span class="size-value" *ngFor="let size of item.sizes">{{ size }}</span>
+                </div>
+              </div>
+              <button class="remove-btn" (click)="removeItem(item.id)">
+                <span class="material-icons">Törlés</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shipping Form -->
+      <form #checkoutForm="ngForm" (ngSubmit)="nextStep()" class="checkout-form" [class.hidden]="currentStep !== 2">
+        <h2 class="section-title">Szállítási adatok</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="name">Név</label>
+            <input type="text" id="name" name="name" required ngModel placeholder="Nagy János"
+                   [class.invalid]="nameInput.invalid && nameInput.touched" #nameInput="ngModel">
+            <span class="error-message" *ngIf="nameInput.invalid && nameInput.touched">
+              Kérjük, adja meg a nevét
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required ngModel placeholder="teszt@gmail.com"
+                   [class.invalid]="emailInput.invalid && emailInput.touched" #emailInput="ngModel">
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Telefonszám</label>
+            <input type="tel" id="phone" name="phone" required ngModel 
+                   pattern="(\+36|06)[0-9]{8,9}" placeholder="0612345678">
+          </div>
+
+          <div class="form-group">
+            <label for="postalCode">Irányítószám</label>
+            <input type="text" id="postalCode" name="postalCode" required ngModel 
+                   maxlength="4" pattern="[0-9]{4}" placeholder="1234">
+          </div>
+
+          <div class="form-group">
+            <label for="city">Város</label>
+            <input type="text" id="city" name="city" required ngModel placeholder="Budapest">
+          </div>
+
+          <div class="form-group">
+            <label for="street">Utca, házszám</label>
+            <input type="text" id="street" name="street" required ngModel placeholder="Homok utca 1.">
+          </div>
+        </div>
+      </form>
+
+      <!-- Payment Section -->
+      <div class="payment-section" [class.hidden]="currentStep !== 3">
+        <h2 class="section-title">Fizetési mód</h2>
+        <div class="payment-methods">
+          <div class="payment-method" [class.selected]="selectedPayment === 'card'" (click)="selectPayment('card')">
+            <span class="material-icons">credit_card</span>
+            <span>Bankkártya</span>
+          </div>
+          <div class="payment-method" [class.selected]="selectedPayment === 'cash'" (click)="selectPayment('cash')">
+            <span class="material-icons">payments</span>
+            <span>Utánvét</span>
+          </div>
+        </div>
+
+        <!-- Card Details Form -->
+        <div class="card-details" *ngIf="selectedPayment === 'card'" [@fadeIn]>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="cardNumber">Kártyaszám</label>
+              <input type="text" id="cardNumber" name="cardNumber" 
+                     placeholder="1234 5678 9012 3456" maxlength="16">
+            </div>
+
+            <div class="form-group">
+              <label for="cardName">Kártyabirtokos neve</label>
+              <input type="text" id="cardName" name="cardName" 
+                     placeholder="Nagy János">
+            </div>
+
+            <div class="form-group">
+              <label for="expiry">Lejárati dátum</label>
+              <input type="text" id="expiry" name="expiry" 
+                     placeholder="MM/YY" maxlength="5">
+            </div>
+
+            <div class="form-group">
+              <label for="cvv">CVV</label>
+              <input type="text" id="cvv" name="cvv" 
+                     placeholder="123" maxlength="3">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cart Summary -->
+      <div class="cart-summary">
+        <div class="summary-row">
+          <span>Részösszeg</span>
+          <span>{{ cartService.getTotal() | currency:'HUF':'symbol':'1.0-0' }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Szállítás</span>
+          <span>{{ shippingCost | currency:'HUF':'symbol':'1.0-0' }}</span>
+        </div>
+        <div class="summary-row total">
+          <span>Összesen</span>
+          <span>{{ (cartService.getTotal() + shippingCost) | currency:'HUF':'symbol':'1.0-0' }}</span>
+        </div>
+
+        <div class="action-buttons">
+          <button 
+            *ngIf="currentStep > 1" 
+            class="secondary-button" 
+            type="button"
+            (click)="previousStep()">
+            Vissza
+          </button>
+          <button 
+            class="primary-button" 
+            type="button"
+            [disabled]="!canProceed()"
+            (click)="nextStep()">
+            {{ currentStep === 3 ? 'Fizetés' : 'Tovább' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
