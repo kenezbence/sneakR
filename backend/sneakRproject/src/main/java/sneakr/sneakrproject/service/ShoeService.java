@@ -219,4 +219,42 @@ public class ShoeService {
     toReturn.put("statusCode", statusCode);
     return toReturn;
 }
+    
+    public JSONObject updateShoeBuyer(Cipok u, Integer id) {
+    JSONObject toReturn = new JSONObject();
+    String status = "success";
+    int statusCode = 200;
+    EntityManager em = emf.createEntityManager();
+
+    try {
+        // Validations
+        if (id == null || id <= 0) {
+            status = "InvalidID";
+            statusCode = 400;
+        } else {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("updateShoeBuyer");
+            
+            spq.registerStoredProcedureParameter("idIN", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("userIdIN", Integer.class, ParameterMode.IN);
+
+            spq.setParameter("idIN", id);
+            spq.setParameter("userIdIN", u.getUserId());
+
+            spq.execute();
+        }
+    } catch (Exception e) {
+        status = "ServerError";
+        statusCode = 500;
+        System.err.println("Error during shoe update: " + e.getMessage());
+    } finally {
+        if (em != null) {
+            em.clear();
+            em.close();
+        }
+    }
+
+    toReturn.put("status", status);
+    toReturn.put("statusCode", statusCode);
+    return toReturn;
+}
 }

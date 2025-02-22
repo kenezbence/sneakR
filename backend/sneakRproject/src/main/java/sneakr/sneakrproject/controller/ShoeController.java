@@ -203,7 +203,7 @@ public Response uploadShoes(String bodyString) {
         return Response.status(obj.getInt("statusCode")).entity(obj.toString()).type(MediaType.APPLICATION_JSON).build();
     }
     
-    @PUT
+@PUT
 @Path("updateShoe/{id}")
 @Consumes(MediaType.APPLICATION_JSON)
 public Response updateShoe(@PathParam("id") Integer id, String bodyString) {
@@ -221,6 +221,30 @@ public Response updateShoe(@PathParam("id") Integer id, String bodyString) {
         );
 
         JSONObject obj = layer.updateShoe(u, id);
+        return Response.status(obj.getInt("statusCode"))
+                       .entity(obj.toString())
+                       .build();
+    } catch (JSONException e) {
+        JSONObject error = new JSONObject();
+        error.put("status", "InvalidRequest");
+        error.put("statusCode", 400);
+        error.put("message", "Malformed JSON input");
+        return Response.status(400).entity(error.toString()).build();
+    }
+}
+
+@PUT
+@Path("updateShoeBuyer/{id}")
+@Consumes(MediaType.APPLICATION_JSON)
+public Response updateShoeBuyer(@PathParam("id") Integer id, String bodyString) {
+    try {
+        JSONObject body = new JSONObject(bodyString);
+        
+        Cipok u = new Cipok(
+            body.getInt("userId")
+        );
+
+        JSONObject obj = layer.updateShoeBuyer(u, id);
         return Response.status(obj.getInt("statusCode"))
                        .entity(obj.toString())
                        .build();

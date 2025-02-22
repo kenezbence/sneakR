@@ -5,11 +5,14 @@
 package sneakr.sneakrproject.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +21,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.ParameterMode;
+import javax.persistence.Persistence;
+import javax.persistence.StoredProcedureQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -36,6 +42,12 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Rendelesek.findByRendelesAllapot", query = "SELECT r FROM Rendelesek r WHERE r.rendelesAllapot = :rendelesAllapot")})
 public class Rendelesek implements Serializable {
 
+    @Column(name = "szallitasi_cim_id")
+    private Integer szallitasiCimId;
+
+    @Column(name = "user_id")
+    private Integer userId;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,24 +62,21 @@ public class Rendelesek implements Serializable {
     private String rendelesAllapot;
     @OneToMany(mappedBy = "rendelesId")
     private Collection<RendelesTetelek> rendelesTetelekCollection;
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @ManyToOne
-    private Userek userId;
-    @JoinColumn(name = "szallitasi_cim_id", referencedColumnName = "id")
-    @ManyToOne
-    private Lakcimek szallitasiCimId;
-    @JoinColumn(name = "szallitas_id", referencedColumnName = "id")
-    @ManyToOne
-    private Szallitasok szallitasId;
-    @JoinColumn(name = "kuponkod_id", referencedColumnName = "id")
-    @ManyToOne
-    private Kuponkodok kuponkodId;
 
+    static EntityManagerFactory emf = Persistence.createEntityManagerFactory("sneakr_sneakRproject_war_1.0-SNAPSHOTPU");
+    
     public Rendelesek() {
     }
 
     public Rendelesek(Integer id) {
         this.id = id;
+    }
+    
+    public Rendelesek(Integer userId, Integer szallitasiCimId, String rendelesAllapot) {
+        this.userId = userId;
+        this.szallitasiCimId = szallitasiCimId;
+        this.rendelesAllapot = rendelesAllapot;
+        
     }
 
     public Integer getId() {
@@ -102,38 +111,6 @@ public class Rendelesek implements Serializable {
         this.rendelesTetelekCollection = rendelesTetelekCollection;
     }
 
-    public Userek getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Userek userId) {
-        this.userId = userId;
-    }
-
-    public Lakcimek getSzallitasiCimId() {
-        return szallitasiCimId;
-    }
-
-    public void setSzallitasiCimId(Lakcimek szallitasiCimId) {
-        this.szallitasiCimId = szallitasiCimId;
-    }
-
-    public Szallitasok getSzallitasId() {
-        return szallitasId;
-    }
-
-    public void setSzallitasId(Szallitasok szallitasId) {
-        this.szallitasId = szallitasId;
-    }
-
-    public Kuponkodok getKuponkodId() {
-        return kuponkodId;
-    }
-
-    public void setKuponkodId(Kuponkodok kuponkodId) {
-        this.kuponkodId = kuponkodId;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -157,6 +134,66 @@ public class Rendelesek implements Serializable {
     @Override
     public String toString() {
         return "sneakr.sneakrproject.model.Rendelesek[ id=" + id + " ]";
+    }
+
+    public static ArrayList<Rendelesek> getAllRendeles() {
+    EntityManager em = emf.createEntityManager();
+    ArrayList<Rendelesek> rendelesList = new ArrayList<>();
+
+    try {
+        StoredProcedureQuery spq = em.createStoredProcedureQuery("getAllRendeles", Rendelesek.class);
+        spq.execute();
+        rendelesList = new ArrayList<>(spq.getResultList());
+
+    } catch (Exception e) {
+        System.err.println("Error: " + e.getLocalizedMessage());
+    } finally {
+        em.clear();
+        em.close();
+    }
+
+    return rendelesList;
+}
+    
+    public Boolean insertRendeles(Rendelesek u) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("insertRendeles");
+            
+            spq.registerStoredProcedureParameter("userIdIN", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("szallitasIN", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("allapotIN", String.class, ParameterMode.IN);
+            
+            spq.setParameter("userIdIN", u.getUserId());
+            spq.setParameter("szallitasIN", u.getSzallitasiCimId());
+            spq.setParameter("allapotIN", u.getRendelesAllapot());
+          
+            spq.execute();
+            
+            return true;
+        } catch (Exception e) {
+            System.err.println("Hiba: " + e.getLocalizedMessage());
+            return false;
+        } finally{
+            em.clear();
+            em.close();
+        }
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Integer getSzallitasiCimId() {
+        return szallitasiCimId;
+    }
+
+    public void setSzallitasiCimId(Integer szallitasiCimId) {
+        this.szallitasiCimId = szallitasiCimId;
     }
     
 }

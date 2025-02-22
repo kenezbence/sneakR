@@ -53,8 +53,6 @@ public class Kuponkodok implements Serializable {
     @Column(name = "ervenyes_ig")
     @Temporal(TemporalType.DATE)
     private Date ervenyesIg;
-    @OneToMany(mappedBy = "kuponkodId")
-    private Collection<Rendelesek> rendelesekCollection;
 
     public Kuponkodok() {
     }
@@ -101,14 +99,6 @@ public class Kuponkodok implements Serializable {
 
     public void setErvenyesIg(Date ervenyesIg) {
         this.ervenyesIg = ervenyesIg;
-    }
-
-    public Collection<Rendelesek> getRendelesekCollection() {
-        return rendelesekCollection;
-    }
-
-    public void setRendelesekCollection(Collection<Rendelesek> rendelesekCollection) {
-        this.rendelesekCollection = rendelesekCollection;
     }
 
     @Override

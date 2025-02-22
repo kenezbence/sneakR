@@ -43,8 +43,6 @@ public class Szallitasok implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "ar")
     private Float ar;
-    @OneToMany(mappedBy = "szallitasId")
-    private Collection<Rendelesek> rendelesekCollection;
 
     public Szallitasok() {
     }
@@ -75,14 +73,6 @@ public class Szallitasok implements Serializable {
 
     public void setAr(Float ar) {
         this.ar = ar;
-    }
-
-    public Collection<Rendelesek> getRendelesekCollection() {
-        return rendelesekCollection;
-    }
-
-    public void setRendelesekCollection(Collection<Rendelesek> rendelesekCollection) {
-        this.rendelesekCollection = rendelesekCollection;
     }
 
     @Override

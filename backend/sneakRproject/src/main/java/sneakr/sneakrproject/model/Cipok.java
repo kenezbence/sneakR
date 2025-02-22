@@ -43,6 +43,9 @@ import static sneakr.sneakrproject.model.Userek.emf;
     @NamedQuery(name = "Cipok.findByAr", query = "SELECT c FROM Cipok c WHERE c.ar = :ar")})
 public class Cipok implements Serializable {
 
+    @Column(name = "user_id")
+    private Integer userId;
+
     @Size(max = 100)
     @Column(name = "nem")
     private String nem;
@@ -137,6 +140,11 @@ public class Cipok implements Serializable {
         this.meret = meret;
         this.ar = ar;
         this.img = img;
+    }
+    
+    public Cipok(Integer userId) {
+        EntityManager em = emf.createEntityManager();
+        this.userId = userId;
     }
 
     public Integer getMeret() {
@@ -393,6 +401,36 @@ public class Cipok implements Serializable {
         em.close();
     }
 }
+    
+    public static boolean updateShoeBuyer(Cipok u, Integer id) {
+    EntityManager em = emf.createEntityManager();
+    try {
+        StoredProcedureQuery spq = em.createStoredProcedureQuery("updateShoeBuyer");
+        
+        spq.registerStoredProcedureParameter("idIN", Integer.class, ParameterMode.IN);
+        spq.registerStoredProcedureParameter("userIdIN", Integer.class, ParameterMode.IN);
+
+        spq.setParameter("idIN", id);
+        spq.setParameter("userIdIN", u.getUserId());
+
+        spq.execute();
+        return true;
+    } catch (Exception e) {
+        System.err.println("Update error: " + e.getMessage());
+        return false;
+    } finally {
+        em.clear();
+        em.close();
+    }
+}
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
  
 
 

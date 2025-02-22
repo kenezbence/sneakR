@@ -25,6 +25,7 @@ import javax.persistence.Persistence;
 import javax.persistence.StoredProcedureQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -38,6 +39,9 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Lakcimek.findByVaros", query = "SELECT l FROM Lakcimek l WHERE l.varos = :varos"),
     @NamedQuery(name = "Lakcimek.findByIranyitoszam", query = "SELECT l FROM Lakcimek l WHERE l.iranyitoszam = :iranyitoszam")})
 public class Lakcimek implements Serializable {
+
+    @OneToMany(mappedBy = "szallitasiCimId")
+    private Collection<Rendelesek> rendelesekCollection;
 
     @Column(name = "user_id")
     private Integer userId;
@@ -201,6 +205,15 @@ public class Lakcimek implements Serializable {
             em.clear();
             em.close();
         }
+    }
+
+    @XmlTransient
+    public Collection<Rendelesek> getRendelesekCollection() {
+        return rendelesekCollection;
+    }
+
+    public void setRendelesekCollection(Collection<Rendelesek> rendelesekCollection) {
+        this.rendelesekCollection = rendelesekCollection;
     }
 
 
