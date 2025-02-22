@@ -5,10 +5,13 @@
 package sneakr.sneakrproject.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +20,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.ParameterMode;
+import javax.persistence.Persistence;
+import javax.persistence.StoredProcedureQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -29,12 +35,19 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Lakcimek.findAll", query = "SELECT l FROM Lakcimek l"),
     @NamedQuery(name = "Lakcimek.findById", query = "SELECT l FROM Lakcimek l WHERE l.id = :id"),
-    @NamedQuery(name = "Lakcimek.findByOrszag", query = "SELECT l FROM Lakcimek l WHERE l.orszag = :orszag"),
     @NamedQuery(name = "Lakcimek.findByVaros", query = "SELECT l FROM Lakcimek l WHERE l.varos = :varos"),
-    @NamedQuery(name = "Lakcimek.findByIranyitoszam", query = "SELECT l FROM Lakcimek l WHERE l.iranyitoszam = :iranyitoszam"),
-    @NamedQuery(name = "Lakcimek.findByUtca", query = "SELECT l FROM Lakcimek l WHERE l.utca = :utca"),
-    @NamedQuery(name = "Lakcimek.findByHazszam", query = "SELECT l FROM Lakcimek l WHERE l.hazszam = :hazszam")})
+    @NamedQuery(name = "Lakcimek.findByIranyitoszam", query = "SELECT l FROM Lakcimek l WHERE l.iranyitoszam = :iranyitoszam")})
 public class Lakcimek implements Serializable {
+
+    @Column(name = "user_id")
+    private Integer userId;
+
+    @Size(max = 40)
+    @Column(name = "telefonszam")
+    private String telefonszam;
+    @Size(max = 255)
+    @Column(name = "utca_hazszam")
+    private String utcaHazszam;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -43,31 +56,37 @@ public class Lakcimek implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Size(max = 255)
-    @Column(name = "orszag")
-    private String orszag;
-    @Size(max = 255)
     @Column(name = "varos")
     private String varos;
     @Size(max = 255)
     @Column(name = "iranyitoszam")
     private String iranyitoszam;
     @Size(max = 255)
-    @Column(name = "utca")
-    private String utca;
-    @Size(max = 255)
-    @Column(name = "hazszam")
-    private String hazszam;
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @ManyToOne
-    private Userek userId;
-    @OneToMany(mappedBy = "szallitasiCimId")
-    private Collection<Rendelesek> rendelesekCollection;
+    
+    static EntityManagerFactory emf = Persistence.createEntityManagerFactory("sneakr_sneakRproject_war_1.0-SNAPSHOTPU");
 
     public Lakcimek() {
     }
 
     public Lakcimek(Integer id) {
         this.id = id;
+    }
+    
+    public Lakcimek(Integer userId, String telefonszam, String varos, String iranyitoszam,String utcaHazszam){
+        EntityManager em = emf.createEntityManager();
+        this.userId = userId;
+        this.telefonszam = telefonszam;
+        this.varos = varos;
+        this.iranyitoszam = iranyitoszam;
+        this.utcaHazszam = utcaHazszam;
+    }
+    
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public Integer getId() {
@@ -76,14 +95,6 @@ public class Lakcimek implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getOrszag() {
-        return orszag;
-    }
-
-    public void setOrszag(String orszag) {
-        this.orszag = orszag;
     }
 
     public String getVaros() {
@@ -100,38 +111,6 @@ public class Lakcimek implements Serializable {
 
     public void setIranyitoszam(String iranyitoszam) {
         this.iranyitoszam = iranyitoszam;
-    }
-
-    public String getUtca() {
-        return utca;
-    }
-
-    public void setUtca(String utca) {
-        this.utca = utca;
-    }
-
-    public String getHazszam() {
-        return hazszam;
-    }
-
-    public void setHazszam(String hazszam) {
-        this.hazszam = hazszam;
-    }
-
-    public Userek getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Userek userId) {
-        this.userId = userId;
-    }
-
-    public Collection<Rendelesek> getRendelesekCollection() {
-        return rendelesekCollection;
-    }
-
-    public void setRendelesekCollection(Collection<Rendelesek> rendelesekCollection) {
-        this.rendelesekCollection = rendelesekCollection;
     }
 
     @Override
@@ -158,5 +137,71 @@ public class Lakcimek implements Serializable {
     public String toString() {
         return "sneakr.sneakrproject.model.Lakcimek[ id=" + id + " ]";
     }
+
+    public String getTelefonszam() {
+        return telefonszam;
+    }
+
+    public void setTelefonszam(String telefonszam) {
+        this.telefonszam = telefonszam;
+    }
+
+    public String getUtcaHazszam() {
+        return utcaHazszam;
+    }
+
+    public void setUtcaHazszam(String utcaHazszam) {
+        this.utcaHazszam = utcaHazszam;
+    }
     
+    
+    public static ArrayList<Lakcimek> getAllLakcim() {
+    EntityManager em = emf.createEntityManager();
+    ArrayList<Lakcimek> lakcimList = new ArrayList<>();
+
+    try {
+        StoredProcedureQuery spq = em.createStoredProcedureQuery("getAllLakcim", Lakcimek.class);
+        spq.execute();
+        lakcimList = new ArrayList<>(spq.getResultList());
+
+    } catch (Exception e) {
+        System.err.println("Error: " + e.getLocalizedMessage());
+    } finally {
+        em.clear();
+        em.close();
+    }
+
+    return lakcimList;
+}
+    
+    public Boolean insertLakcim(Lakcimek u) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("insertLakcim");
+            
+            spq.registerStoredProcedureParameter("userIdIN", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("telefonszamIN", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("varosIN", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("iranyitoszamIN", String.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("utcaIN", String.class, ParameterMode.IN);
+            
+            spq.setParameter("userIdIN", u.getUserId());
+            spq.setParameter("telefonszamIN", u.getTelefonszam());
+            spq.setParameter("varosIN", u.getVaros());
+            spq.setParameter("iranyitoszamIN", u.getIranyitoszam());
+            spq.setParameter("utcaIN", u.getUtcaHazszam());
+          
+            spq.execute();
+            
+            return true;
+        } catch (Exception e) {
+            System.err.println("Hiba: " + e.getLocalizedMessage());
+            return false;
+        } finally{
+            em.clear();
+            em.close();
+        }
+    }
+
+
 }

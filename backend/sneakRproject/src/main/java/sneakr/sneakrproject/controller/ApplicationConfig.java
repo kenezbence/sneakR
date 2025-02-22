@@ -29,6 +29,7 @@ public class ApplicationConfig extends Application  {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(filters.CORSFilter.class);
+        resources.add(sneakr.sneakrproject.controller.LakcimController.class);
         resources.add(sneakr.sneakrproject.controller.ResellShoeController.class);
         resources.add(sneakr.sneakrproject.controller.ShoeController.class);
         resources.add(sneakr.sneakrproject.controller.UserController.class);
