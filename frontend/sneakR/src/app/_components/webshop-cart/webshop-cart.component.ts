@@ -5,6 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
+import { LakcimService } from '../../_services/lakcim.service';
+import { RendelesService } from '../../_services/rendeles.service';
+import { ShoeService } from '../../_services/shoe.service';
 
 @Component({
   selector: 'app-webshop-cart',
@@ -34,11 +37,28 @@ export class WebshopCartComponent {
   selectedPayment: 'card' | 'cash' | null = null;
   shippingCost = 1890; 
   showSuccessModal = false;
-  constructor(public cartService: CartService, private router: Router) {
+  currentUser: any;
+  szallitasiCimId: number | null = null;
+  shippingForm = {
+    phone: '',
+    city: '',
+    postalCode: '',
+    street: ''
+  };
+
+  constructor(public cartService: CartService,
+    private lakcimService: LakcimService,
+    private rendelesService: RendelesService,
+    private shoeService: ShoeService,
+    private router: Router) {
+    const userData = localStorage.getItem('currentUser');
+    this.currentUser = userData ? JSON.parse(userData) : null;
     this.cartService.getCart().subscribe(items => {
       this.cartItems = items;
     });
   }
+
+  
 
   removeItem(productId: number) {
     this.cartService.removeFromCart(productId);
