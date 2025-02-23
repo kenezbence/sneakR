@@ -117,7 +117,7 @@ public class Cipok implements Serializable {
         this.img = img;
     }
     
-    public Cipok(String nev, String marka,String nem, String allapot, Integer meret,Float ar,Akciok akcioId,Exkluzivok exkluzivId,Ujdonsagok ujdonsagId, String img) {
+    public Cipok(String nev, String marka,String nem, String allapot, Integer meret,Float ar,Akciok akcioId,Exkluzivok exkluzivId,Ujdonsagok ujdonsagId, String img, Integer userId) {
         this.id = id;
         this.nev = nev;
         this.marka = marka;
@@ -129,6 +129,7 @@ public class Cipok implements Serializable {
         this.exkluzivId = exkluzivId;
         this.ujdonsagId = ujdonsagId;
         this.img = img;
+        this.userId = userId;
     }
     
     public Cipok(String nev, String marka,String nem, String allapot, Integer meret,Float ar, String img) {

@@ -144,6 +144,7 @@ public Response getAllShoesData() {
             shoeJson.put("exkluzivId", u.getExkluzivId());
             shoeJson.put("ujdonsagId", u.getUjdonsagId());
             shoeJson.put("img", u.getImg());
+            shoeJson.put("userId", u.getUserId());
 
             // Add the user JSON object to the array
             shoesArray.put(shoeJson);

@@ -23,8 +23,10 @@ export class ShoeService {
 
   constructor(private http: HttpClient) { }
 
-  getAllShoesData(): Observable<any> {
-  return this.http.get(this.apiUrl);
+getAllShoesData(): Observable<any> {
+  return this.http.get(this.apiUrl).pipe(
+    map((res: any) => res.shoes || []) // Correctly extract 'shoes' array
+  );
 }
 updateShoeBuyer(id: number, userId: number): Observable<any> {
     const url = `http://127.0.0.1:8080/sneakRproject-1.0-SNAPSHOT/webresources/cipok/updateShoeBuyer/${id}`;
@@ -59,4 +61,5 @@ deleteShoe(id: number): Observable<any> {
       } as Product)))
     );
   }
+
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class LakcimService {
@@ -13,6 +13,7 @@ export class LakcimService {
   }
 
   getAllLakcim(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/getAllLakcim`);
-  }
+  return this.http.get(`${this.baseUrl}/getAllLakcim`);
+}
+
 }

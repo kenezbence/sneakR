@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class RendelesService {
@@ -11,4 +11,8 @@ export class RendelesService {
   insertRendeles(data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/insertRendeles`, data);
   }
+
+  getAllRendeles(): Observable<any> {
+  return this.http.get(`${this.baseUrl}/getAllRendeles`);
+}
 }

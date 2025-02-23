@@ -1,7 +1,8 @@
-export interface Order {
-    id: number;
-    date: string;
-    total: number;
-    status: string;
-  }
-  
+interface Order {
+  id: number;
+  user_id: number;
+  szallitasi_cim_id: number;
+  osszeg: number;
+  rendeles_datum: string;
+  rendeles_allapot: string;
+}

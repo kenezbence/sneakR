@@ -89,16 +89,53 @@
     <section #purchasedItems id="purchased-items" class="listings-section">
         <h2>Vásárolt Termékek</h2>
         <div class="card-grid">
-            <div class="card">
+            <div *ngFor="let shoe of purchasedShoes" class="card">
                 <div class="card-img-container">
-                    <img src="https://www.buzzsneakers.hu/files/thumbs/files/images/slike_proizvoda/media/VN0/VN000CR5B9M/images/thumbs_800/VN000CR5B9M_800_800px.jpg" alt="Vans Old Skool">
+                    <img [src]="shoe.img" [alt]="shoe.nev">
                 </div>
                 <div class="card-content">
-                    <h3>Vans Old Skool</h3>
-                    <p>📅 Vásárlás dátuma: 2024-12-01</p>
-                    <p>⭐ Értékelés: 5/5</p>
+                    <h3>{{ shoe.nev }}</h3>
+                    <p>💰 Ár: {{ shoe.ar | currency:'HUF':'symbol':'1.0-0' }}</p>
+                    <p>🏷️ Márka: {{ shoe.marka }}</p>
+                    <p>👟 Méret: {{ shoe.meret }}</p>
                 </div>
+                <div class="details-btn-container">
+                    <button (click)="showOrderDetails()" class="details-btn">
+                        📦 Részletek
+                    </button>
+                </div>
+            </div>
+            <div *ngIf="purchasedShoes.length === 0" class="empty-state">
+                Nincsenek vásárolt termékek
             </div>
         </div>
     </section>
+
+    <div *ngIf="showOrderModal" class="order-modal">
+        <div class="modal-content">
+            <span class="close" (click)="closeOrderDetails()">&times;</span>
+            <h2>Rendelés részletei</h2>
+            <div *ngFor="let order of selectedOrderDetails" class="order-detail">
+                <div>
+                    <strong>Dátum:</strong>
+                    <span>{{ order.rendelesDatum }}</span>
+                
+                    <strong>Állapot:</strong>
+                    <span>{{ order.rendelesAllapot }} <span class="status-badge">{{ order.rendelesAllapot }}</span></span>
+                
+                    <strong>Összeg:</strong>
+                    <span class="osszeg">{{ order.osszeg | currency:'HUF':'symbol':'1.0-0' }}</span>
+                </div>
+                <div class="address-block" *ngIf="order.address">
+                    <p>Szállítási cím</p>
+                    <p>{{ order.address.varos }}, {{ order.address.utcaHazszam }}</p>
+                    <p>📮 {{ order.address.iranyitoszam }}</p>
+                    <p *ngIf="order.address.telefonszam">📱 {{ order.address.telefonszam }}</p>
+                </div>
+                <div *ngIf="!order.address" class="no-address">
+                    ℹ️ Nincs elérhető szállítási cím
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
