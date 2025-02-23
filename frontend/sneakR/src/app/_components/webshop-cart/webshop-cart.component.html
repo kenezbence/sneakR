@@ -76,24 +76,22 @@
 
           <div class="form-group">
             <label for="phone">Telefonszám</label>
-            <input type="tel" id="phone" name="phone" required ngModel 
-                   pattern="(\+36|06)[0-9]{8,9}" placeholder="0612345678">
+            <input type="tel" id="phone" [(ngModel)]="shippingForm.phone" name="phone" required>
           </div>
 
           <div class="form-group">
             <label for="postalCode">Irányítószám</label>
-            <input type="text" id="postalCode" name="postalCode" required ngModel 
-                   maxlength="4" pattern="[0-9]{4}" placeholder="1234">
+            <input type="text" id="postalCode" [(ngModel)]="shippingForm.postalCode" name="postalCode" required>
           </div>
 
           <div class="form-group">
             <label for="city">Város</label>
-            <input type="text" id="city" name="city" required ngModel placeholder="Budapest">
+            <input type="text" id="city" [(ngModel)]="shippingForm.city" name="city" required>
           </div>
 
           <div class="form-group">
             <label for="street">Utca, házszám</label>
-            <input type="text" id="street" name="street" required ngModel placeholder="Homok utca 1.">
+            <input type="text" id="street" [(ngModel)]="shippingForm.street" name="street" required>
           </div>
         </div>
       </form>

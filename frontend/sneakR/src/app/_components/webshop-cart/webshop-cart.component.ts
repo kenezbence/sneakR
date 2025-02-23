@@ -70,10 +70,31 @@ export class WebshopCartComponent {
   }
 
   nextStep() {
-    if (this.currentStep < 3) {
-      this.currentStep++;
+    if (this.currentStep === 2) {
+      const lakcimData = {
+        userId: this.currentUser.id,
+        telefonszam: this.shippingForm.phone,
+        varos: this.shippingForm.city,
+        iranyitoszam: this.shippingForm.postalCode,
+        utcaHazszam: this.shippingForm.street
+      };
+
+      this.lakcimService.insertLakcim(lakcimData).subscribe({
+        next: () => {
+          this.lakcimService.getAllLakcim().subscribe({
+            next: (res: any) => {
+              const addresses = res.Lakcimek.filter((a: any) => a.user_id === this.currentUser.id);
+              if (addresses.length > 0) {
+                addresses.sort((a: any, b: any) => b.id - a.id);
+                this.szallitasiCimId = addresses[0].id;
+                this.currentStep++;
+              }
+            }
+          });
+        }
+      });
     } else {
-      this.checkout();
+      this.currentStep++;
     }
   }
 
@@ -97,8 +118,24 @@ export class WebshopCartComponent {
   }
 
   checkout() {
-    this.showSuccessModal = true;
-    this.cartService.clearCart();
+    if (!this.szallitasiCimId) return;
+
+    const orderData = {
+      userId: this.currentUser.id,
+      szallitasiCimId: this.szallitasiCimId,
+      osszeg: this.cartService.getTotal() + this.shippingCost,
+      rendelesAllapot: "Előkészítés"
+    };
+
+    this.rendelesService.insertRendeles(orderData).subscribe({
+      next: () => {
+        this.cartItems.forEach(item => {
+          this.shoeService.updateShoeBuyer(item.id, this.currentUser.id).subscribe();
+        });
+        this.cartService.clearCart();
+        this.showSuccessModal = true;
+      }
+    });
   }
   onCloseSuccessModal() {
     this.showSuccessModal = false;

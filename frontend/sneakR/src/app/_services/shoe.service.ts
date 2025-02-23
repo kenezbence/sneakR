@@ -26,9 +26,9 @@ export class ShoeService {
   getAllShoesData(): Observable<any> {
   return this.http.get(this.apiUrl);
 }
-updateShoeBuyer(shoeId: number, userId: number): Observable<any> {
-    const updateUrl = `http://127.0.0.1:8080/sneakRproject-1.0-SNAPSHOT/webresources/cipok/updateShoeBuyer/${shoeId}`;
-    return this.http.put(updateUrl, { userId });
+updateShoeBuyer(id: number, userId: number): Observable<any> {
+    const url = `http://127.0.0.1:8080/sneakRproject-1.0-SNAPSHOT/webresources/cipok/updateShoeBuyer/${id}`;
+    return this.http.put(url, { userId });
   }
 uploadShoe(shoeData: any): Observable<any> {
   const uploadUrl = 'http://127.0.0.1:8080/sneakRproject-1.0-SNAPSHOT/webresources/cipok/uploadShoes';
