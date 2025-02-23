@@ -42,6 +42,9 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Rendelesek.findByRendelesAllapot", query = "SELECT r FROM Rendelesek r WHERE r.rendelesAllapot = :rendelesAllapot")})
 public class Rendelesek implements Serializable {
 
+    @Column(name = "osszeg")
+    private Integer osszeg;
+
     @Column(name = "szallitasi_cim_id")
     private Integer szallitasiCimId;
 
@@ -72,9 +75,10 @@ public class Rendelesek implements Serializable {
         this.id = id;
     }
     
-    public Rendelesek(Integer userId, Integer szallitasiCimId, String rendelesAllapot) {
+    public Rendelesek(Integer userId, Integer szallitasiCimId,Integer osszeg, String rendelesAllapot) {
         this.userId = userId;
         this.szallitasiCimId = szallitasiCimId;
+        this.osszeg = osszeg;
         this.rendelesAllapot = rendelesAllapot;
         
     }
@@ -162,10 +166,12 @@ public class Rendelesek implements Serializable {
             
             spq.registerStoredProcedureParameter("userIdIN", Integer.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("szallitasIN", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("osszegIN", Integer.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("allapotIN", String.class, ParameterMode.IN);
             
             spq.setParameter("userIdIN", u.getUserId());
             spq.setParameter("szallitasIN", u.getSzallitasiCimId());
+            spq.setParameter("osszegIN", u.getOsszeg());
             spq.setParameter("allapotIN", u.getRendelesAllapot());
           
             spq.execute();
@@ -194,6 +200,14 @@ public class Rendelesek implements Serializable {
 
     public void setSzallitasiCimId(Integer szallitasiCimId) {
         this.szallitasiCimId = szallitasiCimId;
+    }
+
+    public Integer getOsszeg() {
+        return osszeg;
+    }
+
+    public void setOsszeg(Integer osszeg) {
+        this.osszeg = osszeg;
     }
     
 }

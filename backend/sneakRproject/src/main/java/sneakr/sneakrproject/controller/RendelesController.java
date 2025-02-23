@@ -53,6 +53,7 @@ public Response getAllRendeles() {
             rendelesekJson.put("id", u.getId()); 
             rendelesekJson.put("user_id", u.getUserId());
             rendelesekJson.put("szallitasiCimId", u.getSzallitasiCimId());
+            rendelesekJson.put("osszeg", u.getOsszeg());
             rendelesekJson.put("rendelesDatum", u.getRendelesDatum());
             rendelesekJson.put("rendelesAllapot", u.getRendelesAllapot());
             
@@ -86,6 +87,7 @@ public Response insertRendeles(String bodyString) {
         Rendelesek u = new Rendelesek(
             body.getInt("userId"),
             body.getInt("szallitasiCimId"),
+            body.getInt("osszeg"),
             body.getString("rendelesAllapot")
         );
         

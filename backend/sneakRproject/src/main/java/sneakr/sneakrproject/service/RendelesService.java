@@ -48,11 +48,13 @@ public class RendelesService {
             // Register parameters (fixed parameter name mismatch)
             spq.registerStoredProcedureParameter("userIdIN", Integer.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("szallitasIN", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("osszegIN", Integer.class, ParameterMode.IN);
             spq.registerStoredProcedureParameter("allapotIN", String.class, ParameterMode.IN);
             
             // Set parameters
             spq.setParameter("userIdIN", u.getUserId());
             spq.setParameter("szallitasIN", u.getSzallitasiCimId());
+            spq.setParameter("osszegIN", u.getOsszeg());
             spq.setParameter("allapotIN", u.getRendelesAllapot());
 
             spq.execute();
