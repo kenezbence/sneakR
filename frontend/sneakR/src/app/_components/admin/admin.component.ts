@@ -61,4 +61,7 @@ export class AdminComponent {
       });
     }
   }
+  goBackToProfile() {
+    this.router.navigate(['/resell-user']);
+  }
 }
