@@ -8,6 +8,7 @@ import sneakr.sneakrproject.model.Userek;
 import org.json.JSONObject;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import sneakr.sneakrproject.config.JWT;
 import sneakr.sneakrproject.model.Cipok;
 
 /**
@@ -72,7 +73,8 @@ public class UserService {
                     result.put("nev", modelResult.getNev());
                     result.put("email", modelResult.getEmail());
                     result.put("jelszo", modelResult.getJelszo());
-                    result.put("admin", modelResult.getAdmin());
+                    result.put("admin", modelResult.getAdmin());   
+                    result.put("jwt", JWT.createJWT(modelResult));
 
                     toReturn.put("result", result);
                 }

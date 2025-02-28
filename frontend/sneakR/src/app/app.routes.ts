@@ -18,6 +18,7 @@ import { AdminComponent } from './_components/admin/admin.component';
 import { ResellProductsComponent } from './_components/resell-products/resell-products.component';
 import { ShoeControllerComponent } from './_components/shoe-controller/shoe-controller.component';
 
+
 export const routes: Routes = [
     {path:'', redirectTo:'/login', pathMatch:'full'},
     {path:'login',  component:LoginComponent},

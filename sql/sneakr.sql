@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: localhost:3306
--- Létrehozás ideje: 2025. Feb 23. 01:32
+-- Létrehozás ideje: 2025. Feb 27. 21:34
 -- Kiszolgáló verziója: 5.7.24
 -- PHP verzió: 8.3.1
 
@@ -97,7 +97,7 @@ DROP PROCEDURE IF EXISTS `login`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `login` (IN `emailIN` VARCHAR(255), IN `passwordIN` VARCHAR(255))   SELECT * FROM userek WHERE userek.email = emailIN AND userek.jelszo = passwordIN$$
 
 DROP PROCEDURE IF EXISTS `registerUser`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `registerUser` (IN `nevIN` VARCHAR(255), IN `emailIN` VARCHAR(255), IN `jelszoIN` VARCHAR(255))   INSERT INTO `userek` (`id`, `nev`, `email`, `jelszo`, `admin`) VALUES (NULL, nevIN, emailIN, jelszoIN, "nem")$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `registerUser` (IN `nevIN` VARCHAR(255), IN `emailIN` VARCHAR(255), IN `jelszoIN` VARCHAR(255))   INSERT INTO `userek` (`id`, `nev`, `email`, `jelszo`, `admin`) VALUES (NULL, nevIN, emailIN, sha2('jelszoIN', 256), "nem")$$
 
 DROP PROCEDURE IF EXISTS `searchShoeByBrand`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `searchShoeByBrand` (IN `markaIN` VARCHAR(255))   SELECT cipok.nev AS Cipők, markak.nev AS Márka, cipok.ar AS Ár, cipok.img AS Kép
@@ -484,7 +484,8 @@ INSERT INTO `userek` (`id`, `nev`, `email`, `jelszo`, `admin`) VALUES
 (5, 'Péter Aladár', 'petialadar@gmail.com', 'petike12345', 'nem'),
 (6, 'Nagy Zsombor', 'nagyzsombi@gmail.com', 'zsombika12345', 'nem'),
 (61, 'Lajos Pal', 'lali@gmail.com', 'Jelszo123!', 'nem'),
-(62, 'Nagy Emma', 'nagyemma@gmail.com', 'EmmaNagy2000!', 'nem');
+(62, 'Nagy Emma', 'nagyemma@gmail.com', 'EmmaNagy2000!', 'nem'),
+(63, 'Tesz Emil', 'tesztemail@gmail.com', '8012f4a30f62d05f9b8e9e73ca3455d8669f98e4b9691e3b01d9725aca4ebfc7', 'nem');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -665,7 +666,7 @@ ALTER TABLE `ujdonsagok`
 -- AUTO_INCREMENT a táblához `userek`
 --
 ALTER TABLE `userek`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- Megkötések a kiírt táblákhoz

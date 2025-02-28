@@ -18,6 +18,7 @@ sneakr\sneakrproject\model\Kuponkodok.class
 sneakr\sneakrproject\model\Kiegeszitok.class
 sneakr\sneakrproject\model\Ujdonsagok.class
 sneakr\sneakrproject\service\ResellShoeService.class
+sneakr\sneakrproject\config\JWT.class
 sneakr\sneakrproject\model\Szallitasok.class
 sneakr\sneakrproject\service\RendelesService.class
 sneakr\sneakrproject\model\ShoppingSession.class
