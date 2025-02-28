@@ -116,4 +116,9 @@ export class WebshopComponent implements OnInit {
   navigateToTarget3() {
     this.router.navigate(['/select']);
   }
+
+  navigateToProfile() {
+    this.router.navigate(['/resell-user']);
+}
+
 }

@@ -576,3 +576,30 @@ h2 {
     transform: rotate(-10deg) scale(1.05);
 }
 
+/* Profil ikon stílusok */
+.profile-wrapper {
+    position: fixed;
+    top: 20px;
+    right: 160px; /* A távolság a kosár ikontól */
+    z-index: 1001;
+}
+
+.icon-btn.profile-btn {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    width: 50px;
+    height: 47px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.icon-btn.profile-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.icon-btn.profile-btn i {
+    font-size: 22px;
+}
