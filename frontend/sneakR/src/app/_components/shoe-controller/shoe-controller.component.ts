@@ -51,13 +51,13 @@ export class ShoeControllerComponent {
   }
 
   loadShoes() {
-    this.shoeService.getAllShoesData().subscribe({
-      next: (response: any) => {
-        this.shoes = response.shoes;
-      },
-      error: (err) => console.error('Error loading shoes:', err)
-    });
-  }
+  this.shoeService.getAllShoesData().subscribe({
+    next: (response: any) => {
+      this.shoes = response.shoes ? response.shoes : response;
+    },
+    error: (err) => console.error('Error loading shoes:', err)
+  });
+}
 
   
   openUploadModal() {
