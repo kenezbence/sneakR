@@ -116,4 +116,18 @@
       opacity: 1;
     }
   }
+
+
+  @media screen and (max-width: 768px) {
+    .center-title h1 {
+      font-size: 36px; /* Kisebb méret tableten */
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .center-title h1 {
+      font-size: 28px; /* Még kisebb méret mobilon */
+    }
+  }
+  
   
