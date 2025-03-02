@@ -1,8 +1,11 @@
 <div class="admin-container">
   <div *ngIf="isAdmin; else accessDenied">
     <h1>Felhasználók Kezelése</h1>
+    <button class="back-button" (click)="goBackToProfile()">Vissza a profilra</button>
+    
 
     <div *ngIf="users.length > 0">
+      <br>
         Betöltött felhasználók száma: {{ users.length }}<br>
         Első felhasználó neve: {{ users[0].nev }}
     </div>

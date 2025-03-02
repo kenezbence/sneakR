@@ -115,7 +115,10 @@
     <div *ngIf="isAdmin; else accessDenied">
         <h1>Cipők Kezelése</h1>
 
+        <button class="back-button" (click)="goBackToProfile()">Vissza a profilra</button>
+
         <div *ngIf="shoes.length > 0">
+            <br>
             Betöltött cipők: {{ shoes.length }}
         </div>
 
@@ -151,8 +154,6 @@
             </table>
         </div>
         <br>
-
-        <button class="back-button" (click)="goBackToProfile()">Vissza a profilra</button>
 
         <div class="loading" *ngIf="shoes.length === 0">
             Loading shoes...
