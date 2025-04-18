@@ -38,12 +38,7 @@ header {
     gap: 1.5rem;
 }
 
-.search-container {
-    position: relative;
-    margin-right: 1rem;
-}
-
-.search-input {
+/* .search-input {
     padding: 0.8rem 2.5rem 0.8rem 1.2rem;
     background: rgba(255, 255, 255, 0.1);
     border: none;
@@ -65,7 +60,7 @@ header {
     top: 50%;
     transform: translateY(-50%);
     color: rgba(255, 255, 255, 0.6);
-}
+} */
 
 .icon-btn {
     background: rgba(255, 255, 255, 0.1);
@@ -114,8 +109,8 @@ header {
 .mobile-nav {
     display: none;
     position: absolute;
-    top: 100%;
-    right: 2rem;
+    top: 90%;
+    right: 31rem;
     background: rgba(30, 30, 30, 0.98);
     backdrop-filter: blur(12px);
     border-radius: 12px;
@@ -212,7 +207,7 @@ header {
 /* --- RESPONSIVE FIXES --- */
 @media (max-width: 768px) {
     .mobile-nav {
-        right: 1rem;
+        right: 4rem;
     }
 }
 
