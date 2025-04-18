@@ -1,6 +1,5 @@
 <div class="page-container">
   <section class="cart-container" [class.empty]="cartItems.length === 0">
-    <!-- Progress Stepper -->
     <div class="stepper" *ngIf="cartItems.length > 0">
       <div class="step" [class.active]="currentStep >= 1">
         <div class="step-number">1</div>

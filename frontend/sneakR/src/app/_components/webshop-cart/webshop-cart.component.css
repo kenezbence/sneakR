@@ -17,7 +17,7 @@
   padding: 2rem;
 }
 
-/* Fixed Stepper */
+
 .stepper {
   display: flex;
   justify-content: space-between;
@@ -69,7 +69,7 @@
   z-index: 0;
 }
 
-/* Cart Items */
+
 .cart-items {
   display: grid;
   gap: 1.5rem;
@@ -152,7 +152,7 @@
   background: #fee2e2;
 }
 
-/* Form Styling */
+
 .form-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -196,7 +196,7 @@
   font-size: 0.875rem;
 }
 
-/* Payment Methods */
+
 .payment-methods {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -220,7 +220,7 @@
   background: #f0fdf4;
 }
 
-/* Cart Summary */
+
 .cart-summary {
   background: #f8fafc;
   padding: 1.5rem;
@@ -244,7 +244,7 @@
   padding-top: 1rem;
 }
 
-/* Fix button styles */
+
 .primary-button,
 .secondary-button {
   padding: 0.75rem 1.5rem;
@@ -282,7 +282,6 @@
   background: #f1f5f9;
 }
 
-/* Empty Cart State */
 .empty-cart {
   text-align: center;
   padding: 4rem 2rem;
@@ -320,7 +319,6 @@
   display: none;
 }
 
-/* Make sure forms are visible */
 .cart-items-container,
 .checkout-form,
 .payment-section {
@@ -335,7 +333,6 @@
   opacity: 0;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .cart-item {
     flex-direction: column;
@@ -395,7 +392,6 @@
   }
 }
 
-/* Modal Styles */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -479,10 +475,6 @@
   margin-bottom: 1rem;
 }
 
-.confirmation-text {
-  color: #64748b;
-  font-size: 1.1rem;
-}
 
 .modal-footer {
   display: flex;
@@ -490,7 +482,6 @@
   gap: 1rem;
 }
 
-/* Responsive modal styles */
 @media (max-width: 640px) {
   .modal-container {
     width: 95%;
@@ -535,5 +526,5 @@
 .confirmation-text {
   text-align: center;
   margin-bottom: 2rem;
-  color: #1e293b;
+  color: #fff;
 }

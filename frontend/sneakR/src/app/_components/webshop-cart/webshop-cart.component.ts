@@ -36,7 +36,7 @@ export class WebshopCartComponent {
   cartItems: CartProduct[] = [];
   selectedPayment: 'card' | 'cash' | null = null;
   shippingCost = 1890; 
-  showSuccessModal = false;
+  showSuccessModal = true;
   currentUser: any;
   szallitasiCimId: number | null = null;
   shippingForm = {
