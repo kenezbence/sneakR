@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Renderer2, } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CartService, CartProduct } from '../../_services/cart.service';
@@ -16,10 +16,12 @@ export class WebshopnavbarComponent implements OnInit, OnDestroy {
   cartItems: CartProduct[] = [];
   showCartMenu = false;
   isMenuActive = false;
+  menuState: { [key: string]: boolean } = {};
   private cartSubscription!: Subscription;
 
   constructor(private router: Router, private cartService: CartService, private renderer: Renderer2, ) {}
 
+  @ViewChild('best') bestSection!: ElementRef;
   ngOnInit() {
     this.cartSubscription = this.cartService.getCart().subscribe(cart => {
       this.cartItems = cart;
@@ -58,5 +60,17 @@ export class WebshopnavbarComponent implements OnInit, OnDestroy {
 
   toggleMenu() {
     this.isMenuActive = !this.isMenuActive;
+    if (!this.isMenuActive) {
+      this.menuState = {};
+    }
+  }
+
+  toggleSubmenu(menuKey: string) {
+    this.menuState[menuKey] = !this.menuState[menuKey];
+  }
+  scrollToBest() {
+    if (this.bestSection) {
+      this.bestSection.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 }

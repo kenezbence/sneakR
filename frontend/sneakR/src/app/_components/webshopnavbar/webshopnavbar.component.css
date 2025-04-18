@@ -338,3 +338,64 @@ header {
         right: -20px;
     }
 }
+
+/* Mobile nav átalakítva sidebar stílusra */
+.mobile-nav {
+    position: fixed;
+    top: 70px;
+    right: -300px;
+    width: 300px;
+    height: calc(100vh - 70px);
+    background: #222;
+    transition: all 0.3s ease;
+    padding: 20px;
+    z-index: 1002;
+    overflow-y: auto;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+}
+
+.mobile-nav.active {
+    right: 0;
+}
+
+.mobile-nav .submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding-left: 20px;
+    background: rgba(255,255,255,0.05);
+}
+
+.mobile-nav .submenu.active {
+    max-height: 500px;
+}
+
+.mobile-nav > li {
+    margin: 25px 0;
+}
+
+.mobile-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    display: block;
+    padding: 8px 0;
+}
+
+.mobile-backdrop {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 70px);
+    background: rgba(0,0,0,0.5);
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.mobile-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+}

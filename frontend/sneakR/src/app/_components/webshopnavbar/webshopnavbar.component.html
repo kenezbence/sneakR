@@ -58,12 +58,50 @@
                 <i class="fas fa-bars"></i>
             </button>
         </div>
-
         <ul class="mobile-nav" [class.active]="isMenuActive">
-            <li><a href="#" class="nav-link">Férfi</a></li>
-            <li><a href="#" class="nav-link">Női</a></li>
-            <li><a href="#" class="nav-link">Minőség</a></li>
-            <li><a [routerLink]="['/about']" class="nav-link">Info</a></li>
+            <li>
+                <a (click)="toggleSubmenu('brands'); $event.preventDefault()" href="#">Márkák</a>
+                <ul class="submenu" [class.active]="menuState['brands']">
+                    <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'Jordan'}">Jordan</a></li>
+                    <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'Nike'}">Nike</a></li>
+                    <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'Adidas'}">Adidas</a></li>
+                    <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'Yeezy'}">Yeezy</a></li>
+                    <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'New Balance'}">New Balance</a></li>
+                    <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'Alexander McQueen'}">Alexander McQueen</a></li>
+                    <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'Travis Scott'}">Travis Scott</a></li>
+                    <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'Reebok'}">Reebok</a></li>
+                    <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'Converse'}">Converse</a></li>
+                    <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'Puma'}">Puma</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a (click)="toggleSubmenu('sneaker'); $event.preventDefault()" href="#">Még több Sneaker</a>
+                <ul class="submenu" [class.active]="menuState['sneaker']">
+                    <li>
+                        <a (click)="toggleSubmenu('discover'); $event.preventDefault()" href="#">Felfedezés</a>
+                        <ul class="submenu" [class.active]="menuState['discover']">
+                            <li>
+                                <a [routerLink]="['/webshop']" (click)="scrollToBest() " 
+                                   (click)="toggleMenu()">
+                                    Best Sellers
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a (click)="toggleSubmenu('info'); $event.preventDefault()" href="#">Info</a>
+                <ul class="submenu" [class.active]="menuState['info']">
+                    <li><a (click)="toggleMenu()" [routerLink]="['/about']">Rólunk</a></li>
+                    <li><a (click)="toggleMenu()" [routerLink]="['/GYIK']">GYIK</a></li>
+                    <li><a (click)="toggleMenu()" [routerLink]="['/contact']">Kapcsolat</a></li>
+                </ul>
+            </li>
         </ul>
+
+        <div class="mobile-backdrop" [class.active]="isMenuActive" (click)="toggleMenu()"></div>
     </nav>
 </header>

@@ -3,7 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ShoeService } from '../../_services/shoe.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CartService, CartProduct } from '../../_services/cart.service';
 
 @Component({
@@ -30,6 +30,7 @@ export class WebshopComponent implements OnInit {
   constructor(
     private shoeService: ShoeService,
     private cartService: CartService,
+    private route: ActivatedRoute,
     private router: Router // Service injektálás
   ) {}
 
@@ -50,6 +51,11 @@ export class WebshopComponent implements OnInit {
     this.cartService.getCart().subscribe(cart => {
       this.cartItems = cart;
       this.cartCount = cart.length;
+    });
+    this.route.fragment.subscribe(fragment => {
+      if(fragment === 'best') {
+        this.scrollToBest();
+      }
     });
   }
 
