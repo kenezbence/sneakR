@@ -1,13 +1,19 @@
 <div class="admin-container">
   <div *ngIf="isAdmin; else accessDenied">
-    <h1>Felhasználók Kezelése</h1>
-    <button class="back-button" (click)="goBackToProfile()">Vissza a profilra</button>
-    
+    <div class="admin-header">
+      <h1>Felhasználók Kezelése 👨💻</h1>
+      <button class="back-button" (click)="goBackToProfile()">← Vissza a profilra</button>
+    </div>
 
-    <div *ngIf="users.length > 0">
-      <br>
-        Betöltött felhasználók száma: {{ users.length }}<br>
-        Első felhasználó neve: {{ users[0].nev }}
+    <div class="user-stats" *ngIf="users.length > 0">
+      <div class="stat-card">
+        <span class="stat-value">{{ users.length }}</span>
+        <span class="stat-label">Betöltött felhasználó</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">{{ users[0].nev.split(' ')[0] }}</span>
+        <span class="stat-label">Első felhasználó</span>
+      </div>
     </div>
 
     <div class="table-container" *ngIf="users.length > 0">
@@ -40,9 +46,10 @@
 
   <ng-template #accessDenied>
     <div class="error-container">
-      <h2>404 - Nem található</h2>
-      <p>Nincs jogosultságod az oldal megtekintéséhez!</p>
-      <button class="back-button" (click)="goBack()">Vissza a főoldalra</button>
+      <div class="error-icon">🚫</div>
+      <h2>Hozzáférés megtagadva!</h2>
+      <p>Ehhez az oldalhoz nincs megfelelő jogosultságod.</p>
+      <button class="back-button" (click)="goBack()">🏠 Vissza a főoldalra</button>
     </div>
   </ng-template>
 </div>
