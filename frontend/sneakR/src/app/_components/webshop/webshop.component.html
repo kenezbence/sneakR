@@ -68,20 +68,20 @@
     
         <!-- Sneaker -->
         <li>
-          <a (click)="toggleSubmenu('sneaker'); $event.preventDefault()" href="#">Sneaker</a>
+          <a (click)="toggleSubmenu('sneaker'); $event.preventDefault()" href="#">Még több Sneaker</a>
           <ul class="submenu" [class.active]="menuState['sneaker']">
             <!-- Felfedezés -->
             <li>
               <a (click)="toggleSubmenu('discover'); $event.preventDefault()" href="#">Felfedezés</a>
               <ul class="submenu" [class.active]="menuState['discover']">
                 <li><a (click)="scrollToBest(); toggleMenu()">Best Sellers</a></li>
-                <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{ maxPrice: 50000 }">50 000 Ft alatt</a></li>
-                <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{ maxPrice: 100000 }">100 000 Ft alatt</a></li>
+                <!-- <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{ maxPrice: 50000 }">50 000 Ft alatt</a></li>
+                <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{ maxPrice: 100000 }">100 000 Ft alatt</a></li> -->
               </ul>
             </li>
             
             <!-- Air Jordan -->
-            <li>
+            <!-- <li>
               <a (click)="toggleSubmenu('air-jordan'); $event.preventDefault()" href="#">Air Jordan</a>
               <ul class="submenu" [class.active]="menuState['air-jordan']">
                 <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{model: 'Air Jordan 1'}">Air Jordan 1</a></li>
@@ -89,10 +89,10 @@
                 <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{model: 'Air Jordan 4'}">Air Jordan 4</a></li>
                 <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'Jordan'}">Még több Air Jordan</a></li>
               </ul>
-            </li>
+            </li> -->
     
             <!-- További almenük... -->
-            <li>
+            <!-- <li>
               <a (click)="toggleSubmenu('nike'); $event.preventDefault()" href="#">Nike</a>
               <ul class="submenu" [class.active]="menuState['nike']">
                 <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{model: 'Air Force 1'}">Air Force 1</a></li>
@@ -100,9 +100,9 @@
                 <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{model: 'Air Max'}">Air Max</a></li>
                 <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'Nike'}">Még több Nike</a></li>
               </ul>
-            </li>
+            </li> -->
   
-            <li>
+            <!-- <li>
               <a (click)="toggleSubmenu('new-balance'); $event.preventDefault()" href="#">New Balance</a>
               <ul class="submenu" [class.active]="menuState['new-balance']">
                 <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{model: 'New Balance 550'}">New Balance 550</a></li>
@@ -110,9 +110,9 @@
                 <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{model: 'New Balance 1906'}">New Balance 1906</a></li>
                 <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'New Balance'}">Még több New Balance</a></li>
               </ul>
-            </li>
+            </li> -->
   
-            <li>
+            <!-- <li>
               <a (click)="toggleSubmenu('yeezy'); $event.preventDefault()" href="#">Yeezy</a>
               <ul class="submenu" [class.active]="menuState['yeezy']">
                 <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{model: 'Yeezy 350'}">Yeezy 350</a></li>
@@ -120,7 +120,7 @@
                 <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{model: 'Foam Runner'}">Foam Runner</a></li>
                 <li><a (click)="toggleMenu()" [routerLink]="['/products']" [queryParams]="{brand: 'Yeezy'}">Még több Yeezy</a></li>
               </ul>
-            </li>
+            </li> -->
           </ul>
         </li>
     
