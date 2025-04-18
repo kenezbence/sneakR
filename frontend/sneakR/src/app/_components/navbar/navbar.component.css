@@ -1,4 +1,11 @@
 /* Modern Navbar Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
 header {
     background: rgba(30, 30, 30, 0.95);
     backdrop-filter: blur(10px);
@@ -38,30 +45,6 @@ header {
     gap: 1.5rem;
 }
 
-/* .search-input {
-    padding: 0.8rem 2.5rem 0.8rem 1.2rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    border-radius: 30px;
-    color: #fff;
-    width: 250px;
-    transition: all 0.3s ease;
-}
-
-.search-input:focus {
-    outline: none;
-    background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 8px rgba(42, 123, 71, 0.3);
-}
-
-.search-icon {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: rgba(255, 255, 255, 0.6);
-} */
-
 .icon-btn {
     background: rgba(255, 255, 255, 0.1);
     width: 45px;
@@ -96,26 +79,18 @@ header {
     justify-content: center;
 }
 
-.hamburger-menu {
-    display: none;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-/* --- HAMBURGER MENÜ STÍLUSOK --- */
+/* Hamburger menü javított reszponzív részek */
 .mobile-nav {
     display: none;
     position: absolute;
-    top: 90%;
-    right: 31rem;
-    background: rgba(30, 30, 30, 0.98);
+    top: 100%;
+    right: 2rem;
+    background: rgba(0, 0, 0, 0.98);
     backdrop-filter: blur(12px);
     border-radius: 12px;
     padding: 1rem;
-    min-width: 220px;
+    min-width: 200px;
+    max-width: calc(100vw - 2rem);
     box-shadow: 0 8px 32px rgba(0,0,0,0.3);
     border: 1px solid rgba(255, 255, 255, 0.1);
     z-index: 1000;
@@ -126,37 +101,41 @@ header {
     animation: slideDown 0.3s ease;
 }
 
-/* Menüelemek */
 .mobile-nav li {
-    list-style: none;
-    padding: 10px;
-    transition: background 0.3s ease;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+}
+
+.mobile-nav li:last-child {
+    border-bottom: none;
 }
 
 .mobile-nav button {
-    width: 100%;
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    text-align: left;
-    font-size: 1rem;
-    color: white;
-    padding: 12px;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: block;
+    padding: 0.5rem;
     border-radius: 6px;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
 }
 
 .mobile-nav button:hover {
     background: rgba(255, 255, 255, 0.2);
-    transform: translateX(5px);
 }
 
-/* --- SUBMENÜK --- */
 .submenu {
     display: none;
-    padding-left: 20px;
-    max-height: 250px; /* Ne csússzon ki */
-    overflow-y: auto; /* Görgethető legyen */
+    padding-left: 15px;
+    max-height: 50vh;
+    overflow-y: auto;
     border-left: 2px solid rgba(255, 255, 255, 0.1);
     margin-top: 5px;
 }
@@ -165,7 +144,6 @@ header {
     display: block;
 }
 
-/* Márkák menüje */
 .submenu button {
     font-size: 0.9rem;
     padding: 10px;
@@ -182,7 +160,6 @@ header {
     background: rgba(255, 255, 255, 0.15);
 }
 
-/* Görgethető lista */
 .submenu::-webkit-scrollbar {
     width: 6px;
 }
@@ -192,7 +169,6 @@ header {
     border-radius: 6px;
 }
 
-/* ANIMÁCIÓ */
 @keyframes slideDown {
     from {
         opacity: 0;
@@ -204,18 +180,24 @@ header {
     }
 }
 
-/* --- RESPONSIVE FIXES --- */
 @media (max-width: 768px) {
+    .hamburger-btn {
+        display: block;
+        margin-left: 1rem;
+    }
+    
     .mobile-nav {
-        right: 4rem;
+        right: 1rem;
+        left: auto;
     }
 }
 
 @media (max-width: 480px) {
     .mobile-nav {
-        right: 0.5rem;
-        left: 0.5rem;
-        width: calc(100% - 1rem);
+        right: 1rem;
+        left: 1rem;
+        width: calc(100% - 2rem);
+        max-width: none;
     }
 }
 
@@ -262,6 +244,7 @@ header {
     border-radius: 6px;
     background: rgba(255,255,255,0.05);
     margin-bottom: 10px;
+    position: relative;
 }
 
 .cart-menu-item img {
@@ -298,10 +281,6 @@ header {
     margin-bottom: 10px;
 }
 
-.empty-cart p {
-    margin: 0;
-}
-
 .view-cart-btn {
     width: 100%;
     background: #2A7B47;
@@ -316,21 +295,6 @@ header {
 
 .view-cart-btn:hover {
     background: #1F5C37;
-}
-
-/* Mobil nézet */
-@media (max-width: 768px) {
-    .cart-menu {
-        width: 300px;
-        right: -20px;
-    }
-}
-
-/* Törlés gomb stílusai */
-.item-actions {
-    position: absolute;
-    right: 10px;
-    top: 10px;
 }
 
 .item-remove-btn {
@@ -353,7 +317,9 @@ header {
     background: #cc0000;
 }
 
-.cart-menu-item {
-    position: relative; /* Hozzáadva a pozicionáláshoz */
-    padding-right: 40px; /* Hely a gombnak */
+@media (max-width: 768px) {
+    .cart-menu {
+        width: 300px;
+        right: -20px;
+    }
 }
