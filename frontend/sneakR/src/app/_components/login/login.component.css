@@ -186,3 +186,29 @@ button:disabled {
 .help-link:hover {
     text-decoration: underline;
 }
+
+.password-input-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+    color: #666;
+}
+
+.password-toggle:hover {
+    color: #333;
+}
+
+/* Add padding to prevent text under the icon */
+input[type="password"],
+input[type="text"] {
+    /* padding-right: 40px; */
+    /* width: 100%; */
+}

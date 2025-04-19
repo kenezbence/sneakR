@@ -20,6 +20,7 @@ export class LoginComponent {
   password: string = '';
   errorMessage: string = '';
   isLoading: boolean = false;
+  showPassword: boolean = false;
 
   constructor(private loginService: LoginService, private router: Router) {}
 
@@ -60,6 +61,10 @@ export class LoginComponent {
       }
     });
   }
+  
+  togglePasswordVisibility() {
+        this.showPassword = !this.showPassword;
+    }
 
   private getErrorMessage(error: HttpErrorResponse): string {
   if (error.error instanceof ErrorEvent) {

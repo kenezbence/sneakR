@@ -21,8 +21,13 @@
             </div>
     
             <div class="input-group">
-                <input type="password" placeholder="Jelszó" id="password" [(ngModel)]="password" name="password" required
-                    [class.invalid]="errorMessage">
+                <div class="password-input-container">
+                    <input type="password" placeholder="Jelszó" id="password" [(ngModel)]="password" name="password" required
+                        [class.invalid]="errorMessage" [type]="showPassword ? 'text' : 'password'">
+                    <span class="password-toggle" (click)="togglePasswordVisibility()">
+                        <i class="material-icons">{{ showPassword ? 'visibility_off' : 'visibility' }}</i>
+                    </span>
+                </div>
             </div>
     
             <a [routerLink]="['/password']" class="help-link">Elfelejtetted a jelszavad?</a>
