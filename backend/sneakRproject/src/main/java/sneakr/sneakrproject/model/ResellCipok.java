@@ -43,6 +43,14 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ResellCipok.findByAr", query = "SELECT r FROM ResellCipok r WHERE r.ar = :ar")})
 public class ResellCipok implements Serializable {
 
+    @Column(name = "buyer_id")
+    private Integer buyerId;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 10)
+    @Column(name = "isBought")
+    private String isBought;
+
     @Column(name = "user_id")
     private Integer userId;
 
@@ -90,6 +98,7 @@ public class ResellCipok implements Serializable {
         this.img = img;
     }
     
+    
 //    public ResellCipok(String nev, String marka,String nem, String allapot, Integer meret,Float ar, String img, Integer user_id) {
 //        this.id = id;
 //        this.nev = nev;
@@ -111,6 +120,19 @@ public class ResellCipok implements Serializable {
         this.ar = ar;
         this.img = img;
         this.userId = userId;
+    }
+    public ResellCipok(String nev, String marka,String nem, String allapot, Integer meret,Float ar, String img, Integer userId, Integer buyerId, String isBought) {
+        EntityManager em = emf.createEntityManager();
+        this.nev = nev;
+        this.marka = marka;
+        this.nem = nem;
+        this.allapot = allapot;
+        this.meret = meret;
+        this.ar = ar;
+        this.img = img;
+        this.userId = userId;
+        this.buyerId = buyerId;
+        this.isBought = isBought;
     }
     
     
@@ -281,4 +303,44 @@ public class ResellCipok implements Serializable {
         em.close();
     }
 }
+     
+    public static boolean updateResellShoeBuyer(ResellCipok u, Integer id) {
+    EntityManager em = emf.createEntityManager();
+    try {
+        StoredProcedureQuery spq = em.createStoredProcedureQuery("updateResellShoeBuyer");
+        
+        spq.registerStoredProcedureParameter("idIN", Integer.class, ParameterMode.IN);
+        spq.registerStoredProcedureParameter("buyerIdIN", Integer.class, ParameterMode.IN);
+        spq.registerStoredProcedureParameter("isBoughtIN", String.class, ParameterMode.IN);
+
+        spq.setParameter("idIN", id);
+        spq.setParameter("buyerIdIN", u.getBuyerId());
+        spq.setParameter("isBoughtIN", u.getIsBought());
+
+        spq.execute();
+        return true;
+    } catch (Exception e) {
+        System.err.println("Update error: " + e.getMessage());
+        return false;
+    } finally {
+        em.clear();
+        em.close();
+    }
+}
+
+    public Integer getBuyerId() {
+        return buyerId;
+    }
+
+    public void setBuyerId(Integer buyerId) {
+        this.buyerId = buyerId;
+    }
+
+    public String getIsBought() {
+        return isBought;
+    }
+
+    public void setIsBought(String isBought) {
+        this.isBought = isBought;
+    }
 }

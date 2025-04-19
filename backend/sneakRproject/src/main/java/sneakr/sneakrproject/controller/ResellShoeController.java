@@ -9,6 +9,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -63,6 +64,8 @@ public Response getAllResellShoesData() {
             resellShoeJson.put("ar", u.getAr());
             resellShoeJson.put("img", u.getImg());       
             resellShoeJson.put("user_id", u.getUserId());
+            resellShoeJson.put("buyerId", u.getBuyerId());
+            resellShoeJson.put("isBought", u.getIsBought());
 
             // Add the user JSON object to the array
             ResellShoesArray.put(resellShoeJson);
@@ -123,6 +126,30 @@ public Response uploadResellShoes(String bodyString) {
         JSONObject obj = layer.deleteResellShoes(idIN);
         return Response.status(obj.getInt("statusCode")).entity(obj.toString()).type(MediaType.APPLICATION_JSON).build();
     }
+    
+@PUT
+@Path("updateResellShoeBuyer/{id}")
+@Consumes(MediaType.APPLICATION_JSON)
+public Response updateResellShoeBuyer(@PathParam("id") Integer id, String bodyString) {
+    try {
+        JSONObject body = new JSONObject(bodyString);
+        
+        ResellCipok u = new ResellCipok();
+        u.setBuyerId(body.getInt("buyerId"));
+        u.setIsBought(body.getString("isBought"));
+
+        JSONObject obj = layer.updateResellShoeBuyer(u, id);
+        return Response.status(obj.getInt("statusCode"))
+                       .entity(obj.toString())
+                       .build();
+    } catch (JSONException e) {
+        JSONObject error = new JSONObject();
+        error.put("status", "InvalidRequest");
+        error.put("statusCode", 400);
+        error.put("message", "Malformed JSON input");
+        return Response.status(400).entity(error.toString()).build();
+    }
+}
      
      
      

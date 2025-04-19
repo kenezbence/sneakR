@@ -131,4 +131,44 @@ public class ResellShoeService {
     return toReturn;
 }
     
+    public JSONObject updateResellShoeBuyer(ResellCipok u, Integer id) {
+    JSONObject toReturn = new JSONObject();
+    String status = "success";
+    int statusCode = 200;
+    EntityManager em = emf.createEntityManager();
+
+    try {
+        // Validations
+        if (id == null || id <= 0) {
+            status = "InvalidID";
+            statusCode = 400;
+        } else {
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("updateResellShoeBuyer");
+            
+            spq.registerStoredProcedureParameter("idIN", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("buyerIdIN", Integer.class, ParameterMode.IN);
+            spq.registerStoredProcedureParameter("isBoughtIN", String.class, ParameterMode.IN);
+
+            spq.setParameter("idIN", id);
+            spq.setParameter("buyerIdIN", u.getBuyerId());
+            spq.setParameter("isBoughtIN", u.getIsBought());
+
+            spq.execute();
+        }
+    } catch (Exception e) {
+        status = "ServerError";
+        statusCode = 500;
+        System.err.println("Error during shoe update: " + e.getMessage());
+    } finally {
+        if (em != null) {
+            em.clear();
+            em.close();
+        }
+    }
+
+    toReturn.put("status", status);
+    toReturn.put("statusCode", statusCode);
+    return toReturn;
+}
+    
 }
