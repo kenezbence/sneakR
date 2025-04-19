@@ -67,6 +67,9 @@
                 &gt;
             </button>
         </div>
+<div *ngIf="user.activeListingsCount  === 0" class="empty-state">
+    Jelenleg nincs eladott terméked!
+</div>
     </section>
 
     <!-- Korábbi Hirdetések -->
