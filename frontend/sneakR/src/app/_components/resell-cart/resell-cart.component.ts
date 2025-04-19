@@ -7,11 +7,12 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { LakcimService } from '../../_services/lakcim.service';
 import { RendelesService } from '../../_services/rendeles.service';
 import { UserService } from '../../_services/user.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-resell-cart',
   standalone: true,
-  imports: [NavbarComponent, CommonModule, FormsModule],
+  imports: [NavbarComponent, CommonModule, FormsModule, RouterModule],
   templateUrl: './resell-cart.component.html',
   styleUrls: ['./resell-cart.component.css']
 })
@@ -139,4 +140,5 @@ export class ResellCartComponent implements OnInit {
     this.showSuccessModal = false;
     this.router.navigate(['/resell']);
   }
+
 }
