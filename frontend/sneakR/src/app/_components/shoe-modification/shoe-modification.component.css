@@ -1,0 +1,183 @@
+/* shoe-modification.component.css */
+.modification-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #2A7B47;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    font-size: 2.2rem;
+}
+
+.modification-form {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #ffffff;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #2A7B47;
+    outline: none;
+    box-shadow: 0 0 8px rgba(42, 123, 71, 0.2);
+}
+
+.input-group label {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #ffffff;
+    padding: 0 0.5rem;
+    color: #666;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.input-group input:focus+label,
+.input-group select:valid+label,
+.input-group input:not(:placeholder-shown)+label {
+    transform: translateY(-2.2rem);
+    font-size: 0.9rem;
+    color: #2A7B47;
+}
+
+.input-group select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232A7B47' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 35px;
+}
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+}
+
+.confirm-button,
+.back-button {
+    padding: 0.8rem 1.8rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.confirm-button {
+    background: #2A7B47;
+    color: white;
+}
+
+.confirm-button:hover {
+    background: #1f5e36;
+    transform: translateY(-1px);
+}
+
+.back-button {
+    background: #6c757d;
+    color: white;
+}
+
+.back-button:hover {
+    background: #5a6268;
+    transform: translateY(-1px);
+}
+
+/* Error Messages */
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    display: none;
+}
+
+input:invalid:not(:placeholder-shown)~.invalid-feedback,
+select:invalid:not(:placeholder-shown)~.invalid-feedback {
+    display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .modification-container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+    }
+
+    .input-group input,
+    .input-group select {
+        padding: 0.8rem;
+        font-size: 0.95rem;
+    }
+
+    .input-group label {
+        font-size: 0.95rem;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .confirm-button,
+    .back-button {
+        width: 100%;
+        padding: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .modification-container {
+        padding: 1rem;
+        margin: 0.5rem;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    .input-group input,
+    .input-group select {
+        padding: 0.7rem;
+    }
+
+    .input-group label {
+        left: 0.8rem;
+    }
+
+    .input-group input:focus+label,
+    .input-group select:valid+label,
+    .input-group input:not(:placeholder-shown)+label {
+        transform: translateY(-2rem);
+    }
+}

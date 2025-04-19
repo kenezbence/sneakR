@@ -17,6 +17,7 @@ import { WebshopCartComponent } from './_components/webshop-cart/webshop-cart.co
 import { AdminComponent } from './_components/admin/admin.component';
 import { ResellProductsComponent } from './_components/resell-products/resell-products.component';
 import { ShoeControllerComponent } from './_components/shoe-controller/shoe-controller.component';
+import { ShoeModificationComponent } from './_components/shoe-modification/shoe-modification.component';
 
 
 export const routes: Routes = [
@@ -38,6 +39,6 @@ export const routes: Routes = [
     {path: 'webshop-cart', component:WebshopCartComponent},
     {path: 'admin', component:AdminComponent},
     {path: 'resell-products', component:ResellProductsComponent},
-    {path: 'shoe-controller', component:ShoeControllerComponent}
-
+    {path: 'shoe-controller', component:ShoeControllerComponent},
+    {path: 'shoe-modification', component:ShoeModificationComponent}
 ];

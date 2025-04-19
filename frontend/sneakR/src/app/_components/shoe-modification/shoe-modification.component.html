@@ -1,0 +1,53 @@
+<div class="modification-container">
+    <h1>Cipő Módosítása</h1>
+
+    <form class="modification-form" (ngSubmit)="onEditSubmit(editForm)" #editForm="ngForm">
+        <div class="input-group">
+            <input type="text" name="nev" [(ngModel)]="editingShoe.nev" required>
+            <label>Termék neve</label>
+        </div>
+
+        <div class="input-group">
+            <select name="marka" [(ngModel)]="editingShoe.marka" required>
+                <option *ngFor="let brand of brands" [value]="brand">{{brand}}</option>
+            </select>
+            <label>Márka</label>
+        </div>
+
+        <div class="input-group">
+            <select name="nem" [(ngModel)]="editingShoe.nem" required>
+                <option value="Férfi">Férfi</option>
+                <option value="Nő">Nő</option>
+            </select>
+            <label>Nem</label>
+        </div>
+
+        <div class="input-group">
+            <select name="allapot" [(ngModel)]="editingShoe.allapot" required>
+                <option value="használt">Használt</option>
+                <option value="új">Új</option>
+            </select>
+            <label>Állapot</label>
+        </div>
+
+        <div class="input-group">
+            <input type="number" name="meret" [(ngModel)]="editingShoe.meret" required>
+            <label>Méret</label>
+        </div>
+
+        <div class="input-group">
+            <input type="number" name="ar" [(ngModel)]="editingShoe.ar" min="1" required>
+            <label>Ár (Ft)</label>
+        </div>
+
+        <div class="input-group">
+            <input type="url" name="img" [(ngModel)]="editingShoe.img" required>
+            <label>Képlink</label>
+        </div>
+
+        <div class="button-group">
+            <button type="submit" class="confirm-button">Mentés</button>
+            <button type="button" class="back-button" (click)="goBack()">Vissza</button>
+        </div>
+    </form>
+</div>

@@ -62,4 +62,9 @@ deleteShoe(id: number): Observable<any> {
     );
   }
 
+
+  getShoeById(id: number): Observable<any> {
+  const url = `http://127.0.0.1:8080/sneakRproject-1.0-SNAPSHOT/webresources/cipok/getShoeById/${id}`;
+  return this.http.get(url);
+}
 }
