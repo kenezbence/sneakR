@@ -25,9 +25,15 @@ interface ResellShoesResponse {
 export class ResellProductService {
   private apiUrl = 'http://127.0.0.1:8080/sneakRproject-1.0-SNAPSHOT/webresources/resellCipok/getAllResellShoesData';
 
+  private deleteApiUrl = 'http://127.0.0.1:8080/sneakRproject-1.0-SNAPSHOT/webresources/resellCipok/deleteResellShoes';
+
   constructor(private http: HttpClient) { }
 
   getResellShoes(): Observable<ResellShoesResponse> {
     return this.http.get<ResellShoesResponse>(this.apiUrl);
+  }
+
+   deleteResellShoe(shoeId: number): Observable<any> {
+    return this.http.delete(`${this.deleteApiUrl}/${shoeId}`);
   }
 }

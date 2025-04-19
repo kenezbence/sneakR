@@ -33,6 +33,8 @@ export class ResellUserComponent implements OnInit {
   currentSlide = 0;
   selectedOrderDetails: any[] = [];
   showOrderModal = false;
+  showDeleteConfirmation = false;
+  selectedShoeId: number | null = null;
 
   constructor(
     private router: Router,
@@ -43,6 +45,8 @@ export class ResellUserComponent implements OnInit {
     private lakcimService: LakcimService 
   ) {}
 
+
+
   ngOnInit() {
     const userData = localStorage.getItem('currentUser');
     if (userData) {
@@ -52,6 +56,35 @@ export class ResellUserComponent implements OnInit {
     } else {
       this.router.navigate(['/login']);
     }
+  }
+
+  deleteListing(shoeId: number, event: Event): void {
+    event.preventDefault();
+    this.selectedShoeId = shoeId;
+    this.showDeleteConfirmation = true;
+  }
+
+  confirmDelete(): void {
+    if (this.selectedShoeId) {
+      this.resellService.deleteResellShoe(this.selectedShoeId).subscribe({
+        next: () => {
+          this.userShoes = this.userShoes.filter(shoe => shoe.id !== this.selectedShoeId);
+          this.loadUserShoes(); // Refresh the list
+          this.showDeleteConfirmation = false;
+          this.selectedShoeId = null;
+        },
+        error: (err) => {
+          console.error('Error deleting shoe:', err);
+          this.showDeleteConfirmation = false;
+          this.selectedShoeId = null;
+        }
+      });
+    }
+  }
+
+  cancelDelete(): void {
+    this.showDeleteConfirmation = false;
+    this.selectedShoeId = null;
   }
 
   showOrderDetails() {
@@ -116,17 +149,17 @@ closeOrderDetails() {
   }
   */
 
-  deleteListing(shoeId: number, event: Event): void {
-    const button = event.target as HTMLElement;
-    const card = button.closest('.card');
+  // deleteListing(shoeId: number, event: Event): void {
+  //   const button = event.target as HTMLElement;
+  //   const card = button.closest('.card');
     
-    this.userShoes = this.userShoes.filter(shoe => shoe.id !== shoeId);
+  //   this.userShoes = this.userShoes.filter(shoe => shoe.id !== shoeId);
     
-    if (card) {
-      card.classList.add('fade-out');
-      setTimeout(() => card.remove(), 300);
-    }
-  }
+  //   if (card) {
+  //     card.classList.add('fade-out');
+  //     setTimeout(() => card.remove(), 300);
+  //   }
+  // }
 
   // Slider methods
   get slides(): any[][] {

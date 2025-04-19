@@ -145,9 +145,10 @@ export class ShoeControllerComponent {
   }
 
   openEditModal(shoe: any) {
-        this.editingShoe = { ...shoe }; // Clone the shoe object
-        this.showEditModal = true;
-    }
+    this.router.navigate(['/shoe-modification'], {
+        state: { shoe: shoe } // Pass the shoe data through navigation state
+    });
+}
 
 closeEditModal() {
         this.showEditModal = false;
@@ -178,4 +179,10 @@ onEditSubmit(form: NgForm) {
     onCloseEditSuccessModal() {
         this.showEditSuccessModal = false;
     }
+
+    navigateToModification(shoeId: number) {
+    this.router.navigate(['/shoe-modification', shoeId]);
 }
+}
+
+

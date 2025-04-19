@@ -109,5 +109,26 @@ public class ResellShoeService {
     return toReturn;
 }
     
+    public JSONObject deleteResellShoes(Integer id) {
+    JSONObject toReturn = new JSONObject();
+    String status = "success";
+    int statusCode = 200;
+
+    try {
+        boolean deleteResult = ResellCipok.deleteResellShoes(id);
+        if (!deleteResult) {
+            status = "DeleteFailed";
+            statusCode = 500;
+        }
+    } catch (Exception e) {
+        status = "ServerError";
+        statusCode = 500;
+        System.err.println("Hiba a törléskor: " + e.getMessage());
+    }
+
+    toReturn.put("status", status);
+    toReturn.put("statusCode", statusCode);
+    return toReturn;
+}
     
 }

@@ -1,10 +1,7 @@
 <!-- shoe-controller.component.html -->
 <div class="shoe-controller-container">
 
-    <button class="upload-button" (click)="openUploadModal()">
-        <i class="fas fa-plus"></i>
-        Cipő feltöltése
-    </button>
+    
 
     <div class="custom-modal" [class.active]="showUploadModal">
         <div class="modal-content">
@@ -113,6 +110,12 @@
     </div>
 
     <div *ngIf="isAdmin; else accessDenied">
+
+        <button class="upload-button" (click)="openUploadModal()">
+            <i class="fas fa-plus"></i>
+            Cipő feltöltése
+        </button>
+        
         <h1>Cipők Kezelése</h1>
 
         <button class="back-button" (click)="goBackToProfile()">Vissza a profilra</button>
