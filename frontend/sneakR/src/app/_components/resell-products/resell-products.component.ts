@@ -60,10 +60,12 @@ export class ResellProductsComponent implements OnInit {
     });
   }
 
-  private loadData() {
+private loadData() {
     this.resellService.getResellShoes().subscribe({
       next: (response) => {
-        this.originalProducts = response.ResellShoes;
+        this.originalProducts = response.ResellShoes.filter((shoe: any) => 
+        shoe.isBought !== "igen"
+      );
         this.brands = [...new Set(this.originalProducts.map(p => p.marka))];
         this.originalMaxPrice = Math.max(...this.originalProducts.map(p => p.ar));
         this.maxPrice = this.originalMaxPrice;

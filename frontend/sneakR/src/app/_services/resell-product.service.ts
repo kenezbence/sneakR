@@ -12,6 +12,8 @@ interface ResellShoe {
   ar: number;
   img: string;
   user_id: number;
+  buyerId?: number;        // new
+  isBought?: string;
 }
 
 export interface ResellShoesResponse {  // Add 'export' here
@@ -36,4 +38,11 @@ export class ResellProductService {
    deleteResellShoe(shoeId: number): Observable<any> {
     return this.http.delete(`${this.deleteApiUrl}/${shoeId}`);
   }
+
+  updateResellShoeBuyer(shoeId: number, data: any): Observable<any> {
+  return this.http.put(
+    `http://127.0.0.1:8080/sneakRproject-1.0-SNAPSHOT/webresources/resellCipok/updateResellShoeBuyer/${shoeId}`,
+    data
+  );
+}
 }

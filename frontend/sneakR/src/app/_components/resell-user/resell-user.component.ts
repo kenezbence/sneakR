@@ -16,7 +16,7 @@ import { LakcimService } from '../../_services/lakcim.service';
 })
 export class ResellUserComponent implements OnInit {  
   @ViewChild('currentListings') currentListings!: ElementRef;
-  @ViewChild('pastListings') pastListings!: ElementRef;
+  @ViewChild('pastListings') pastListingsElement!: ElementRef;
   @ViewChild('purchasedItems') purchasedItems!: ElementRef;
 
   user: any = {
@@ -35,6 +35,7 @@ export class ResellUserComponent implements OnInit {
   showOrderModal = false;
   showDeleteConfirmation = false;
   selectedShoeId: number | null = null;
+  pastListingsData: any[] = [];
 
   constructor(
     private router: Router,
@@ -119,25 +120,50 @@ closeOrderDetails() {
 }
 
   private loadUserShoes() {
-    this.resellService.getResellShoes().subscribe({
-      next: (response) => {
-        this.userShoes = response.ResellShoes.filter(
-          (shoe: any) => shoe.user_id === this.user.id
-        );
-        this.user.activeListingsCount = this.userShoes.length;
-      },
-      error: (err) => console.error('Error loading user shoes:', err)
-    });
-  }
-
-  private loadPurchasedShoes() {
-  this.shoeService.getAllShoesData().subscribe({
-    next: (shoes: any[]) => { // Now receives the shoes array directly
-      this.purchasedShoes = shoes.filter(shoe => 
-        shoe.userId === this.user.id // Use 'userId' instead of 'user_id'
+  this.resellService.getResellShoes().subscribe({
+    next: (response) => {
+      const allShoes = response.ResellShoes;
+      
+      this.userShoes = allShoes.filter((shoe: any) => 
+        shoe.user_id === this.user.id && shoe.isBought === "nem"
       );
-    },
-    error: (err) => console.error('Error loading purchased shoes:', err)
+      
+      this.pastListingsData = allShoes.filter((shoe: any) => 
+        shoe.user_id === this.user.id && shoe.isBought === "igen"
+      );
+
+      this.user.activeListingsCount = this.userShoes.length;
+      this.user.soldItemsCount = this.pastListingsData.length; // Update count
+    }
+  });
+}
+
+private loadPurchasedShoes() {
+  this.resellService.getResellShoes().subscribe({
+    next: (resellResponse) => {
+      const resellShoes = resellResponse.ResellShoes.filter((shoe: any) => 
+        shoe.buyerId === this.user.id
+      ).map(shoe => ({
+        ...shoe,
+        // Get date from localStorage or use current date
+        purchaseDate: localStorage.getItem(`purchaseDate_${shoe.id}`) || new Date().toISOString(),
+        type: 'resell'
+      }));
+
+      this.shoeService.getAllShoesData().subscribe({
+        next: (normalShoes: any[]) => {
+          const normalPurchases = normalShoes.filter(shoe => 
+            shoe.userId === this.user.id
+          ).map(shoe => ({
+            ...shoe,
+            purchaseDate: new Date().toISOString(), // Add default date
+            type: 'normal'
+          }));
+
+          this.purchasedShoes = [...resellShoes, ...normalPurchases];
+        }
+      });
+    }
   });
 }
 

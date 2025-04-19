@@ -28,7 +28,8 @@
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrAIH5ePjPpc06-hopmyUZNsVbBPvZA0XGmQ&s"
                     alt="Profilkép" class="avatar">
                 <p>📧 {{ user.email }}</p>
-                <p>🌟 Aktív hirdetések: {{ userShoes.length }} | 🛍️ Eladott termékek: 3</p>
+                <!-- <p>🌟 Aktív hirdetések: {{ userShoes.length }} | 🛍️ Eladott termékek: 3</p> -->
+                <p>🌟 Aktív hirdetések: {{ user.activeListingsCount }} | 🛍️ Eladott termékek: {{ user.soldItemsCount }}</p>
             </div>
         </header>
     </section>
@@ -69,9 +70,9 @@
     </section>
 
     <!-- Korábbi Hirdetések -->
-    <section #pastListings id="past-listings" class="listings-section">
+    <!-- <section #pastListings id="past-listings" class="listings-section">
         <h2>Korábbi Hirdetések</h2>
-        <!-- <div class="card-grid">
+        <div class="card-grid">
             <div class="card">
                 <div class="card-img-container">
                     <img src="https://sneakcenter.com/cdn/shop/products/nike-dunk-low-lottery-grey-sneakcenter-1-34784944488715.png?v=1701593658" alt="Nike Dunk Low">
@@ -83,8 +84,29 @@
                 </div>
             </div>
         </div> -->
-        <div class="empty-state">
+        <!-- <div class="empty-state">
             Nincsenek korábbi hirdetések
+        </div>
+    </section>  -->
+
+    <section #pastListings id="past-listings" class="listings-section">
+        <h2>Korábbi Hirdetések</h2>
+        <div class="card-grid">
+            <div *ngFor="let shoe of pastListingsData" class="card">
+                <!-- Same card structure as current listings -->
+                <div class="card-content">
+                    <h3>{{ shoe.nev }}</h3>
+                    <div class="card-img-container-past">
+                        <img [src]="shoe.img" [alt]="shoe.nev">
+                    </div>
+                    <br>
+                    <!-- <p>⏳ Elkelt: {{ shoe.soldDate | date }}</p> -->
+                    <p>💸 Végső ár: {{ shoe.ar | currency:'HUF':'symbol':'1.0-0' }}</p>
+                </div>
+            </div>
+            <div *ngIf="user.soldItemsCount  === 0" class="empty-state">
+                Jelenleg nincs eladott terméked!
+            </div>
         </div>
     </section>
 

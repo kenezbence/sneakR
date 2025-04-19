@@ -8,6 +8,8 @@ import { LakcimService } from '../../_services/lakcim.service';
 import { RendelesService } from '../../_services/rendeles.service';
 import { UserService } from '../../_services/user.service';
 import { RouterModule } from '@angular/router';
+import { ResellProductService } from '../../_services/resell-product.service';
+import { ProductService } from '../../_services/product.service';
 
 @Component({
   selector: 'app-resell-cart',
@@ -38,7 +40,8 @@ export class ResellCartComponent implements OnInit {
     private router: Router,
     private lakcimService: LakcimService,
     private rendelesService: RendelesService,
-    private userService: UserService
+    private userService: UserService,
+    private resellProductService: ResellProductService
   ) {}
 
   ngOnInit() {
@@ -109,24 +112,40 @@ export class ResellCartComponent implements OnInit {
     });
   }
 
-  private submitOrder() {
-    if (!this.szallitasiCimId) return;
+private submitOrder() {
+  if (!this.szallitasiCimId) return;
 
-    const orderData = {
-      userId: this.currentUser.id,
-      szallitasiCimId: this.szallitasiCimId,
-      osszeg: this.getTotal(),
-      rendelesAllapot: "Feldolgozás alatt"
-    };
+  const orderData = {
+    userId: this.currentUser.id,
+    szallitasiCimId: this.szallitasiCimId,
+    osszeg: this.getTotal(),
+    rendelesAllapot: "Feldolgozás alatt"
+  };
 
-    this.rendelesService.insertRendeles(orderData).subscribe({
-      next: () => {
-        this.cartService.clearCart();
-        this.showSuccessModal = true;
-      },
-      error: (err) => console.error('Error submitting order:', err)
-    });
-  }
+  const purchaseDate = new Date().toISOString();
+
+  this.rendelesService.insertRendeles(orderData).subscribe({
+    next: () => {
+      this.cart.forEach(item => {
+        const updateData = {
+          buyerId: this.currentUser.id,
+          isBought: "igen",
+          _frontendPurchaseDate: purchaseDate // Add purchase date
+        };
+
+        this.resellProductService.updateResellShoeBuyer(item.id, updateData)
+          .subscribe(() => {
+            // Store date in localStorage as fallback
+            localStorage.setItem(`purchaseDate_${item.id}`, purchaseDate);
+          });
+      });
+
+      this.cartService.clearCart();
+      this.showSuccessModal = true;
+    },
+    error: (err) => console.error('Error submitting order:', err)
+  });
+}
 
   getTotal(): number {
     return this.cart.reduce((acc, item) => acc + item.price, 0);

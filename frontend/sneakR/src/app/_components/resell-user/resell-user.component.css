@@ -169,6 +169,14 @@ body {
     background: transparent; /* Fekete háttér eltávolítva */
 }
 
+.card-img-container-past{
+    height: 250px;
+        overflow: hidden;
+        position:relative;
+        background: transparent;
+        
+}
+
 /* Képek stílusa */
 .card img {
     width: 100%;
