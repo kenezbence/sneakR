@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: localhost:3306
--- Létrehozás ideje: 2025. Ápr 19. 13:51
+-- Létrehozás ideje: 2025. Ápr 19. 15:41
 -- Kiszolgáló verziója: 5.7.24
 -- PHP verzió: 8.3.1
 
@@ -112,6 +112,21 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `searchShoeByName` (IN `cipoIN` VARC
 FROM cipok INNER JOIN markak ON cipok.marka_id = markak.id
 WHERE cipok.nev LIKE Concat('%',cipoIN,'%')$$
 
+DROP PROCEDURE IF EXISTS `updateResellShoeBuyer`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateResellShoeBuyer` (IN `idIN` INT(11), IN `buyerIdIN` INT(11), IN `isBoughtIN` VARCHAR(10))   UPDATE resell_cipok
+SET 
+resell_cipok.nev = resell_cipok.nev,
+resell_cipok.marka = resell_cipok.marka,
+resell_cipok.nem = resell_cipok.nem,
+resell_cipok.allapot = resell_cipok.allapot,
+resell_cipok.meret = resell_cipok.meret,
+resell_cipok.ar = resell_cipok.ar,
+resell_cipok.img = resell_cipok.img,
+resell_cipok.user_id = resell_cipok.user_id,
+resell_cipok.buyer_id = buyerIdIN,
+resell_cipok.isBought = isBoughtIN
+WHERE resell_cipok.id = idIN$$
+
 DROP PROCEDURE IF EXISTS `updateShoe`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `updateShoe` (IN `idIN` INT(11), IN `nevIN` VARCHAR(255), IN `markaIN` VARCHAR(100), IN `nemIN` VARCHAR(100), IN `allapotIN` VARCHAR(100), IN `meretIN` INT(2), IN `arIN` FLOAT, IN `imgIN` TEXT)   UPDATE cipok
 SET cipok.nev = nevIN, 
@@ -196,7 +211,7 @@ INSERT INTO `cipok` (`id`, `nev`, `marka`, `nem`, `allapot`, `meret`, `ar`, `akc
 (3, 'Puma Mayze Flutur', 'Puma', 'Férfi', 'új', 42, 20000, NULL, 2, 2, 'https://i.imgur.com/RleDPg9.png', 5),
 (4, 'Sacai Vaporwaffle Black Gum', 'Nike', 'Nő', 'új', 45, 18000, NULL, NULL, 1, 'https://i.imgur.com/NRKy0uh.png', NULL),
 (5, 'Air Jordan 4 Infrared', 'Jordan', 'Férfi', 'új', 42, 69900, NULL, NULL, NULL, 'https://i.imgur.com/CLQyTre.png', NULL),
-(6, 'Air Jordan 3 Retro Fire Red', 'Jordan', 'Férfi', 'használt', 45, 45000, 3, NULL, NULL, 'https://i.imgur.com/OS86MVh.png', NULL),
+(6, 'Air Jordan 3 Retro Fire Red', 'Jordan', 'Férfi', 'használt', 45, 45000, 3, NULL, NULL, 'https://i.imgur.com/OS86MVh.png', 6),
 (7, 'Kobe 6 Protro\nReverse Grinch', 'Nike', 'Férfi', 'új', 45, 74900, NULL, NULL, NULL, 'https://i.imgur.com/Pc7x47O.png', 62),
 (8, 'Yeezy Boost 350 V2 Carbon', 'Yeezy', 'Nő', 'új', 42, 53900, NULL, NULL, NULL, 'https://i.imgur.com/S4EMLZq.png', NULL),
 (9, 'Off-White Dunk Low Lot 24/50', 'Nike', 'Férfi', 'új', 40, 45900, NULL, NULL, NULL, 'https://i.imgur.com/fadLkYw.png', NULL),
@@ -334,7 +349,16 @@ INSERT INTO `lakcimek` (`id`, `user_id`, `telefonszam`, `varos`, `iranyitoszam`,
 (22, 61, '06  30 876 4333', 'Zalaegerszeg', '8473', 'Uborka Utca 12.'),
 (23, 61, '06 30 475 4744', 'Zalaegerszeg', '7463', 'Uborka Utca 12.'),
 (24, 61, '06308746555', 'Zalaegerszeg', '7436', 'Uborka Utca 12.'),
-(25, 6, '06303104223', 'Kaposszekcső', '7361', 'Táncsics Mihály 69');
+(25, 6, '06303104223', 'Kaposszekcső', '7361', 'Táncsics Mihály 69'),
+(26, 62, '06706454444', 'Zalaegerszeg', '7436', 'Uborka Utca 12.'),
+(27, 6, '06303104223', 'Kaposszekcső', '7361', 'Táncsics Mihály 69'),
+(28, 6, '06303104223', 'Kaposszekcső', '7361', 'Táncsics Mihály 69'),
+(29, 5, '06303104223', 'Kaposszekcső', '7361', 'Táncsics Mihály 69'),
+(30, 5, '06303104223', 'Kaposszekcső', '7361', 'Táncsics Mihály 69'),
+(31, 6, '06303104223', 'Kaposszekcső', '7361', 'Táncsics Mihály 69'),
+(32, 61, '06303104223', 'Kaposszekcső', '7361', 'Táncsics Mihály 69'),
+(33, 61, '06303104223', 'Kaposszekcső', '7361', 'Táncsics Mihály 69'),
+(34, 5, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -371,7 +395,13 @@ INSERT INTO `rendelesek` (`id`, `user_id`, `szallitasi_cim_id`, `osszeg`, `rende
 (16, 61, 22, 15000, '2025-04-19 12:42:13', 'Feldolgozás alatt'),
 (17, 61, 23, 131790, '2025-04-19 12:42:59', 'Előkészítés'),
 (18, 61, 24, 55499, '2025-04-19 12:53:27', 'Feldolgozás alatt'),
-(19, 6, 25, 255499, '2025-04-19 12:56:55', 'Feldolgozás alatt');
+(21, 6, 27, 45900, '2025-04-19 15:10:59', 'Feldolgozás alatt'),
+(22, 6, 28, 46890, '2025-04-19 15:14:39', 'Előkészítés'),
+(23, 5, 29, 55499, '2025-04-19 15:15:03', 'Feldolgozás alatt'),
+(24, 5, 30, 55499, '2025-04-19 15:23:08', 'Feldolgozás alatt'),
+(25, 6, 31, 20000, '2025-04-19 15:32:26', 'Feldolgozás alatt'),
+(26, 61, 32, 74900, '2025-04-19 15:36:20', 'Feldolgozás alatt'),
+(27, 61, 33, 112900, '2025-04-19 15:37:20', 'Feldolgozás alatt');
 
 -- --------------------------------------------------------
 
@@ -405,27 +435,30 @@ CREATE TABLE `resell_cipok` (
   `meret` int(2) DEFAULT NULL,
   `ar` float DEFAULT NULL,
   `img` text NOT NULL,
-  `user_id` int(11) DEFAULT NULL
+  `user_id` int(11) DEFAULT NULL,
+  `buyer_id` int(11) DEFAULT NULL,
+  `isBought` varchar(10) NOT NULL DEFAULT 'nem'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- A tábla adatainak kiíratása `resell_cipok`
 --
 
-INSERT INTO `resell_cipok` (`id`, `nev`, `marka`, `nem`, `allapot`, `meret`, `ar`, `img`, `user_id`) VALUES
-(1, 'Air Max 90', 'Nike', 'Férfi', 'Új', 39, 29990, 'https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/a7f07bf7-7896-48c7-b53d-ab5daf86f84e/NIKE+AIR+MAX+EXCEE.png', 61),
-(2, 'Ultraboost ', 'Adidas', 'Nő', 'Használt', 40, 15000, 'https://www.shooos.hu/media/catalog/product/cache/5/image/1350x778/9df78eab33525d08d6e5fb8d27136e95/a/d/adidas-ultraboost-22-w-gx55911.jpg', 62),
-(3, 'Smash V2 Classic Leather', 'Puma', 'Férfi', 'Új', 42, 20000, 'https://shoecity.com/cdn/shop/products/0450209_01_1000x.jpg?v=1674060650', 5),
-(4, 'Chuck Taylor All Star', 'Converse', 'Nő', 'Új', 45, 18000, 'https://dr9l7gb9cebpv.cloudfront.net/media/catalog/product/cache/2774d42b8e55ba58cfe3fc9632392955/m/9/m9160_a_107x1.jpg', 62),
-(7, 'Air Zoom Alpha', 'Nike', 'Férfi', 'Új', 45, 74900, 'https://cdn-images.farfetch-contents.com/13/86/15/44/13861544_21694244_1000.jpg', 5),
-(8, 'Classic Stan', 'Adidas', 'Nő', 'Új', 42, 53900, 'https://photos6.spartoo.hu/photos/188/18898694/adidas-Originals-STAN-SMITH-18898694_1200_A.jpg', 62),
-(9, 'Velocity Nitro 3', 'Puma', 'Férfi', 'Új', 40, 45900, 'https://img01.ztat.net/article/spp-media-p1/d629e4e5ae284e0fbe6cec2ab0138732/4d1dce999ad248ed8d539805e59bd9ab.jpg?imwidth=1800&filter=packshot', 61),
-(10, 'Legacy', 'Reebok', 'Nő', 'Használt', 45, 61900, 'https://www.shooos.hu/media/catalog/product/cache/5/image/1350x778/9df78eab33525d08d6e5fb8d27136e95/h/6/h686511.jpg', 62),
-(11, 'El Distrito 2.0', 'Converse', 'Férfi', 'Új', 40, 29900, 'https://i.sportisimo.com/products/images/1944/1944552/700x700/converse-el-distrito-2-0_3.jpeg', 4),
-(12, 'Fly', 'Jordan', 'Férfi', 'Új', 42, 112900, 'https://ro.basketzone.net/zdjecia/2018/04/11/304/49/NIKE_AIR_JORDAN_FLY_LOCKDOWN_BLACK_TECH_GREY_k.png', 5),
-(13, 'Nike Dunk Low Retro', 'Nike', 'Férfi', 'Használt', 45, 55499, 'https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/b1bcbca4-e853-4df7-b329-5be3c61ee057/NIKE+DUNK+LOW+RETRO.png', 5),
-(14, 'Nike Dunk Low Retro', 'Nike', 'Férfi', 'használt', 45, 55499, 'https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/b1bcbca4-e853-4df7-b329-5be3c61ee057/NIKE+DUNK+LOW+RETRO.png', 62),
-(15, 'AIR JORDAN 1 RETRO LOW OG CANARY YELLOW', 'Travis Scott', 'Férfi', 'használt', 45, 255499, 'https://www.rdrop.hu/cdn/shop/files/air-jordan-1-retro-low-og-sp-travis-scott-canary-yellow-rdrop-262965.png?v=1720350714', 62);
+INSERT INTO `resell_cipok` (`id`, `nev`, `marka`, `nem`, `allapot`, `meret`, `ar`, `img`, `user_id`, `buyer_id`, `isBought`) VALUES
+(1, 'Air Max 90', 'Nike', 'Férfi', 'Új', 39, 29990, 'https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/a7f07bf7-7896-48c7-b53d-ab5daf86f84e/NIKE+AIR+MAX+EXCEE.png', 61, NULL, 'nem'),
+(2, 'Ultraboost ', 'Adidas', 'Nő', 'Használt', 40, 15000, 'https://www.shooos.hu/media/catalog/product/cache/5/image/1350x778/9df78eab33525d08d6e5fb8d27136e95/a/d/adidas-ultraboost-22-w-gx55911.jpg', 62, NULL, 'nem'),
+(3, 'Smash V2 Classic Leather', 'Puma', 'Férfi', 'Új', 42, 20000, 'https://shoecity.com/cdn/shop/products/0450209_01_1000x.jpg?v=1674060650', 5, 6, 'igen'),
+(4, 'Chuck Taylor All Star', 'Converse', 'Nő', 'Új', 45, 18000, 'https://dr9l7gb9cebpv.cloudfront.net/media/catalog/product/cache/2774d42b8e55ba58cfe3fc9632392955/m/9/m9160_a_107x1.jpg', 62, NULL, 'nem'),
+(7, 'Air Zoom Alpha', 'Nike', 'Férfi', 'Új', 45, 74900, 'https://cdn-images.farfetch-contents.com/13/86/15/44/13861544_21694244_1000.jpg', 5, 61, 'igen'),
+(8, 'Classic Stan', 'Adidas', 'Nő', 'Új', 42, 53900, 'https://photos6.spartoo.hu/photos/188/18898694/adidas-Originals-STAN-SMITH-18898694_1200_A.jpg', 62, NULL, 'nem'),
+(9, 'Velocity Nitro 3', 'Puma', 'Férfi', 'Új', 40, 45900, 'https://img01.ztat.net/article/spp-media-p1/d629e4e5ae284e0fbe6cec2ab0138732/4d1dce999ad248ed8d539805e59bd9ab.jpg?imwidth=1800&filter=packshot', 61, 6, 'igen'),
+(10, 'Legacy', 'Reebok', 'Nő', 'Használt', 45, 61900, 'https://www.shooos.hu/media/catalog/product/cache/5/image/1350x778/9df78eab33525d08d6e5fb8d27136e95/h/6/h686511.jpg', 62, NULL, 'nem'),
+(11, 'El Distrito 2.0', 'Converse', 'Férfi', 'Új', 40, 29900, 'https://i.sportisimo.com/products/images/1944/1944552/700x700/converse-el-distrito-2-0_3.jpeg', 4, NULL, 'nem'),
+(12, 'Fly', 'Jordan', 'Férfi', 'Új', 42, 112900, 'https://ro.basketzone.net/zdjecia/2018/04/11/304/49/NIKE_AIR_JORDAN_FLY_LOCKDOWN_BLACK_TECH_GREY_k.png', 5, 61, 'igen'),
+(14, 'Nike Dunk Low Retro', 'Nike', 'Férfi', 'használt', 45, 55499, 'https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/b1bcbca4-e853-4df7-b329-5be3c61ee057/NIKE+DUNK+LOW+RETRO.png', 62, NULL, 'nem'),
+(15, 'AIR JORDAN 1 RETRO LOW OG CANARY YELLOW', 'Travis Scott', 'Férfi', 'használt', 45, 255499, 'https://www.rdrop.hu/cdn/shop/files/air-jordan-1-retro-low-og-sp-travis-scott-canary-yellow-rdrop-262965.png?v=1720350714', 62, NULL, 'nem'),
+(17, 'Nike Dunk Low Retro', 'Nike', 'Férfi', 'használt', 45, 55499, 'https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/b1bcbca4-e853-4df7-b329-5be3c61ee057/NIKE+DUNK+LOW+RETRO.png', 6, 5, 'igen'),
+(18, 'Nike Dunk Low SP Kentucky', 'Nike', 'Férfi', 'Új', 42, 75600, 'https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/b1bcbca4-e853-4df7-b329-5be3c61ee057/NIKE+DUNK+LOW+RETRO.png', 5, NULL, 'nem');
 
 -- --------------------------------------------------------
 
@@ -643,13 +676,13 @@ ALTER TABLE `kuponkodok`
 -- AUTO_INCREMENT a táblához `lakcimek`
 --
 ALTER TABLE `lakcimek`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT a táblához `rendelesek`
 --
 ALTER TABLE `rendelesek`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT a táblához `rendeles_tetelek`
@@ -661,7 +694,7 @@ ALTER TABLE `rendeles_tetelek`
 -- AUTO_INCREMENT a táblához `resell_cipok`
 --
 ALTER TABLE `resell_cipok`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT a táblához `shopping_session`
