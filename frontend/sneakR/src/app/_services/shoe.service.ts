@@ -48,19 +48,23 @@ deleteShoe(id: number): Observable<any> {
 }
 
   getShoes() {
-    return this.http.get<{ shoes: any[] }>(this.apiUrl).pipe(
-      map(response => response.shoes.map(shoe => ({
+  return this.http.get<{ shoes: any[] }>(this.apiUrl).pipe(
+    map(response => response.shoes
+      .map(shoe => ({
         id: shoe.id,
         name: shoe.nev,
         brand: shoe.marka,
         price: shoe.ar,
-        sizes: [shoe.meret], // Convert single size to array
+        sizes: [shoe.meret],
         image: shoe.img,
         model: shoe.model,
-        category: shoe.category
-      } as Product)))
-    );
-  }
+        category: shoe.category,
+        userId: shoe.user_id // Add userId from backend response
+      } as Product))
+      .filter(product => !product.userId) // Exclude products with userId
+    )
+  );
+}
 
 
   getShoeById(id: number): Observable<any> {

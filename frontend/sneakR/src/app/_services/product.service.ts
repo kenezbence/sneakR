@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 export interface Product {
   id: number;
+  userId: number;
   name: string;
   brand: string;
   model?: string;
@@ -9,6 +10,7 @@ export interface Product {
   sizes: number[];
   image: string;
   category?: string;
+
 }
 
 @Injectable({

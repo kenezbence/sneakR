@@ -109,7 +109,11 @@
                 </div>
             </div>
             <div *ngIf="purchasedShoes.length === 0" class="empty-state">
-                Nincsenek vásárolt termékek
+                <div class="details-btn-container">
+                    <button (click)="showOrderDetails()" class="details-btn">
+                        📦 Részletek
+                    </button>
+                </div>
             </div>
         </div>
     </section>

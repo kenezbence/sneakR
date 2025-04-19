@@ -14,7 +14,7 @@ interface ResellShoe {
   user_id: number;
 }
 
-interface ResellShoesResponse {
+export interface ResellShoesResponse {  // Add 'export' here
   ResellShoes: ResellShoe[];
   statusCode: number;
 }
