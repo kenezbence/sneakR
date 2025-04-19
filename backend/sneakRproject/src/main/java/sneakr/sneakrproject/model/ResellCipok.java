@@ -265,4 +265,20 @@ public class ResellCipok implements Serializable {
         }
     }
     
+     public static boolean deleteResellShoes(Integer idIN) {
+    EntityManager em = emf.createEntityManager();
+    try {
+        StoredProcedureQuery spq = em.createStoredProcedureQuery("deleteResellShoes");
+        spq.registerStoredProcedureParameter("idIN", Integer.class, ParameterMode.IN);
+        spq.setParameter("idIN", idIN);
+        spq.execute();
+        return true;
+    } catch (Exception e) {
+        System.err.println("Hiba a Resell cipő törlésekor: " + e.getMessage());
+        return false;
+    } finally {
+        em.clear();
+        em.close();
+    }
+}
 }

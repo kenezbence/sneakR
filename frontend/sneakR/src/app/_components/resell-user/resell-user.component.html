@@ -138,4 +138,14 @@
             </div>
         </div>
     </div>
+
+    <div *ngIf="showDeleteConfirmation" class="delete-confirmation-modal">
+        <div class="modal-content">
+            <p id="delete-popup">Biztosan törölni szeretnéd ezt a cipőt?</p>
+            <div class="modal-actions">
+                <button (click)="confirmDelete()" class="btn-confirm">Igen</button>
+                <button (click)="cancelDelete()" class="btn-cancel">Mégse</button>
+            </div>
+        </div>
+    </div>
 </body>
