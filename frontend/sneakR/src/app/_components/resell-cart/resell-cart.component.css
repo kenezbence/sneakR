@@ -729,7 +729,6 @@ body {
     border-radius: 16px;
 }
 
-/* Keep existing navbar styles */
 .navbar-container {
     display: flex;
     justify-content: space-between;
