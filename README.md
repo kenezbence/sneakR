@@ -1,5 +1,7 @@
 # SneakR - The Future of Shoe Shopping & Reselling
 
+> [!NOTE]
+> For the Hungarian installation guide, go to Documents/SneakR Telepítési Útmutató.pdf
 ## [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 👋 Introduction
 
 Welcome to SneakR! We're revolutionizing the way people buy, sell, and connect over their passion for footwear. SneakR is a modern, digital platform that seamlessly blends a traditional webshop experience with a vibrant social marketplace. Whether you're hunting for the latest releases, seeking out rare grails, or looking to give your pre-loved sneakers a new life, SneakR is your ultimate destination.
