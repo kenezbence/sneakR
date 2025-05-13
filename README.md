@@ -1,6 +1,6 @@
 # SneakR - The Future of Shoe Shopping & Reselling
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) ## 👋 Introduction
+## [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 👋 Introduction
 
 Welcome to SneakR! We're revolutionizing the way people buy, sell, and connect over their passion for footwear. SneakR is a modern, digital platform that seamlessly blends a traditional webshop experience with a vibrant social marketplace. Whether you're hunting for the latest releases, seeking out rare grails, or looking to give your pre-loved sneakers a new life, SneakR is your ultimate destination.
 
@@ -85,7 +85,7 @@ Ensure you have the following software. If you are installing them now, use the 
     ```
 3.  **Clone the SneakR repository:**
     ```bash
-    git clone [https://github.com/kenezbence/sneakR.git](https://github.com/kenezbence/sneakR.git)
+    git clone https://github.com/kenezbence/sneakR
     ```
 4.  **Navigate into the cloned project directory:**
     ```bash
@@ -96,12 +96,15 @@ Ensure you have the following software. If you are installing them now, use the 
 #### Phase 2: Install MAMP (for Apache & MySQL)
 
 1.  **Download MAMP:**
+```
     a.  Open your web browser.
     b.  Go to the [official MAMP download page](https://www.mamp.info/en/downloads/#Windows).
     c.  Locate "MAMP & MAMP PRO 5.0.6" (or the specific version you need).
     d.  Click the download link corresponding to your Operating System.
     e.  Save the installer file to your computer (e.g., your `Downloads` folder).
+```
 2.  **Install MAMP:**
+```
     a.  Go to the folder where you downloaded the MAMP installer.
     b.  Double-click the installer file to begin the installation.
     c.  **Welcome Screen:** Click "Next" (or "Continue" on macOS).
@@ -120,7 +123,9 @@ Ensure you have the following software. If you are installing them now, use the 
     g.  **Ready to Install:** Click "Install".
     h.  The installation process will begin. Wait for it to complete.
     i.  **Installation Complete:** Click "Finish".
+```
 3.  **Start MAMP and Servers:**
+```
     a.  Find the MAMP application (e.g., on your Desktop, Start Menu, or Applications folder).
     b.  Launch MAMP. The MAMP control panel window will appear.
     c.  MAMP may attempt to start servers automatically. If not, click the "Start Servers" button, or individually start "Apache Server" and "MySQL Server".
@@ -129,7 +134,7 @@ Ensure you have the following software. If you are installing them now, use the 
         i.  Open your web browser.
         ii. Go to `http://localhost/phpMyAdmin`.
         iii.You should see the phpMyAdmin interface if MySQL is running.
-
+```
 #### Phase 3: Install JDKs, NetBeans, and WildFly
 
 **3.1. Install Java Development Kits (JDKs)**
@@ -138,6 +143,7 @@ You need **both** JDK 17 and JDK 8.
 
 * **For JDK 17:**
     1.  **Download JDK 17:**
+```
         a.  Open your browser and go to the [Oracle JDK 17 Archive Downloads page](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
         b.  Accept the license agreement if prompted.
         c.  Find the JDK 17 installer for your operating system (e.g., Windows x64 Installer, macOS Arm 64/x64 DMG Installer).
@@ -147,8 +153,10 @@ You need **both** JDK 17 and JDK 8.
         b.  Follow the on-screen prompts. Default settings are usually fine. Click "Next" through the steps.
         c.  Note the installation path if you need it later (though NetBeans often finds it).
         d.  Complete the installation.
+```
 * **For JDK 8:**
     1.  **Download JDK 8:**
+```
         a.  Open your browser and go to the [Oracle Java SE 8 Archive Downloads page](https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html). (You might need an Oracle account for older versions).
         b.  Find the JDK 8 installer for your operating system (e.g., `jdk-8uXXX-windows-x64.exe` or `jdk-8uXXX-macosx-x64.dmg`).
         c.  Download the installer.
@@ -156,14 +164,17 @@ You need **both** JDK 17 and JDK 8.
         a.  Run the downloaded JDK 8 installer.
         b.  Follow the on-screen prompts. Default settings are usually fine.
         c.  Complete the installation.
-
+```
 **3.2. Install Apache NetBeans IDE (Version 12.5)**
 
 1.  **Download NetBeans 12.5:**
+```
     a.  Open your browser and go to the [Apache NetBeans 12.5 download page](https://netbeans.apache.org/front/main/download/nb125/nb125/).
     b.  Under the "Installers" section, click the link for your operating system (e.g., `Apache-NetBeans-12.5-bin-windows-x64.exe`).
     c.  Download the installer.
+```
 2.  **Install NetBeans 12.5:**
+```
     a.  Run the downloaded NetBeans installer.
     b.  **Welcome/Customize Screen:**
         i.  You may see a "Customize" button. Click it.
@@ -176,23 +187,26 @@ You need **both** JDK 17 and JDK 8.
         iii. Click "Next".
     e.  **Summary/Ready to Install:** Click "Install".
     f.  Wait for the installation to complete, then click "Finish".
-
+```
 **3.3. Install WildFly Application Server (Version 26.1.1.final)**
 
 1.  **Download WildFly 26.1.1.final:**
+```
     a.  Open your browser and go to the [WildFly downloads page](https://www.wildfly.org/downloads/).
     b.  Scroll or search for version **26.1.1.final**.
     c.  Find the "WildFly Preview EE 9.1 Distribution" (this should be `wildfly-preview-26.1.1.Final.zip`).
     d.  Click the "ZIP" button to download it.
+```
 2.  **Extract WildFly:**
+```
     a.  Once downloaded, go to the location of the `wildfly-preview-26.1.1.Final.zip` file.
     b.  Extract the contents of the ZIP file to a suitable directory on your computer.
         * **Example:** `C:\dev\wildfly-26.1.1.Final` or `~/dev/wildfly-26.1.1.Final`.
         * Avoid paths with spaces if possible.
         * This location will be referred to as `<WILDFLY_HOME>`.
-
+```
 **3.4. Integrate WildFly with NetBeans**
-
+```
 1.  **Launch NetBeans IDE.**
 2.  **Open the "Services" Tab:**
     * If not visible, go to the menu: `Window` > `Services` (or press `Ctrl+5`).
@@ -211,9 +225,9 @@ You need **both** JDK 17 and JDK 8.
         ii. You can leave other settings (like port numbers) at their defaults unless you have specific conflicts.
         iii. Click "Finish".
     f.  WildFly should now appear under the "Servers" node in the "Services" tab.
-
+```
 **3.5. Create WildFly Management User**
-
+```
 This user is for accessing the WildFly admin console and for NetBeans to manage the server.
 1.  **Open a Terminal/Command Prompt.**
 2.  **Navigate to WildFly's `bin` directory:**
@@ -225,6 +239,7 @@ This user is for accessing the WildFly admin console and for NetBeans to manage 
     * On Windows: `add-user.bat`
     * On macOS/Linux: `sh add-user.sh`
 4.  **Follow the prompts:**
+
     a.  `What type of user do you wish to add?`
         * Type `a` (for Management User) and press `Enter`.
     b.  `Username :`
@@ -241,9 +256,10 @@ This user is for accessing the WildFly admin console and for NetBeans to manage 
     h.  `Is this new user going to be used for one AS process to connect to another AS process e.g. for a slave Host Controller connecting to a master Domain Controller?`
         * `yes/no?` Type `no` and press `Enter`.
     i.  The script will finish. You have now created a WildFly management user.
+```
 
 #### Phase 4: Install Visual Studio Code (VS Code)
-
+```
 1.  **Download VS Code:**
     a.  Open your browser and go to the [official VS Code download page](https://code.visualstudio.com/download).
     b.  The website should automatically detect your OS. Click the download button for the "Stable Build" (e.g., Windows User Installer, macOS Universal, Linux .deb/.rpm).
@@ -263,13 +279,13 @@ This user is for accessing the WildFly admin console and for NetBeans to manage 
     f.  **Ready to Install:** Click "Install".
     g.  Wait for the installation to complete.
     h.  **Completing Setup:** Click "Finish". VS Code might launch automatically.
-
+```
 #### Phase 5: Install Node.js and Angular CLI
-
+```
 1.  **Install Node.js (includes npm):**
     a.  **Download Node.js:**
         i.  Open your browser and go to the [Node.js official website](https://nodejs.org/en/download).
-        ii. Download the installer for your OS. The **LTS (Long Term Support)** version is generally recommended for stability, but the user specified v23.11.0. Choose the version you require.
+        ii. Download the installer for your OS. v23.11.0. Choose the version you require.
     b.  **Install Node.js:**
         i.  Run the downloaded Node.js installer.
         ii. Click "Next" on the Welcome screen.
@@ -296,11 +312,9 @@ This user is for accessing the WildFly admin console and for NetBeans to manage 
         ng version
         ```
         This command should display information about your Angular CLI version, Node.js version, OS, and other details.
-
+```
 #### Phase 6: Project Setup (Frontend - Angular)
-
-[*This assumes your Angular project code is located within a subfolder (e.g., `frontend` or `sneakr-angular-app`) inside the main `sneakR` repository cloned in Phase 1. Please verify and adjust folder names/paths as per your actual project structure.*]
-
+```
 1.  **Open Project in VS Code:**
     a.  Launch Visual Studio Code.
     b.  Go to `File` > `Open Folder...`.
@@ -317,9 +331,9 @@ This user is for accessing the WildFly admin console and for NetBeans to manage 
         npm install
         ```
     b.  This command reads the `package.json` file and downloads all the necessary libraries and dependencies for the Angular frontend. Wait for it to complete.
-
+```
 #### Phase 7: Project Setup (Backend - Java/WildFly)
-
+```
 1.  **Open Backend Project in NetBeans:**
     a.  Launch NetBeans IDE.
     b.  Go to `File` > `Open Project...`.
@@ -337,9 +351,9 @@ This user is for accessing the WildFly admin console and for NetBeans to manage 
         ii. Log in with the management user created in Phase 3.5.
         iii.Navigate to the "Deployments" section.
         iv. Click "Add" or "Upload Deployment", and upload your `.war` file.
-
+```
 #### Phase 8: Database Setup (Using MAMP's MySQL)
-
+```
 1.  **Ensure MAMP Servers are Running:**
     a.  Open the MAMP control panel.
     b.  Verify that both "Apache Server" and "MySQL Server" have green status indicators.
@@ -358,10 +372,11 @@ This user is for accessing the WildFly admin console and for NetBeans to manage 
         iii.  Under "File to import", click "Browse..." and locate your `sneakr.sql` file. Click "Open".
         iv. Ensure the character set is correct (e.g., UTF-8).
         v.Click "Go" (or "Import") at the bottom of the page.
+```
 #### Phase 9: Environment Variables & Configuration
-
+```
 * **Backend (Java/WildFly) Configuration:**
-    1.  **Database Connection:**
+```    1.  **Database Connection:**
         b.  **If WildFly Datasource (Recommended for Java EE):**
             i.  You need to configure a datasource in WildFly's `standalone/configuration/standalone.xml` (or the profile you use, e.g., `standalone-full.xml`).
             ii. XML snippet for the datasource.
@@ -376,7 +391,8 @@ This user is for accessing the WildFly admin console and for NetBeans to manage 
                         <driver-class>com.mysql.cj.jdbc.Driver</driver-class>
                     </driver>
                 </drivers>
-                ```
+```
+```
         c.  **If `persistence.xml` (for JPA):**
             i.  Locate `src/main/resources/META-INF/persistence.xml` in your backend project.
             ii. Properties to configure.
@@ -387,9 +403,9 @@ This user is for accessing the WildFly admin console and for NetBeans to manage 
                     <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
                     <property name="hibernate.hbm2ddl.auto" value="update"/> </properties>
                 ```
-
+```
 ### Launching the Application (Putting It All Together)
-
+```
 1.  **Step 1: Start MAMP Servers (if not already running):**
     a.  Open the MAMP control panel.
     b.  Ensure "Apache Server" and "MySQL Server" have green status indicators. Click their "Start" buttons if they are stopped.
@@ -423,7 +439,7 @@ This user is for accessing the WildFly admin console and for NetBeans to manage 
     a.  **Frontend:** Your web browser should have opened to `http://localhost:4200` (this is the default port for Angular CLI's `ng serve`). If not, manually navigate to this URL.
     b.  **Backend API Interaction:** The frontend will make requests to the backend API URL configured in `environment.ts`.
     c.  You should now be able to register, log in, and use the SneakR application features.
-
+```
 ## 📖 Usage
 
 Once the application is running:
