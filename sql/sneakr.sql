@@ -2,10 +2,10 @@
 -- version 5.1.2
 -- https://www.phpmyadmin.net/
 --
--- Gép: localhost:3306
--- Létrehozás ideje: 2025. Ápr 19. 15:41
--- Kiszolgáló verziója: 5.7.24
--- PHP verzió: 8.3.1
+-- Host: localhost:3306
+-- Generation Time: May 29, 2025 at 11:59 AM
+-- Server version: 5.7.24
+-- PHP Version: 8.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,14 +18,14 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Adatbázis: `sneakr`
+-- Database: `sneakr`
 --
 CREATE DATABASE IF NOT EXISTS `sneakr` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `sneakr`;
 
 DELIMITER $$
 --
--- Eljárások
+-- Procedures
 --
 DROP PROCEDURE IF EXISTS `deleteResellShoes`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteResellShoes` (IN `idIN` INT(11))   DELETE FROM resell_cipok WHERE resell_cipok.id = idIN$$
@@ -161,7 +161,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `akciok`
+-- Table structure for table `akciok`
 --
 
 DROP TABLE IF EXISTS `akciok`;
@@ -171,7 +171,7 @@ CREATE TABLE `akciok` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- A tábla adatainak kiíratása `akciok`
+-- Dumping data for table `akciok`
 --
 
 INSERT INTO `akciok` (`id`, `tipus`) VALUES
@@ -182,7 +182,7 @@ INSERT INTO `akciok` (`id`, `tipus`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `cipok`
+-- Table structure for table `cipok`
 --
 
 DROP TABLE IF EXISTS `cipok`;
@@ -202,7 +202,7 @@ CREATE TABLE `cipok` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- A tábla adatainak kiíratása `cipok`
+-- Dumping data for table `cipok`
 --
 
 INSERT INTO `cipok` (`id`, `nev`, `marka`, `nem`, `allapot`, `meret`, `ar`, `akcio_id`, `exkluziv_id`, `ujdonsag_id`, `img`, `user_id`) VALUES
@@ -245,7 +245,7 @@ INSERT INTO `cipok` (`id`, `nev`, `marka`, `nem`, `allapot`, `meret`, `ar`, `akc
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `exkluzivok`
+-- Table structure for table `exkluzivok`
 --
 
 DROP TABLE IF EXISTS `exkluzivok`;
@@ -255,7 +255,7 @@ CREATE TABLE `exkluzivok` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- A tábla adatainak kiíratása `exkluzivok`
+-- Dumping data for table `exkluzivok`
 --
 
 INSERT INTO `exkluzivok` (`id`, `tipus`) VALUES
@@ -266,7 +266,7 @@ INSERT INTO `exkluzivok` (`id`, `tipus`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `kiegeszitok`
+-- Table structure for table `kiegeszitok`
 --
 
 DROP TABLE IF EXISTS `kiegeszitok`;
@@ -276,7 +276,7 @@ CREATE TABLE `kiegeszitok` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- A tábla adatainak kiíratása `kiegeszitok`
+-- Dumping data for table `kiegeszitok`
 --
 
 INSERT INTO `kiegeszitok` (`id`, `nev`) VALUES
@@ -288,7 +288,7 @@ INSERT INTO `kiegeszitok` (`id`, `nev`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `kuponkodok`
+-- Table structure for table `kuponkodok`
 --
 
 DROP TABLE IF EXISTS `kuponkodok`;
@@ -301,7 +301,7 @@ CREATE TABLE `kuponkodok` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- A tábla adatainak kiíratása `kuponkodok`
+-- Dumping data for table `kuponkodok`
 --
 
 INSERT INTO `kuponkodok` (`id`, `kod`, `kedvezmeny_szazalek`, `ervenyes_tol`, `ervenyes_ig`) VALUES
@@ -310,7 +310,7 @@ INSERT INTO `kuponkodok` (`id`, `kod`, `kedvezmeny_szazalek`, `ervenyes_tol`, `e
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `lakcimek`
+-- Table structure for table `lakcimek`
 --
 
 DROP TABLE IF EXISTS `lakcimek`;
@@ -324,7 +324,7 @@ CREATE TABLE `lakcimek` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- A tábla adatainak kiíratása `lakcimek`
+-- Dumping data for table `lakcimek`
 --
 
 INSERT INTO `lakcimek` (`id`, `user_id`, `telefonszam`, `varos`, `iranyitoszam`, `utca_hazszam`) VALUES
@@ -363,7 +363,7 @@ INSERT INTO `lakcimek` (`id`, `user_id`, `telefonszam`, `varos`, `iranyitoszam`,
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `rendelesek`
+-- Table structure for table `rendelesek`
 --
 
 DROP TABLE IF EXISTS `rendelesek`;
@@ -377,7 +377,7 @@ CREATE TABLE `rendelesek` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- A tábla adatainak kiíratása `rendelesek`
+-- Dumping data for table `rendelesek`
 --
 
 INSERT INTO `rendelesek` (`id`, `user_id`, `szallitasi_cim_id`, `osszeg`, `rendeles_datum`, `rendeles_allapot`) VALUES
@@ -406,7 +406,7 @@ INSERT INTO `rendelesek` (`id`, `user_id`, `szallitasi_cim_id`, `osszeg`, `rende
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `rendeles_tetelek`
+-- Table structure for table `rendeles_tetelek`
 --
 
 DROP TABLE IF EXISTS `rendeles_tetelek`;
@@ -422,7 +422,7 @@ CREATE TABLE `rendeles_tetelek` (
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `resell_cipok`
+-- Table structure for table `resell_cipok`
 --
 
 DROP TABLE IF EXISTS `resell_cipok`;
@@ -441,18 +441,18 @@ CREATE TABLE `resell_cipok` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- A tábla adatainak kiíratása `resell_cipok`
+-- Dumping data for table `resell_cipok`
 --
 
 INSERT INTO `resell_cipok` (`id`, `nev`, `marka`, `nem`, `allapot`, `meret`, `ar`, `img`, `user_id`, `buyer_id`, `isBought`) VALUES
 (1, 'Air Max 90', 'Nike', 'Férfi', 'Új', 39, 29990, 'https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/a7f07bf7-7896-48c7-b53d-ab5daf86f84e/NIKE+AIR+MAX+EXCEE.png', 61, NULL, 'nem'),
-(2, 'Ultraboost ', 'Adidas', 'Nő', 'Használt', 40, 15000, 'https://www.shooos.hu/media/catalog/product/cache/5/image/1350x778/9df78eab33525d08d6e5fb8d27136e95/a/d/adidas-ultraboost-22-w-gx55911.jpg', 62, NULL, 'nem'),
+(2, 'Ultraboost ', 'Adidas', 'Nő', 'Használt', 40, 15000, 'https://cdn-images.farfetch-contents.com/21/27/54/10/21275410_51237557_1000.jpg', 62, NULL, 'nem'),
 (3, 'Smash V2 Classic Leather', 'Puma', 'Férfi', 'Új', 42, 20000, 'https://shoecity.com/cdn/shop/products/0450209_01_1000x.jpg?v=1674060650', 5, 6, 'igen'),
 (4, 'Chuck Taylor All Star', 'Converse', 'Nő', 'Új', 45, 18000, 'https://dr9l7gb9cebpv.cloudfront.net/media/catalog/product/cache/2774d42b8e55ba58cfe3fc9632392955/m/9/m9160_a_107x1.jpg', 62, NULL, 'nem'),
 (7, 'Air Zoom Alpha', 'Nike', 'Férfi', 'Új', 45, 74900, 'https://cdn-images.farfetch-contents.com/13/86/15/44/13861544_21694244_1000.jpg', 5, 61, 'igen'),
 (8, 'Classic Stan', 'Adidas', 'Nő', 'Új', 42, 53900, 'https://photos6.spartoo.hu/photos/188/18898694/adidas-Originals-STAN-SMITH-18898694_1200_A.jpg', 62, NULL, 'nem'),
 (9, 'Velocity Nitro 3', 'Puma', 'Férfi', 'Új', 40, 45900, 'https://img01.ztat.net/article/spp-media-p1/d629e4e5ae284e0fbe6cec2ab0138732/4d1dce999ad248ed8d539805e59bd9ab.jpg?imwidth=1800&filter=packshot', 61, 6, 'igen'),
-(10, 'Legacy', 'Reebok', 'Nő', 'Használt', 45, 61900, 'https://www.shooos.hu/media/catalog/product/cache/5/image/1350x778/9df78eab33525d08d6e5fb8d27136e95/h/6/h686511.jpg', 62, NULL, 'nem'),
+(10, 'Legacy', 'Reebok', 'Nő', 'Használt', 45, 61900, 'https://static.ftshp.digital/img/p/4/5/4/9/8/4/454984-full_product.jpg', 62, NULL, 'nem'),
 (11, 'El Distrito 2.0', 'Converse', 'Férfi', 'Új', 40, 29900, 'https://i.sportisimo.com/products/images/1944/1944552/700x700/converse-el-distrito-2-0_3.jpeg', 4, NULL, 'nem'),
 (12, 'Fly', 'Jordan', 'Férfi', 'Új', 42, 112900, 'https://ro.basketzone.net/zdjecia/2018/04/11/304/49/NIKE_AIR_JORDAN_FLY_LOCKDOWN_BLACK_TECH_GREY_k.png', 5, 61, 'igen'),
 (14, 'Nike Dunk Low Retro', 'Nike', 'Férfi', 'használt', 45, 55499, 'https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/b1bcbca4-e853-4df7-b329-5be3c61ee057/NIKE+DUNK+LOW+RETRO.png', 62, NULL, 'nem'),
@@ -463,7 +463,7 @@ INSERT INTO `resell_cipok` (`id`, `nev`, `marka`, `nem`, `allapot`, `meret`, `ar
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `shopping_session`
+-- Table structure for table `shopping_session`
 --
 
 DROP TABLE IF EXISTS `shopping_session`;
@@ -480,7 +480,7 @@ CREATE TABLE `shopping_session` (
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `szallitasok`
+-- Table structure for table `szallitasok`
 --
 
 DROP TABLE IF EXISTS `szallitasok`;
@@ -493,7 +493,7 @@ CREATE TABLE `szallitasok` (
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `ujdonsagok`
+-- Table structure for table `ujdonsagok`
 --
 
 DROP TABLE IF EXISTS `ujdonsagok`;
@@ -503,7 +503,7 @@ CREATE TABLE `ujdonsagok` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- A tábla adatainak kiíratása `ujdonsagok`
+-- Dumping data for table `ujdonsagok`
 --
 
 INSERT INTO `ujdonsagok` (`id`, `tipus`) VALUES
@@ -513,7 +513,7 @@ INSERT INTO `ujdonsagok` (`id`, `tipus`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `userek`
+-- Table structure for table `userek`
 --
 
 DROP TABLE IF EXISTS `userek`;
@@ -526,7 +526,7 @@ CREATE TABLE `userek` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- A tábla adatainak kiíratása `userek`
+-- Dumping data for table `userek`
 --
 
 INSERT INTO `userek` (`id`, `nev`, `email`, `jelszo`, `admin`) VALUES
@@ -540,17 +540,17 @@ INSERT INTO `userek` (`id`, `nev`, `email`, `jelszo`, `admin`) VALUES
 (62, 'Nagy Emma', 'nagyemma@gmail.com', 'EmmaNagy2000!', 'nem');
 
 --
--- Indexek a kiírt táblákhoz
+-- Indexes for dumped tables
 --
 
 --
--- A tábla indexei `akciok`
+-- Indexes for table `akciok`
 --
 ALTER TABLE `akciok`
   ADD PRIMARY KEY (`id`);
 
 --
--- A tábla indexei `cipok`
+-- Indexes for table `cipok`
 --
 ALTER TABLE `cipok`
   ADD PRIMARY KEY (`id`),
@@ -563,32 +563,32 @@ ALTER TABLE `cipok`
   ADD KEY `meret_id` (`meret`);
 
 --
--- A tábla indexei `exkluzivok`
+-- Indexes for table `exkluzivok`
 --
 ALTER TABLE `exkluzivok`
   ADD PRIMARY KEY (`id`);
 
 --
--- A tábla indexei `kiegeszitok`
+-- Indexes for table `kiegeszitok`
 --
 ALTER TABLE `kiegeszitok`
   ADD PRIMARY KEY (`id`);
 
 --
--- A tábla indexei `kuponkodok`
+-- Indexes for table `kuponkodok`
 --
 ALTER TABLE `kuponkodok`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `kod` (`kod`);
 
 --
--- A tábla indexei `lakcimek`
+-- Indexes for table `lakcimek`
 --
 ALTER TABLE `lakcimek`
   ADD PRIMARY KEY (`id`);
 
 --
--- A tábla indexei `rendelesek`
+-- Indexes for table `rendelesek`
 --
 ALTER TABLE `rendelesek`
   ADD PRIMARY KEY (`id`),
@@ -596,7 +596,7 @@ ALTER TABLE `rendelesek`
   ADD KEY `szallitasi_cim_id` (`szallitasi_cim_id`);
 
 --
--- A tábla indexei `rendeles_tetelek`
+-- Indexes for table `rendeles_tetelek`
 --
 ALTER TABLE `rendeles_tetelek`
   ADD PRIMARY KEY (`id`),
@@ -605,14 +605,14 @@ ALTER TABLE `rendeles_tetelek`
   ADD KEY `rendeles_id` (`rendeles_id`);
 
 --
--- A tábla indexei `resell_cipok`
+-- Indexes for table `resell_cipok`
 --
 ALTER TABLE `resell_cipok`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_user_id` (`user_id`);
 
 --
--- A tábla indexei `shopping_session`
+-- Indexes for table `shopping_session`
 --
 ALTER TABLE `shopping_session`
   ADD PRIMARY KEY (`id`),
@@ -620,112 +620,112 @@ ALTER TABLE `shopping_session`
   ADD KEY `cipok_id` (`cipok_id`);
 
 --
--- A tábla indexei `szallitasok`
+-- Indexes for table `szallitasok`
 --
 ALTER TABLE `szallitasok`
   ADD PRIMARY KEY (`id`);
 
 --
--- A tábla indexei `ujdonsagok`
+-- Indexes for table `ujdonsagok`
 --
 ALTER TABLE `ujdonsagok`
   ADD PRIMARY KEY (`id`);
 
 --
--- A tábla indexei `userek`
+-- Indexes for table `userek`
 --
 ALTER TABLE `userek`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- A kiírt táblák AUTO_INCREMENT értéke
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT a táblához `akciok`
+-- AUTO_INCREMENT for table `akciok`
 --
 ALTER TABLE `akciok`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT a táblához `cipok`
+-- AUTO_INCREMENT for table `cipok`
 --
 ALTER TABLE `cipok`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
--- AUTO_INCREMENT a táblához `exkluzivok`
+-- AUTO_INCREMENT for table `exkluzivok`
 --
 ALTER TABLE `exkluzivok`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT a táblához `kiegeszitok`
+-- AUTO_INCREMENT for table `kiegeszitok`
 --
 ALTER TABLE `kiegeszitok`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT a táblához `kuponkodok`
+-- AUTO_INCREMENT for table `kuponkodok`
 --
 ALTER TABLE `kuponkodok`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT a táblához `lakcimek`
+-- AUTO_INCREMENT for table `lakcimek`
 --
 ALTER TABLE `lakcimek`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
--- AUTO_INCREMENT a táblához `rendelesek`
+-- AUTO_INCREMENT for table `rendelesek`
 --
 ALTER TABLE `rendelesek`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
--- AUTO_INCREMENT a táblához `rendeles_tetelek`
+-- AUTO_INCREMENT for table `rendeles_tetelek`
 --
 ALTER TABLE `rendeles_tetelek`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT a táblához `resell_cipok`
+-- AUTO_INCREMENT for table `resell_cipok`
 --
 ALTER TABLE `resell_cipok`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT a táblához `shopping_session`
+-- AUTO_INCREMENT for table `shopping_session`
 --
 ALTER TABLE `shopping_session`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT a táblához `szallitasok`
+-- AUTO_INCREMENT for table `szallitasok`
 --
 ALTER TABLE `szallitasok`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT a táblához `ujdonsagok`
+-- AUTO_INCREMENT for table `ujdonsagok`
 --
 ALTER TABLE `ujdonsagok`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT a táblához `userek`
+-- AUTO_INCREMENT for table `userek`
 --
 ALTER TABLE `userek`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
--- Megkötések a kiírt táblákhoz
+-- Constraints for dumped tables
 --
 
 --
--- Megkötések a táblához `cipok`
+-- Constraints for table `cipok`
 --
 ALTER TABLE `cipok`
   ADD CONSTRAINT `fk_akcio_id` FOREIGN KEY (`akcio_id`) REFERENCES `akciok` (`id`),
@@ -733,7 +733,7 @@ ALTER TABLE `cipok`
   ADD CONSTRAINT `fk_ujdonsag_id` FOREIGN KEY (`ujdonsag_id`) REFERENCES `ujdonsagok` (`id`);
 
 --
--- Megkötések a táblához `rendeles_tetelek`
+-- Constraints for table `rendeles_tetelek`
 --
 ALTER TABLE `rendeles_tetelek`
   ADD CONSTRAINT `rendeles_tetelek_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `userek` (`id`),
@@ -741,7 +741,7 @@ ALTER TABLE `rendeles_tetelek`
   ADD CONSTRAINT `rendeles_tetelek_ibfk_3` FOREIGN KEY (`rendeles_id`) REFERENCES `rendelesek` (`id`);
 
 --
--- Megkötések a táblához `shopping_session`
+-- Constraints for table `shopping_session`
 --
 ALTER TABLE `shopping_session`
   ADD CONSTRAINT `shopping_session_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `userek` (`id`),
